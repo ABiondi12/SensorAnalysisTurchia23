@@ -1,5 +1,5 @@
 	% load .csv file on a Matlab table
-	raw_data = readtable('raw_data_S1.csv', 'HeaderLines',1);  % skips the first row of data
+	raw_data = readtable('raw_data_S1.csv', 'HeaderLines', 1);  % skips the first row of data
 
     sensor_model = 0;
     % sensor selection
