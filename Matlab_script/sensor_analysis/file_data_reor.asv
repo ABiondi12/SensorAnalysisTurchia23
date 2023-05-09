@@ -65,14 +65,12 @@ end
 %	- magz_new = -magz
 
 if sensor_model == 1
-    mag_sens_orig = [-mag_y, -mag_x, mag_z];	%  microTesla AGM
-	gyro_sens_orig = [-gyro_x, -gyro_y, -gyro_z];
+    mag_sens_orig = [mag_y, mag_x, -mag_z];	%  microTesla AGM
 elseif sensor_model == 2
-    mag_sens_orig = [mag_x, mag_y, -mag_z];	%  microTesla Axy-5 CHECK
+    mag_sens_orig = [mag_y, mag_x, -mag_z];	%  microTesla Axy-5 CHECK
 end
 	
-%% pseudo-NED (TODO)
-% da qua in giu è sempre roba vecchia
+
 %% new: vertical placement, wide base in back, tip down (high connector)*
 
 % for how the sensor is mounted inside the structure (vertical with 
