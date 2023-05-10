@@ -1,5 +1,5 @@
 % struct_sensor_reoriented
-function [acc_reor, mag_reor, gyro_reor]=file_data_reor(acc, mag, gyro, model, orientation)
+function [acc_reor, mag_reor, gyro_reor]=file_data_reor(acc, mag, gyro, sensor_model)
 
 %% acc and mag extrapulation: 'original' raw data
 acc_x = acc(:, 1);
@@ -21,14 +21,15 @@ if sensor_model == 1 % agm
 end
 
 %% Possible configurations
-% the configurations that has been taken into account are four:
-%	1. connector to the front
-%	2. connector to the back
-%	3. connector to the right
-%	4. connector to the left
-
-% Note: for all these configurations, the logger is placed with the wide
-%		base downstairs and with the smooth angle upstairs.
+% the configurations that has been taken into account are all with the 
+% logger fixed horizontally with the bigger base downstairs and the smooth 
+% angle upstairs and:
+%	1. the connector to the front
+%	2. the connector to the back
+%	3. the connector to the right
+%	4. the connector to the left
+% with respect to the positive turtle longitudinal axis (the one along with
+% the turtle moves).
 
 %% reorient
 % For AGM: 
@@ -65,77 +66,56 @@ end
 %	- magz_new = -magz
 
 if sensor_model == 1
-    mag_sens_orig = [-mag_y, -mag_x, mag_z];	%  microTesla AGM
+    mag_sens_orig = [-mag_y, -mag_x, mag_z];	    % AGM
 	gyro_sens_orig = [-gyro_x, -gyro_y, -gyro_z];
 elseif sensor_model == 2
-    mag_sens_orig = [mag_x, mag_y, -mag_z];	%  microTesla Axy-5 CHECK
+    mag_sens_orig = [mag_x, mag_y, -mag_z];	        % Axy-5
 end
 	
-%% pseudo-NED (TODO)
-% da qua in giu è sempre roba vecchia
-%% new: vertical placement, wide base in back, tip down (high connector)*
+logger_config = 0;
 
-% for how the sensor is mounted inside the structure (vertical with 
-% 	connector at the top, wide base at the rear):
+fprintf("Choose the logger configuration: \n")
+fprintf("1. connector to the front \n")
+fprintf("2. connector to the back \n")
+fprintf("3. connector to the right \n")
+fprintf("4. connector to the left \n")
 
-% for mag. data must be rotated of -pi/2 around y-axis and of -pi/2 around 
-% z-axis (after first rotation):  
-%							[0 0 -1]	[0  1 0]	[0  0 -1]
-%	Ry(-pi/2)*Rx(-pi/2) =	[0 1  0] *  [-1 0 0] =  [-1 0  0]
-%							[1 0  0]	[0 0  1]	[0  1  0]
-
-% mag_sens = Ry(-pi/2) * Rx(-pi/2) * mag_sens_orig = [-mag_z, -mag_x, mag_y]
-
-% For acc data must be rotated of pi around z-axis and of -pi/2 around
-% y-axis (after first rotation): 
-%						[-1 0  0]	[0 0 -1]	[0  0 1]
-%	Rz(pi)*Ry(-pi/2) =	[0  -1 0] * [0 1  0] =  [0 -1 0]
-%						[0  0  1]	[1 0  0]	[1 0  0]
-
-% acc_sens = Rz(pi) * Ry(-pi/2) * acc_sens_orig = [acc_z, -acc_y, acc_x]
-
-% It can be obtain also by rotating the measurements obtained for the 
-% horizontal version of -pi/2 around the y-axis:
-% acc_sens = [acc_x, -acc_y, -acc_z];
-% mag_sens = [mag_y, -mag_x, mag_z];
-
-% acc_sens' = Ry(-pi/2) * acc_sens = [acc_z, -acc_y, acc_x] 
-% mag_sens' = Ry(-pi/2) * mag_sens = [-mag_z, -mag_x, mag_y];
-
-% Attention, in the wander phase the sensor floats with the orange part at
-% the top, so the sensor is placed horizontally with the wide base upwards.
-% Then, the correction to be made is different. For the pre-deployment 
-% phase, on the other hand, it makes little sense to talk about it because
-% there is no fixed reference, it is me who rotate it in my hands, but for
-% simplicity of interpretation of the data I reorient it as when it is on
-% board the turtle.
-
-acc_sens	= [acc_z, -acc_y, acc_x];
-mag_sens	= [-mag_z, -mag_x, mag_y];
-
-if sensor_model == 1
-    gyro_sens	= [gyro_z, -gyro_y, gyro_x];
+while logger_config <= 0 || logger_config > 4
+    logger_config = input('');
 end
 
-%% assign to the struct
-data_raw.accx = acc_sens(:, 1);
-data_raw.accy = acc_sens(:, 2);
-data_raw.accz = acc_sens(:, 3);
-
-data_raw.magx = mag_sens(:, 1);
-data_raw.magy = mag_sens(:, 2);
-data_raw.magz = mag_sens(:, 3);
-
 if sensor_model == 1
-    data_raw.gyrox = gyro_sens(:, 1);
-    data_raw.gyroy = gyro_sens(:, 2);
-    data_raw.gyroz = gyro_sens(:, 3);
+    if logger_config == 1
+        acc_reor = [acc_x, -acc_y, acc_z];
+        mag_reor = [-mag_y, mag_x, mag_z];
+        gyro_reor = [-gyro_x, gyro_y, -gyro_z];
+    elseif logger_config == 2
+        acc_reor = [-acc_x, acc_y, acc_z];
+        mag_reor = [mag_y, -mag_x, mag_z];
+        gyro_reor = [gyro_x, -gyro_y, -gyro_z];
+    elseif logger_config == 3
+        acc_reor = [acc_y, acc_x, acc_z];
+        mag_reor = [-mag_x, -mag_y, mag_z];
+        gyro_reor = [-gyro_y, -gyro_x, -gyro_z];
+    elseif logger_config == 4
+        acc_reor = [-acc_y, -acc_x, -acc_z];
+        mag_reor = [mag_x, mag_y, mag_z];
+        gyro_reor = [gyro_y, gyro_x, -gyro_z];
+    end
+elseif sensor_model == 2
+    if logger_config == 1
+        acc_reor = [acc_x, acc_y, acc_z];
+        mag_reor = [mag_x, mag_y, -mag_z];
+    elseif logger_config == 2
+        acc_reor = [-acc_x, -acc_y, acc_z];
+        mag_reor = [-mag_x, -mag_y, -mag_z];
+    elseif logger_config == 3
+        acc_reor = [-acc_y, acc_x, acc_z];
+        mag_reor = [-mag_y, mag_x, -mag_z];
+    elseif logger_config == 4
+        acc_reor = [acc_y, -acc_x, acc_z];
+        mag_reor = [mag_y, -mag_x, -mag_z];
+    end
 end
 
 %% save struct
-
-fprintf(['all reoriented data have been correctly loaded \n'])
-	
-fprintf('Saving data_raw.mat... \n')
-save('data_raw', 'data_raw');
-fprintf('data_raw.mat saved! \n')

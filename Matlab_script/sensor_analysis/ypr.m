@@ -16,16 +16,13 @@ if sensor == 1
 end
 
 end_sample = length(data_gyrox);
-
 gyro_sens = [data_gyrox, data_gyroy, data_gyroz];
 
 %% plot section
 
 id_plot = 1;
-
-	%% plot: Uncalibrated vs Calibrated magnetic field fitting ellipsoids/sphere
 	
-	figure(id_plot); id_plot = id_plot + 1;
+figure(id_plot); id_plot = id_plot + 1;
 	clf
 	plot3(data_gyrox, data_gyroy, data_gyroz, 'LineStyle','none','Marker', 'o','MarkerSize', 3)
 	grid on
@@ -39,7 +36,7 @@ id_plot = 1;
 	title("gyro axes")
 	hold off
 	
-	figure(id_plot); id_plot = id_plot + 1;
+figure(id_plot); id_plot = id_plot + 1;
 	clf
 	plot(1:end_sample, data_gyrox, 'Marker', 'o','MarkerSize', 3)
 	hold on

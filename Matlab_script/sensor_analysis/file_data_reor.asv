@@ -65,12 +65,63 @@ end
 %	- magz_new = -magz
 
 if sensor_model == 1
-    mag_sens_orig = [mag_y, mag_x, -mag_z];	%  microTesla AGM
+    mag_sens_orig = [-mag_y, -mag_x, mag_z];	    % AGM
+	gyro_sens_orig = [-gyro_x, -gyro_y, -gyro_z];
 elseif sensor_model == 2
-    mag_sens_orig = [mag_y, mag_x, -mag_z];	%  microTesla Axy-5 CHECK
+    mag_sens_orig = [mag_x, mag_y, -mag_z];	        % Axy-5
 end
 	
+logger_config = 0;
 
+fprintf("Choose the logger configuration: \n")
+fprintf("1. connector to the front \n")
+fprintf("2. connector to the back \n")
+fprintf("3. connector to the right \n")
+fprintf("4. connector to the left \n")
+
+while logger_config <= 0 || logger_config > 4
+    logger_config = input('');
+end
+
+if sensor_model == 1
+    if logger_config == 1
+        acc_reor = [acc_x, -acc_y, acc_z];
+        mag_reor = [-mag_y, mag_x, mag_z];
+        gyro_reor = [-gyro_x, gyro_y, -gyro_z];
+    elseif logger_config == 2
+        acc_reor = [-acc_x, acc_y, acc_z];
+        mag_reor = [mag_y, -mag_x, mag_z];
+        gyro_reor = [gyro_x, -gyro_y, -gyro_z];
+    elseif logger_config == 3
+        acc_reor = [acc_y, acc_x, acc_z];
+        mag_reor = [-mag_x, -mag_y, mag_z];
+        gyro_reor = [-gyro_y, -gyro_x, -gyro_z];
+    elseif logger_config == 4
+        acc_reor = [-acc_y, -acc_x, -acc_z];
+        mag_reor = [mag_x, mag_y, mag_z];
+        gyro_reor = [gyro_y, gyro_x, -gyro_z];
+    end
+elseif sensor_model == 2
+        if logger_config == 1
+        acc_reor = [acc_x, -acc_y, acc_z];
+        mag_reor = [-mag_y, mag_x, mag_z];
+        gyro_reor = [-gyro_x, gyro_y, -gyro_z];
+    elseif logger_config == 2
+        acc_reor = [-acc_x, acc_y, acc_z];
+        mag_reor = [mag_y, -mag_x, mag_z];
+        gyro_reor = [gyro_x, -gyro_y, -gyro_z];
+    elseif logger_config == 3
+        acc_reor = [acc_y, acc_x, acc_z];
+        mag_reor = [-mag_x, -mag_y, mag_z];
+        gyro_reor = [-gyro_y, -gyro_x, -gyro_z];
+    elseif logger_config == 4
+        acc_reor = [-acc_y, -acc_x, -acc_z];
+        mag_reor = [mag_x, mag_y, mag_z];
+        gyro_reor = [gyro_y, gyro_x, -gyro_z];
+end
+
+%% pseudo-NED (TODO)
+% da qua in giu è sempre roba vecchia
 %% new: vertical placement, wide base in back, tip down (high connector)*
 
 % for how the sensor is mounted inside the structure (vertical with 
