@@ -7,6 +7,7 @@ clear
 clc
 close all
 
+addpath("csv_file");
 
 sensor = 1;
 type = 1;
