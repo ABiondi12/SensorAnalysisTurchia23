@@ -16,9 +16,10 @@ data = readtable('agm_accy_bis.csv');
 
 if type == 2
 	if sensor == 2
-		data_magx = table2array(data(1:5:end, 7));
-		data_magy = table2array(data(1:5:end, 8));
-		data_magz = table2array(data(1:5:end, 9));
+		time = table2array(data(1:5:end-1, 3));
+		data_magx = table2array(data(1:5:end-1, 7));
+		data_magy = table2array(data(1:5:end-1, 8));
+		data_magz = table2array(data(1:5:end-1, 9));
 	elseif sensor == 1
 		data_magx = table2array(data(:, 10));
 		data_magy = table2array(data(:, 11));
@@ -76,6 +77,23 @@ if type == 2
 		zlabel('z uT','FontSize', 20)
 		set(gca,'FontSize', 20)
 		title("axis")
+		hold off
+		
+	figure(id_plot); id_plot = id_plot + 1;
+		clf
+		plot(time, data_magx, 'Marker', 'o','MarkerSize', 3)
+		hold on
+		plot(time, data_magy, 'Marker', 'o','MarkerSize', 3)
+		plot(time, data_magz, 'Marker', 'o','MarkerSize', 3)
+		grid on
+		box on
+		axis tight
+		xlabel('x','FontSize', 20)
+		ylabel('y','FontSize', 20)
+		zlabel('z','FontSize', 20)
+		legend('x mag', 'y mag', 'z mag','Location', 'southoutside','FontSize', 20)
+		set(gca,'FontSize', 20)
+		title("mag axes")
 		hold off
 		
 elseif type == 1
