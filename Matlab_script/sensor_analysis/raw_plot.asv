@@ -16,7 +16,7 @@ addpath("csv_file");
 
 sensor = 0;
 
-data = readtable('axy4_calib_base_ferma.csv');
+data = readtable('axy4_calib2.csv');
 
 fprintf("Choose the logger model: \n")
 fprintf("1. AGM \n")
