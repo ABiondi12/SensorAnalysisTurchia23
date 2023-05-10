@@ -103,6 +103,7 @@ if sensor_model == 1
         gyro_reor = [gyro_y, gyro_x, -gyro_z];
     end
 elseif sensor_model == 2
+    gyro_reor = 0;
     if logger_config == 1
         acc_reor = [acc_x, acc_y, acc_z];
         mag_reor = [mag_x, mag_y, -mag_z];

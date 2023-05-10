@@ -16,7 +16,7 @@ addpath("csv_file");
 
 sensor = 0;
 
-data = readtable('agm_gyro_x.csv');
+data = readtable('axy4_calib_no_sostegno.csv');
 
 fprintf("Choose the logger model: \n")
 fprintf("1. AGM \n")
@@ -31,17 +31,17 @@ data_accx = table2array(data(:, 4));
 data_accy = table2array(data(:, 5));
 data_accz = table2array(data(:, 6));
 acc_sens = [data_accx, data_accy, data_accz];
-
+magnet_off = 70; % keep into account the magnet influence on mag measures
 if sensor == 2
-	time = table2array(data(1:5:end-1, 3));
-	data_magx = table2array(data(1:5:end-1, 7));    % acc = 10Hz, mag = 2 Hz
-	data_magy = table2array(data(1:5:end-1, 8));
-	data_magz = table2array(data(1:5:end-1, 9));
+	time_mag = table2array(data(1:5:end-magnet_off, 3));
+	data_magx = table2array(data(1:5:end-magnet_off, 7));    % acc = 10Hz, mag = 2 Hz
+	data_magy = table2array(data(1:5:end-magnet_off, 8));
+	data_magz = table2array(data(1:5:end-magnet_off, 9));
 elseif sensor == 1
-    time = table2array(data(:, 3));
-	data_magx = table2array(data(:, 10));           % mag = acc linked
-	data_magy = table2array(data(:, 11));
-	data_magz = table2array(data(:, 12));
+    time_mag = table2array(data(1:end - magnet_off, 3));
+	data_magx = table2array(data(1:end - magnet_off, 10));           % mag = acc linked
+	data_magy = table2array(data(1:end - magnet_off, 11));
+	data_magz = table2array(data(1:end - magnet_off, 12));
     data_gyrox = table2array(data(1:end, 7));
 	data_gyroy = table2array(data(1:end, 8));
 	data_gyroz = table2array(data(1:end, 9));
@@ -67,7 +67,7 @@ end
 if sensor == 1
     [acc_reor, mag_reor, gyro_reor]=file_data_reor(acc_sens, mag_sens, gyro_sens, sensor);
 elseif sensor == 2
-    [acc_reor, mag_reor, ~]=file_data_reor(acc_sens, mag_sens, gyro_sens, sensor);
+    [acc_reor, mag_reor, unused]=file_data_reor(acc_sens, mag_sens, acc_sens, sensor);
 end
 
 if type == 2
@@ -104,10 +104,10 @@ if type == 2
 		
 	figure(id_plot); id_plot = id_plot + 1;
 		clf
-		plot(time, mag_sens(:, 1), 'Marker', 'o','MarkerSize', 3)
+		plot(time_mag, mag_sens(:, 1), 'Marker', 'o','MarkerSize', 3)
 		hold on
-		plot(time, mag_sens(:, 2), 'Marker', 'o','MarkerSize', 3)
-		plot(time, mag_sens(:, 3), 'Marker', 'o','MarkerSize', 3)
+		plot(time_mag, mag_sens(:, 2), 'Marker', 'o','MarkerSize', 3)
+		plot(time_mag, mag_sens(:, 3), 'Marker', 'o','MarkerSize', 3)
 		grid on
 		box on
 		axis tight
@@ -121,10 +121,10 @@ if type == 2
 
     figure(id_plot); id_plot = id_plot + 1;
 		clf
-		plot(time, mag_reor(:, 1), 'Marker', 'o','MarkerSize', 3)
+		plot(time_mag, mag_reor(:, 1), 'Marker', 'o','MarkerSize', 3)
 		hold on
-		plot(time, mag_reor(:, 2), 'Marker', 'o','MarkerSize', 3)
-		plot(time, mag_reor(:, 3), 'Marker', 'o','MarkerSize', 3)
+		plot(time_mag, mag_reor(:, 2), 'Marker', 'o','MarkerSize', 3)
+		plot(time_mag, mag_reor(:, 3), 'Marker', 'o','MarkerSize', 3)
 		grid on
 		box on
 		axis tight
@@ -186,7 +186,7 @@ if type == 2
 		    clf
 		    plot3(sphere_fit(:, 1), sphere_fit(:, 2), sphere_fit(:, 3), 'LineStyle','none','Marker', 'o','MarkerSize',1,'MarkerEdgeColor','g', 'MarkerFaceColor','g')
 		    hold on
-		    plot3(mag_reor(:, 1), mag_reor(:, 2), mag_reor(:, 3), 'LineStyle','none','Marker', 'o','MarkerSize', 3)
+		    plot3(mag_postcalib(:, 1), mag_postcalib(:, 2), mag_postcalib(:, 3), 'LineStyle','none','Marker', 'o','MarkerSize', 3)
 		    grid on
 		    box on
 		    axis equal
