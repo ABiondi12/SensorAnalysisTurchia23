@@ -16,7 +16,7 @@ addpath("csv_file");
 
 sensor = 0;
 
-data = readtable('axy4_calib_base_ferma.csv');
+data = readtable('agmd_c_calib.csv');
 
 fprintf("Choose the logger model: \n")
 fprintf("1. AGM \n")
@@ -32,19 +32,20 @@ data_accy = table2array(data(:, 5));
 data_accz = table2array(data(:, 6));
 acc_sens = [data_accx, data_accy, data_accz];
 magnet_off = 70; % keep into account the magnet influence on mag measures
+shift_init = 10;
 if sensor == 2
 	time_mag = table2array(data(1:5:end-magnet_off, 3));
 	data_magx = table2array(data(1:5:end-magnet_off, 7));    % acc = 10Hz, mag = 2 Hz
 	data_magy = table2array(data(1:5:end-magnet_off, 8));
 	data_magz = table2array(data(1:5:end-magnet_off, 9));
 elseif sensor == 1
-    time_mag = table2array(data(1:end - magnet_off, 3));
-	data_magx = table2array(data(1:end - magnet_off, 10));           % mag = acc linked
-	data_magy = table2array(data(1:end - magnet_off, 11));
-	data_magz = table2array(data(1:end - magnet_off, 12));
-    data_gyrox = table2array(data(1:end, 7));
-	data_gyroy = table2array(data(1:end, 8));
-	data_gyroz = table2array(data(1:end, 9));
+    time_mag = table2array(data(1+shift_init:end - magnet_off, 3));
+	data_magx = table2array(data(1+shift_init:end - magnet_off, 10));           % mag = acc linked
+	data_magy = table2array(data(1+shift_init:end - magnet_off, 11));
+	data_magz = table2array(data(1+shift_init:end - magnet_off, 12));
+    data_gyrox = table2array(data(1+shift_init:end, 7));
+	data_gyroy = table2array(data(1+shift_init:end, 8));
+	data_gyroz = table2array(data(1+shift_init:end, 9));
     gyro_sens = [data_gyrox, data_gyroy, data_gyroz];
 end
 mag_sens = [data_magx, data_magy, data_magz];
