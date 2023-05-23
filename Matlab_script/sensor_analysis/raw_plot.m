@@ -14,9 +14,18 @@ id_plot = 1;
 
 addpath("csv_file");
 
+datetime_column = 0;
 sensor = 0;
 
-data = readtable('agmd_c_calib.csv');
+data = readtable('prova_distacco_axy3.csv');
+
+fprintf("Datetime or Date - time information? \n")
+fprintf("1. Date and Time columns together \n")
+fprintf("2. Date and Time columns divided divided \n")
+
+while datetime_column <= 0 || datetime_column > 2
+    datetime_column = input('');
+end
 
 fprintf("Choose the logger model: \n")
 fprintf("1. AGM \n")
@@ -27,26 +36,59 @@ while sensor <= 0 || sensor > 2
 end
 
 %% load data
-data_accx = table2array(data(:, 4));
-data_accy = table2array(data(:, 5));
-data_accz = table2array(data(:, 6));
-acc_sens = [data_accx, data_accy, data_accz];
-magnet_off = 70; % keep into account the magnet influence on mag measures
-shift_init = 10;
-if sensor == 2
-	time_mag = table2array(data(1:5:end-magnet_off, 3));
-	data_magx = table2array(data(1:5:end-magnet_off, 7));    % acc = 10Hz, mag = 2 Hz
-	data_magy = table2array(data(1:5:end-magnet_off, 8));
-	data_magz = table2array(data(1:5:end-magnet_off, 9));
-elseif sensor == 1
-    time_mag = table2array(data(1+shift_init:end - magnet_off, 3));
-	data_magx = table2array(data(1+shift_init:end - magnet_off, 10));           % mag = acc linked
-	data_magy = table2array(data(1+shift_init:end - magnet_off, 11));
-	data_magz = table2array(data(1+shift_init:end - magnet_off, 12));
-    data_gyrox = table2array(data(1+shift_init:end, 7));
-	data_gyroy = table2array(data(1+shift_init:end, 8));
-	data_gyroz = table2array(data(1+shift_init:end, 9));
-    gyro_sens = [data_gyrox, data_gyroy, data_gyroz];
+if datetime_column == 1
+	datetime_acc = table2array(data(:, 2));
+	data_accx = table2array(data(:, 3));
+	data_accy = table2array(data(:, 4));
+	data_accz = table2array(data(:, 5));
+	acc_sens = [data_accx, data_accy, data_accz];
+	magnet_off = 10; % keep into account the magnet influence on mag measures
+	shift_init = 10;
+	
+	if sensor == 2
+		datetime_mag = table2array(data(1:10:end-magnet_off, 2));
+		data_magx = table2array(data(1:10:end-magnet_off, 6));    % acc = 10Hz, mag = 2 Hz
+		data_magy = table2array(data(1:10:end-magnet_off, 7));
+		data_magz = table2array(data(1:10:end-magnet_off, 8));
+	elseif sensor == 1
+		datetime_mag = table2array(data(1+shift_init:end - magnet_off, 2));
+		data_magx = table2array(data(1+shift_init:end - magnet_off, 9));           % mag = acc linked
+		data_magy = table2array(data(1+shift_init:end - magnet_off, 10));
+		data_magz = table2array(data(1+shift_init:end - magnet_off, 11));
+		data_gyrox = table2array(data(1+shift_init:end, 6));
+		data_gyroy = table2array(data(1+shift_init:end, 7));
+		data_gyroz = table2array(data(1+shift_init:end, 8));
+		gyro_sens = [data_gyrox, data_gyroy, data_gyroz];
+	end	
+elseif datetime_column == 2 % not working for now
+	date_acc = table2array(data(:, 2));
+	time_acc = table2array(data(:, 3));
+	datetime_acc = date_acc + time_acc;
+	data_accx = table2array(data(:, 4));
+	data_accy = table2array(data(:, 5));
+	data_accz = table2array(data(:, 6));
+	acc_sens = [data_accx, data_accy, data_accz];
+	magnet_off = 10; % keep into account the magnet influence on mag measures
+	shift_init = 10;
+	if sensor == 2
+		date_mag = table2array(data(1:10:end-magnet_off, 2));
+		time_mag = table2array(data(1:10:end-magnet_off, 3));
+		datetime_mag = datetime([date_mag, time_mag], 'InputFormat', 'GG/MM/YY HH:mm:ss.sss');
+		data_magx = table2array(data(1:10:end-magnet_off, 7));    % acc = 10Hz, mag = 2 Hz
+		data_magy = table2array(data(1:10:end-magnet_off, 8));
+		data_magz = table2array(data(1:10:end-magnet_off, 9));
+	elseif sensor == 1
+		date_mag = table2array(data(1+shift_init:end - magnet_off, 2));
+		time_mag = table2array(data(1+shift_init:end - magnet_off, 3));
+		datetime_mag = datetime([date_mag, time_mag], 'InputFormat', 'GG/MM/YY HH:mm:ss.sss');
+		data_magx = table2array(data(1+shift_init:end - magnet_off, 10));           % mag = acc linked
+		data_magy = table2array(data(1+shift_init:end - magnet_off, 11));
+		data_magz = table2array(data(1+shift_init:end - magnet_off, 12));
+		data_gyrox = table2array(data(1+shift_init:end, 7));
+		data_gyroy = table2array(data(1+shift_init:end, 8));
+		data_gyroz = table2array(data(1+shift_init:end, 9));
+		gyro_sens = [data_gyrox, data_gyroy, data_gyroz];
+	end
 end
 mag_sens = [data_magx, data_magy, data_magz];
 %% show
@@ -103,12 +145,30 @@ if type == 2
 		title("Reoriented axes")
 		hold off
 		
+		sample_tot = length(mag_sens);	
+		figure(id_plot); id_plot = id_plot + 1;
+		clf
+		plot(1:sample_tot, mag_sens(:, 1), 'Marker', 'o','MarkerSize', 3)
+		hold on
+		plot(1:sample_tot, mag_sens(:, 2), 'Marker', 'o','MarkerSize', 3)
+		plot(1:sample_tot, mag_sens(:, 3), 'Marker', 'o','MarkerSize', 3)
+		grid on
+		box on
+		axis tight
+		xlabel('x','FontSize', 20)
+		ylabel('y','FontSize', 20)
+		zlabel('z','FontSize', 20)
+		legend('x mag', 'y mag', 'z mag','Location', 'southoutside','FontSize', 20)
+		set(gca,'FontSize', 20)
+		title("Mag axes not reoriented")
+		hold off
+		
 	figure(id_plot); id_plot = id_plot + 1;
 		clf
-		plot(time_mag, mag_sens(:, 1), 'Marker', 'o','MarkerSize', 3)
+		plot(datetime_mag, mag_sens(:, 1), 'Marker', 'o','MarkerSize', 3)
 		hold on
-		plot(time_mag, mag_sens(:, 2), 'Marker', 'o','MarkerSize', 3)
-		plot(time_mag, mag_sens(:, 3), 'Marker', 'o','MarkerSize', 3)
+		plot(datetime_mag, mag_sens(:, 2), 'Marker', 'o','MarkerSize', 3)
+		plot(datetime_mag, mag_sens(:, 3), 'Marker', 'o','MarkerSize', 3)
 		grid on
 		box on
 		axis tight
@@ -122,10 +182,10 @@ if type == 2
 
     figure(id_plot); id_plot = id_plot + 1;
 		clf
-		plot(time_mag, mag_reor(:, 1), 'Marker', 'o','MarkerSize', 3)
+		plot(datetime_mag, mag_reor(:, 1), 'Marker', 'o','MarkerSize', 3)
 		hold on
-		plot(time_mag, mag_reor(:, 2), 'Marker', 'o','MarkerSize', 3)
-		plot(time_mag, mag_reor(:, 3), 'Marker', 'o','MarkerSize', 3)
+		plot(datetime_mag, mag_reor(:, 2), 'Marker', 'o','MarkerSize', 3)
+		plot(datetime_mag, mag_reor(:, 3), 'Marker', 'o','MarkerSize', 3)
 		grid on
 		box on
 		axis tight
