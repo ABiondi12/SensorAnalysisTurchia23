@@ -17,7 +17,7 @@ addpath("csv_file");
 datetime_column = 0;
 sensor = 0;
 
-data = readtable('prova_distacco_axy3.csv');
+data = readtable('02 agmdB_290523_calib_S2.csv');
 
 fprintf("Datetime or Date - time information? \n")
 fprintf("1. Date and Time columns together \n")
@@ -42,7 +42,7 @@ if datetime_column == 1
 	data_accy = table2array(data(:, 4));
 	data_accz = table2array(data(:, 5));
 	acc_sens = [data_accx, data_accy, data_accz];
-	magnet_off = 10; % keep into account the magnet influence on mag measures
+	magnet_off = 275; % keep into account the magnet influence on mag measures
 	shift_init = 10;
 	
 	if sensor == 2
