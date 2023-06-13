@@ -13,11 +13,12 @@ close all
 id_plot = 1;
 
 addpath("csv_file");
+addpath("csv_file\Turchia2023");
 
 datetime_column = 0;
 sensor = 0;
 
-data = readtable('02 agmdB_290523_calib_S2.csv');
+data = readtable('axy1_S1.csv');
 
 fprintf("Datetime or Date - time information? \n")
 fprintf("1. Date and Time columns together \n")
