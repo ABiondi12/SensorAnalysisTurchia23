@@ -1,4 +1,4 @@
-function [mag_postcalib, soft_iron, hard_iron, exp_mag_strength, sphere_fit, ellips_fit]=mag_calib_main(mag_sens)
+function [mag_postcalib, soft_iron, hard_iron, exp_mag_strength, sphere_fit, ellips_fit]=mag_calib_main(mag_sens, mag_calib)
 % Function that takes as input uncalibrated data over which to compute
 % correction coefficient and gives as output the same data after been
 % calibrated, together with the correction coefficients to be applied to
@@ -31,18 +31,16 @@ function [mag_postcalib, soft_iron, hard_iron, exp_mag_strength, sphere_fit, ell
 %     corrected magnetometer data lies on a sphere of radius EXPMFS.
 
 %% calibration procedure
-mag_precalib = mag_sens;
-
 % Compute correction terms starting from not calibrated dataset:
 % soft_iron corresponds to the A term of the function description (see
 % above), hard_iron corresponds to the B term of the function description.
-[soft_iron, hard_iron, exp_mag_strength] = magcal(mag_precalib);
+[soft_iron, hard_iron, exp_mag_strength] = magcal(mag_calib);
 
 % Magnetic field correction: here, only the calibration dataset (called
 % pre-deployment in prof. Luschi dataset) is corrected. If this calibration
 % results to be failry good, then you have to apply the same formula over
 % the entire dataset (turtle travel in open sea).
-mag_postcalib = (mag_precalib-hard_iron)*soft_iron;
+mag_postcalib = (mag_sens-hard_iron)*soft_iron;
 
 % reconstruct fitting ellipsoid (pre-calibration) and obtained sphere (post
 % calibration).
