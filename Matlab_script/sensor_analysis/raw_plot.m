@@ -21,11 +21,13 @@ addpath("csv_file\Turchia2023\Emine-D");
 addpath("csv_file\Turchia2023\Emine-D\axy");
 addpath("csv_file\Turchia2023\Fati-E");
 addpath("csv_file\Turchia2023\Fati-E\axy");
+addpath("csv_file\Turchia2023\Melis-B");
+addpath("csv_file\Turchia2023\Melis-B\axy");
 
 datetime_column = 0;
 sensor = 0;
 
-data = readtable('05_S2.csv');
+data = readtable('melis_axy4_S4.csv');
 
 fprintf("Datetime or Date - time information? \n")
 fprintf("1. Date and Time columns together \n")
