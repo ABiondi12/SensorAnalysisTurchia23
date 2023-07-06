@@ -33,7 +33,7 @@ end
 
 %% reorient
 % For AGM: 
-%	- accx is longitudinal and positive along the connector side. 
+%	- accx is longitudinal and positive along the connector side.
 %	- accy is trasversal and positive to the side of the dot.
 %	- accz is vertical and positive downstairs.
 %	- magx is trasversal and negative to the side of the dot.
@@ -52,18 +52,19 @@ end
 %	- magz is vertical and positive upstairs.
 %
 % Lets start before by aligning all the sensors with the same reference
-% frame as those of the acceletometer.
+% frame as those of the acceletometer (for AGM, also change y axis sign of 
+% acc so as to obtain a right hand reference frame).
 % For AGM:
 % 	- gyrox_new = -gyrox
 %	- gyroy_new = -gyroy
 %	- gyroz_new = -gyroz
-%	- magx_new = -magy
-%	- magy_new = -magx
-%	- magz_new = magz
+%	- magx_new	= -magy
+%	- magy_new	= -magx
+%	- magz_new	=  magz
 % For Axy:
-%	- magx_new = magx
-%	- magy_new = magy
-%	- magz_new = -magz
+%	- magx_new	=  magx
+%	- magy_new	=  magy
+%	- magz_new	= -magz
 
 if sensor_model == 1
     mag_sens_orig = [-mag_y, -mag_x, mag_z];	    % AGM
@@ -76,7 +77,7 @@ logger_config = 0;
 
 fprintf("Choose the logger configuration: \n")
 fprintf("1. connector to the front \n")
-fprintf("2. connector to the back \n")
+fprintf("2. connector to the back (Turtle carapace setup) \n")
 fprintf("3. connector to the right \n")
 fprintf("4. connector to the left \n")
 
@@ -86,7 +87,7 @@ end
 
 if sensor_model == 1
     if logger_config == 1
-        acc_reor = [acc_x, -acc_y, acc_z];
+        acc_reor = [acc_x, -acc_y, acc_z]; % right hand reference frame
         mag_reor = [-mag_y, mag_x, mag_z];
         gyro_reor = [-gyro_x, gyro_y, -gyro_z];
     elseif logger_config == 2
