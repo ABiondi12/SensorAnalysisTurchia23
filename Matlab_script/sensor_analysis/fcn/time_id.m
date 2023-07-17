@@ -1,11 +1,27 @@
 function[start_id, stop_id] = time_id(dataset, Yi, Mi, Di, Hi, MIi, Si, MSi, Yf, Mf, Df, Hf, MIf, Sf, MSf)
-% type = 'n' significa che passo un dataset dove ho già questa informazione
-% scelta a priori
+% time_id
+% This function takes as input a datetime vector and information about the
+% starting time and stop time and returns as output the id inside the
+% datetime vector corresponding to those two moment.
+%
+% INPUT:
+%	dataset - datetime vector where to look for start and stop time
+%	Yi, Mi, Di, Hi, MIi, Si, MSi - year, month, day, hour, minute, second,
+%									millisecond of the start time
+%	Yf, Mf, Df, Hf, MIf, Sf, MSf - year, month, day, hour, minute, second,
+%									millisecond of the stop time
+%
+% OUTPUT:
+%	start_id	- id of the position inside "dataset" of the datetime
+%					information passed as input for the start time
+%	stop_id		- id of the position inside "dataset" of the datetime
+%					information passed as input for the stop time
 
+%% elaboration
 	start = datetime(Yi, Mi, Di, Hi, MIi, Si, MSi);
 	stop = datetime(Yf, Mf, Df, Hf, MIf, Sf, MSf);
 
-	if (stop-start)<0 %funzione che fa la differenza di istanti
+	if (stop-start)<0 % differences between two istants
 		tmp = stop;
 		stop = start;
 		start = tmp;

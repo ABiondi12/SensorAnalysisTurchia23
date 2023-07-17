@@ -1,7 +1,22 @@
 function [norma_acc, acc_normz, norma_mag, mag_normz, norma_gyro, gyro_normz] = norm_acc_mg(acc, mag, gyro)
-% computes both norm and normalized vector of acc and mag vectors passed as
-% input arguments, whose must be already reoriented in the desired frame
-%% acc
+% norm_acc_mg
+% This function computes both norm and normalized vector of acceleration, 
+% gyroscope, and magnetic field vectors passed as input arguments, whose 
+% must be already reoriented in the desired reference frame.
+%
+% INPUT:
+%	acc		- acceleration dataset (nx3, n = num. samples)
+%	mag		- magnetic field dataset (nx3, n = num. samples)
+%	gyro	- gyroscope dataset (nx3, n = num. samples)
+% OUTPUT:
+%	norma_acc	- norm of acceleration vector
+%	acc_normz	- normalized acceleration dataset (nx3, n = num. samples)
+%	norma_mag	- norm of magnetic field vector
+%	mag_normz	- normalized magnetic field dataset (nx3, n = num. samples)
+%	norma_gyro	- norm of angular velocity vector
+%	gyro_normz	- normalized gyroscope dataset (nx3, n = num. samples)
+%
+%% acceleration
 len_acc = size(acc, 1);
 
 norma_acc = zeros(len_acc, 1);
@@ -12,7 +27,7 @@ for i=1:len_acc
 	acc_normz(i, :) = acc(i, :)./norma_acc(i);
 end
 
-%% mag
+%% magnetic field
 len_mag = size(mag, 1);
 
 norma_mag = zeros(len_mag, 1);
@@ -23,7 +38,7 @@ for i=1:len_mag
 	mag_normz(i, :) = mag(i, :)./norma_mag(i);
 end
 
-%% gyro
+%% gyroscope
 if nargin > 2
 	len_gyro = size(gyro, 1);
 

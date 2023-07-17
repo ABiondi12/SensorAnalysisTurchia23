@@ -1,14 +1,30 @@
 function [DBA, DBA_mov_w, Norm, Norm_mov_w, Norm2, Norm2_mov_w] = energy_indeces(dinx, diny, dinz, mov_wind_size)
+% energy_indeces
 % This function computes energy indeces such as ODBA, VeDBA and VeDBA^2
-% using as accelerations values passed as input (dinx, diny and dinz). It
-% also execute a smoothdata operation using a moving window of size 
+% using as acceleration values passed as input (dinx, diny and dinz). It
+% also executes a smoothdata operation using a moving window of size 
 % mov_wind_size (given as input). 
 % Output are the three indeces and their smoothed versions.
+%
+% INPUT:
+%	dinx			- dynamic acceleration along x-axis
+%	diny			- dynamic acceleration along y-axis
+%	dinz			- dynamic acceleration along z-axis
+%	mov_wind_size	- size of the moving window for smoothing the data
 % 
-% Indeces are computed using these formula:
+% OUTPUT:
+%	DBA				- DBA index
+%	DBA_mov_w		- DBA index smooth version
+%	Norm			- norm of the acceleration vector
+%	Norm_mov_w		- norm of the acceleration vector smooth version
+%	Norm2			- square norm of the acceleration vector
+%	Norm2_mov_w		- square norm of the acceleration vector smooth version
+%
+% Output indeces are computed using these formula:
 %	DBA		= |accx| + |accy| + |accz|
 %	Norm	= sqrt(accx^2 + accy^2 + accz^2)
 %	Norm2	= accx^2 + accy^2 + accz^2
+
 if mov_wind_size > 0
 	
 	DBA		= zeros(size(dinx, 1), size(dinx, 2));

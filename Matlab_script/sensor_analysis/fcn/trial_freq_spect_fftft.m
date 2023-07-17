@@ -1,6 +1,6 @@
+function[spect_zero_max, spect_bott_max, spect_max, freq_spect_zero_max, freq_spect_bott_max, freq_spect_max] = trial_freq_spect_fftft(name_turtle, motion_type, P_acc, F_acc, id_plot, name_signal, t_fft, depth)
 % trial_freq_spect_fftft
 
-function[spect_zero_max, spect_bott_max, spect_max, freq_spect_zero_max, freq_spect_bott_max, freq_spect_max] = trial_freq_spect_fftft(name_turtle, motion_type, P_acc, F_acc, id_plot, name_signal, t_fft, depth)
 dim_fontb	= 20;
 dim_font	= 30;
 th_zero		= 0;

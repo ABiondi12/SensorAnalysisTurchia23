@@ -1,4 +1,27 @@
 function [day_night] = day_night_dive(turtle_dive_last, dive_init, dive_end, sunrise_init, sunset_init, sunrise_end, sunset_end)
+% day_night_dive 
+% This function takes as input information about the dive start and stop
+% time and about sunrise and sunset hours and return "day" if it happens
+% mostly during the day and "night" if it happens mostly during the night.
+%
+% INPUT:
+%	turtle_dive_last	- duration (seconds) of the entire dive
+%	dive_init			- start of the dive, datetime information
+%	dive_end			- end of the dive, datetime information
+%	sunrise_init		- sunrise datetime information of the same day in
+%							which the dive starts
+%	sunset_init			- sunset datetime information of the same day in
+%							which the dive starts
+%	sunrise_end			- sunrise datetime information of the same day in
+%							which the dive ends
+%	sunset_end			- sunset datetime information of the same day in
+%							which the dive ends
+%
+% OUTPUT:
+%	day_night			- "day" or "night", depending on the period in 
+%							which the dive is mostly performed
+
+
 
 if sunrise_init == sunrise_end && sunset_init == sunset_end
 	% dive is enclosed in the same day

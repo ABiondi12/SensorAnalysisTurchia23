@@ -1,5 +1,58 @@
-% struct_sensor_reoriented
 function [acc_reor, mag_reor, gyro_reor]=file_data_reor(acc, mag, gyro, sensor_model)
+% file_data_reor
+% This function takes as input data from sensors, as accelerometer and
+% gyroscope, and gives as output their reoriented version so as to obtain a
+% pseudo-NED reference frame, that is:
+%	- x axis along turtle carapace, positive from the tail to the head
+%	- z axis positive downwards w.r.t. turtle carapace
+%	- y so as to obtain a right hand frame
+%
+% POSSIBLE CONFIGURATIONS:
+% the configurations that has been taken into account are all with the 
+% logger fixed horizontally with the bigger base downstairs and the smooth 
+% angle upstairs and:
+%	1. the connector to the front
+%	2. the connector to the back
+%	3. the connector to the right
+%	4. the connector to the left
+% with respect to the positive turtle longitudinal axis (the one along with
+% the turtle moves).
+%
+% REORIENT:
+%	* Original raw orientation for AGM: 
+%		- accx is longitudinal and positive along the connector side.
+%		- accy is trasversal and positive to the side of the dot.
+%		- accz is vertical and positive downstairs.
+%		- magx is trasversal and negative to the side of the dot.
+%		- magy is longitudinal and negative along the connector side.
+%		- magz is vertical and positive downstairs.
+%		- gyrox is longitudinal and negative along the connector side.
+%		- gyroy is trasversal and negative to the side of the dot.
+%		- gyroz is vertical and positive upstairs.
+%
+%	* Original raw orientation for Axy: 
+%		- accx is longitudinal and positive along the connector side. 
+%		- accy is trasversal and positive to the connector side.
+%		- accz is vertical and positive downstairs.
+%		- magx is longitudinal and positive along the connector side.
+%		- magy is trasversal and positive to the connector side.
+%		- magz is vertical and positive upstairs.
+%
+% INPUT:
+%	acc			 - acceleration raw data (matrix nx3, n = num of samples)
+%	mag			 - magnetic field raw data (matrix nx3, n = num of samples)
+%	gyro		 - gyroscope raw data (matrix nx3, n = num of samples)
+%	sensor_model - axy-5 or AGM
+%
+% OUTPUT:
+%	acc_reor	 - acceleration reoriented data (matrix nx3, n = num of samples)
+%	mag_reor	 - magnetic field reoriented data (matrix nx3, n = num of samples)
+%	gyro_reor	 - gyroscope reoriented data (matrix nx3, n = num of samples)
+%
+% NOTE:
+%	gyroscope input and output are significant only for AGM sensor, in case
+%	of Axy-5 sensor you can simply use acc data for gyro and ignore the
+%	output.
 
 %% acc and mag extrapulation: 'original' raw data
 acc_x = acc(:, 1);
@@ -120,4 +173,4 @@ elseif sensor_model == 2
     end
 end
 
-%% save struct
+%% save struct (not for now)

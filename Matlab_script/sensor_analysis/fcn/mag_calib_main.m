@@ -1,10 +1,25 @@
 function [mag_postcalib, soft_iron, hard_iron, exp_mag_strength, sphere_fit, ellips_fit]=mag_calib_main(mag_sens, mag_calib)
-% Function that takes as input uncalibrated data over which to compute
-% correction coefficient and gives as output the same data after been
+% mag_calib_main
+% Function that takes as input uncalibrated magnetic field data and, if not
+% on the same dataset, magnetic field data over which to compute
+% correction coefficient. Then, it gives as output the data after been
 % calibrated, together with the correction coefficients to be applied to
-% the rest of the data in order to calibrate them. 
+% calibrate them. 
 %
 % This function makes use of the Matlab function magcal.
+%
+% INPUT:
+%	mag_sens	- uncalibrated magnetic field data, usually at the
+%					beginning of the dataset there is the calibration session
+%	mag_calib	- dataset of the calibration session in case we want to use
+%					a set that is not present in mag_sens (unused)
+% OUTPUT:
+%	mag_postcalib	 - calibrated magnetic field data (mag_sens after calibration)
+%	soft_iron		 - soft iron correction factor
+%	hard_iron		 - hard iron correction factor
+%	exp_mag_strength - expected magnitude of the magnetic field
+%	sphere_fit		 - best fit sphere of the calibrated magnetic field
+%	ellips_fit		 - best fit ellipsoid of the uncalibrated magnetic field
 %
 %% magcal function description
 %  magcal - Magnetometer calibration coefficients 

@@ -1,7 +1,9 @@
 function [yaw_grad_m, yaw_grad_g, pitch_grad, roll_grad, R_pose_m, R_pose_g] = YPR_comp(minusg_NAV, Dec, acc, mag, Fs, Fs_filter)
-% With information about magnetic field and gravity, both in NED
-% (navigation frame, known once selected a place and a day) and in local
-% (BODY) reference frame (same in accelerometers and magnetometers), known
+% YPR_comp
+% This function computes the yaw, pitch and roll angles starting from
+% information about magnetic field and gravity, both in NED(navigation 
+% frame, known once selected a place and a day) and in local (BODY)
+% reference frame (same in accelerometers and magnetometers), known
 % through logger informations, Yaw Pitch and Roll angles are computed.
 
 if(length(acc)~=length(mag))

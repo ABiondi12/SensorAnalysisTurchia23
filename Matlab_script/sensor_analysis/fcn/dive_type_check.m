@@ -1,5 +1,26 @@
-% dive_type_check
+
 function [dive_ty] =  dive_type_check(depth, surf_dive_th, surf_dive_th_sh)
+% dive_type_check
+% Function that evaluate the shape of a single dive using a self made
+% classification:
+%	U - if the bottom phase occupies more than 80% of the total dive time
+%	S - if the sum between descent and ascent time lasts for more than 75% 
+%		of the total duration of the dive and the descent and ascent times 
+%		differ by more than (>) 20% of the total duration of the dive.
+%	V - if the sum between descent and ascent time lasts for more than 75% 
+%		of the total duration of the dive and the descent and ascent times 
+%		differ by less than (<=) 20% of the total duration of the dive.
+%	M - if the dive does not fall into any of the above categories.
+%
+% NOTE: all the percentages can be modified in the function code.
+%
+% INPUT:
+%	depth			- depth profile of the dive (negative values)
+%	surf_dive_th	- depth over which a big dive occurs (-5m)
+%	surf_dive_th_sh - depth over which a shallow or a big dive occurs (-1m)
+%
+% OUTPUT:
+%	dive_ty			- dive type among "s", "u", "v", and "m"
 
 %% parameters (change if you do not meet the classification)
 perc_bottom_u = 80;			% if the bottom phase occupies more than 80% of
