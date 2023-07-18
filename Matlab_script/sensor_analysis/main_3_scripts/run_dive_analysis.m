@@ -1,8 +1,8 @@
 % run_dive_analysis
-
+%
 % dataset that is in use into this script and has to be present:
 %		turtle_dataset	= turtle_dive
-
+%
 % Struct that are going to be used during this script's execution
 % in order to build struct containing dive and surf informations:
 %		dive_data = struct('datatime', [], 'time_in', [], 'time_f', [], 'type', [], 'depth', [], 'accx', [], 'accy', [], 'accz', [], 'yaw', [], 'pitch', [], 'roll', [], 'ODBA', [], 'ODBA_mean', [], 'ODBA_var', [], 'VeDBA', [], 'VeDBA_mean', [], 'VeDBA_var', 'AAV', [], 'offinshore', [], 'daynight', []);

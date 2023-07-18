@@ -1,11 +1,30 @@
-function [yaw_grad_m, yaw_grad_g, pitch_grad, roll_grad, R_pose_m, R_pose_g] = YPR_comp(minusg_NAV, Dec, acc, mag, Fs, Fs_filter)
+function [yaw_grad_m, yaw_grad_g, pitch_grad, roll_grad, R_pose_m, R_pose_g] = YPR_comp(g_NAV, Dec, acc, mag, Fs, Fs_filter)
 % YPR_comp
 % This function computes the yaw, pitch and roll angles starting from
 % information about magnetic field and gravity, both in NED(navigation 
 % frame, known once selected a place and a day) and in local (BODY)
 % reference frame (same in accelerometers and magnetometers), known
 % through logger informations, Yaw Pitch and Roll angles are computed.
+%
+% INPUT:
+%	g_NAV		- gravity vector in navigation reference frame.
+%	Dec			- local magnetic field declination in degrees. 
+%	acc			- acceleration data reoriented.
+%	mag			- magnetic field data reoriented.
+%	Fs			- frequency for magnetic field data (acc is at 10 Hz)
+%	Fs_filter	- passband frequency of the filter in hertz, used for 
+%					filtering over acc measures in order to isolate g 
+%					components from measures.
+% 
+% OUTPUT:
+%	yaw_grad_m	- yaw angle w.r.t. magnetic North (degree)
+%	yaw_grad_g	- yaw angle w.r.t. geographic North (degree)
+%	pitch_grad	- pitch angle (degree)
+%	roll_grad	- roll angle (degree)
+%	R_pose_m	-
+%	R_pose_g	-
 
+%% Resample of acceleration
 if(length(acc)~=length(mag))
 	step = 10/Fs;
 	acc = acc(1:step:end, :);
@@ -154,7 +173,7 @@ end
 Theta = zeros(length(acc), 1);
 Phi = zeros(length(acc), 1);
 
-g_z = minusg_NAV(3);
+g_z = g_NAV(3);
 
 for i = 1:length(acc)
 	if g_x_B(i)<=1 && g_x_B(i)>= -1	
@@ -201,6 +220,7 @@ pitch_grad	= Theta_grad;
 yaw_grad_m	= Psi_grad;					% magnetic North
 yaw_grad_g	= Psi_grad + Dec * (-g_z);	% geographic North
 
+%% pose (does not work for now)
 % R_pose_m	= eul2rotm([Psi, Theta, Phi]);
 R_pose_m = zeros(10); % falso, ma si impalla sennò
 

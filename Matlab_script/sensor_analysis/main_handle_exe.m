@@ -1,5 +1,28 @@
 % main_handle_exe
+%
+% This script is the main one, that has to be launched in order to execute
+% an entire evaluation of a single turtle dataset relative to a period of
+% open sea swimming, like the homing period.
+%
+% There are simply called some sub-main scripts, each of them executing a
+% different group of tasks, from raw data loading and reorientation, to
+% stft evaluation, dives division and analysis and energy indices over each
+% of them.
+%
+% The other main scripts that are recalled from here are, in order:
+%
+%	1. main_1_raw_data
+%	2. main_2_ypr
+%	3. main_3_dive_analysis
+%	4. main_4_ODBA_statistics_paper
+%
+% Refers to each of them, separately, by calling "help name_of_the_script"
+% for knowing what is executed inside of each specific sub-main script.
+%
+% At the very end, after every sub-main scripts has been executed, a table
+% that summarize the results is created and saved.
 
+%% start
 clear
 clc
 close all

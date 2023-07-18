@@ -1,13 +1,13 @@
 % mean_ODBA_paper
 
-% Here, I work on ODBA and VeDBA values associated to each dive and
-% shallow section.
+% Here, there are computed ODBA and VeDBA values associated to each dive
+% and shallow section.
 %% results
 % ODBA and VeDBA are higher in shallow phases then in dives.
 % Each point of graphs produced below corresponds to index mean over the
 % entire section's time length. As we can observe, index mean associated to
 % dives are lower than the one associated to shallow water navigation.
-
+%
 % Here is also performed division among discending, bottom, and ascending 
 % phases, in order to evaluate if energetic index differs significantly
 % depending on turtle behavior. Not an evidence is highlight,

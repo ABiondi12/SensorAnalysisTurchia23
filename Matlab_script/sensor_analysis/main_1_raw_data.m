@@ -1,12 +1,64 @@
-% sensor = 1	for agm
-% sensor = 2	for axy
-% type = 0		for all  (acc, mag, gyro for AGM)
-% type = 1		for acc
-% type = 2		for mag
-% type = 3      for gyro (available only for AGM)
-
-% note: for AGM --> acc is 10 Hz; mag, gyro and depth are 1 Hz 
-%       for axy --> acc is 10 Hz; mag is 1 Hz
+% main_1_raw_data
+% This script executes the firsts elaborations over the raw data. In
+% particular, there are implemented the following steps:
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 1. DATA LOAD
+% It is called the function load data, demanded to import data from a .csv
+% file to Matlab variables. During data loading, the following specifics
+% are to be specified:
+%	a. sensor type
+%		sensor = 1	for AGM
+%		sensor = 2	for Axy-5
+%	b. data type (to be shown)
+%		type = 0		for all - recommended (acc, mag, gyro for AGM)
+%		type = 1		for acc
+%		type = 2		for mag
+%		type = 3		for gyro (available only for AGM)
+%	c. date and time in the same column or not
+%		datetime_column = 1 for yes (recommended)
+%		datetime_column = 2 for no
+%	d. frequency for magnetic field, gyroscope and depth
+%			for AGM --> acc is 10 Hz; mag, gyro and depth are 1 Hz 
+%			for axy --> acc is 10 Hz; mag is 1 Hz
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 2. DATA REORIENTATION
+%	raw data are espressed in sensor reference frame, here there is the
+%	reorientation of their axes in order to obtain, for all the data
+%	(acceleration, magnetic field and gyroscope data) the same reference
+%	frame having:
+%		x axis -- along turtle carapace, positive in the direction of
+%					movement
+%		z axis -- along vertical direction w.r.t. turtle body, positive
+%					downstairs
+%		y axis -- trasversal w.r.t. turtle carapace, so that to obtain a
+%					right handed reference frame
+%
+% Note: for that part it is necessary to specify how the logger was fixed
+%		over the turtle carapace
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 3. MAGNETIC FIELD CALIBRATION
+% In this part, there is the calibration of the magnetic field data. It is
+% asked if to execute the calibration (recommended), where is the data
+% session from which to compute it and if proceed by the correction of the
+% entire magnetic field dataset (recommended).
+% It is executed through the launch of the script "mag_calibration", thus
+% refers to it for more details about calibration procedure.
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 4. PLOT SESSION
+% Plot for acceleration, magnetic field and gyroscope data, both in the
+% original (sensor, local) reference frame and in the reoriented reference
+% frame. For magnetic field data, also pre and post calibration values are
+% shown.
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% flag definition
 data_type	= -1;

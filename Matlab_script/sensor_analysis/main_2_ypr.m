@@ -1,5 +1,5 @@
-%% Description
-% Script in which are evaluated:
+% main_2_ypr
+% In this script there are evaluated:
 %
 %	1_ angle between local magnetic field and acceleration vectors (with
 %	the hypotesis that only gravity field occurs, because turtles movement
@@ -7,9 +7,9 @@
 %	proper accelerations along 3 axis will be negligible w.r.t. g).
 %
 %	2_ Yaw Pitch and Roll angles in order to evaluate turtles orientation.
-
-% Logger was located on turtles' carapace
-
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %	UPDATE: use filtered values of acc measures in order to keep only low
 %	frequency components, corresponding to static acceleration (gravity)
 
@@ -31,6 +31,12 @@ model		= '2020';
 	
 % local magnetic field from online dataset (NED frame)
 % Results have nanoTesla magnitude
+%   Output calculated by wrldmagm are:
+%   XYZ    :magnetic field vector in nanotesla (nT). 
+%   H      :horizontal intensity in nanotesla (nT). 
+%   DEC    :declination in degrees. 
+%   DIP    :inclination in degrees. 
+%   F      :total intensity in nanotesla (nT).
 [XYZ, H, D, I, F] = wrldmagm(height, lat, long, decyear(year_calib, month_calib, day_calib), model);
 
 % Sensors data have microTesla magnitude, so we bring all measures
@@ -199,6 +205,7 @@ fprintf('angle_g_mf using rotated sensor measures once divided by their norm  an
 % minusg_NED = [0, 0, -1];
 g_NED = [0, 0, 1];
 
+% frequency of magnetic field data (acceleration is sampled at 10 Hz)
 if mag_step == 10
 	Fs = 1;
 elseif mag_step == 5

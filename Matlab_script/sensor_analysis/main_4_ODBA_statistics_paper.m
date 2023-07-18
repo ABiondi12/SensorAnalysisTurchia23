@@ -1,5 +1,27 @@
-% evaluate dive division
-close all
+% main_4_ODBA_statistics_paper
+%
+%	In this script there is the evaluation of ODBA statistics, like:
+%		- max
+%		- mean
+%		- std
+%		- range
+%		- median
+%		- quartile
+%
+%	among the dives computed by the turtle, grouped into big, shallow and 
+%	sub surface. Moreover, only for big dives, the same evaluations are 
+%	also performed by keeping into account the different dives shapes. 
+%	Finally, again for big dives only, the same statistic parameters are
+%	computed for the descent, bottom and ascent phases of the dives.
+%
+%	Then, the same parameters are finally evaluated for dives grouped also
+%	depending on their spatial (offshore-inshore) and temporal (day-night)
+%	distributions, and for combinations of the two (off-day, off-night,
+%	in-day, in-night). Also with this additional division, the parameters
+%	are computed for the various dive phases (descent, bottom, ascent) and
+%	by keeping into account only s-shaped dives.
+
+%% evaluate dive division
 
 if exist('id_plot', 'var') == 0
 	id_plot = 1;
