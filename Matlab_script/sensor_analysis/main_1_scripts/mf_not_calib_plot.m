@@ -1,5 +1,28 @@
-% uncalibrated magnetic field plot
+% mf_not_calib_plot
+% Uncalibrated magnetic field plot
+% This script is demanded to plot magnetif field data both in local 
+% reference frame and in reoriented reference frame. Reoriented reference 
+% frame consists in:
+% 	- x longitudinal along turtle carapace, positive in motion direction
+%	- z vertical w.r.t. turtle carapace, positive downwards
+%	- y trasversal w.r.t. turtle carapace, so that to obtain a right hand 
+%		reference frame
+%
+% There are two 3D plot:
+%	1. 3D plot of uncalibrated magnetic field, not reoriented
+%	2. 3D plot of calibrated magnetic field, reoriented
+%
+% There are three plot produced here:
+%	1. plot of magnetic field data, before reorientation
+%	2. plot of magnetic field data, after reorientation
+%	3. plot of magnetic field data, after reorientation - single axes plot
+%
+% Moreover, if date and time information are available (it happens when
+% they are in the same column into the .csv file), datetime is shown along
+% x-axis of the plot, otherwise it will be present the samples number.
 
+
+%% plot
 % plot: Uncalibrated magnetic field, not reoriented - 3D
 figure('Name', ['figure ', num2str(id_plot),', Magnetic field 3D representation - not reoriented'], 'NumberTitle','off'); id_plot = id_plot + 1;
 clf
@@ -67,7 +90,7 @@ if datetime_column == 1
 	title("Magnetic field, reoriented axes")
 	hold off
 	
-	% plot: Uncalibrated magnetic field, reoriented (single axis)
+	% plot: Uncalibrated magnetic field, reoriented (single axes)
 	figure('Name', ['figure ', num2str(id_plot),', magnetic field reoriented - single axes'], 'NumberTitle','off'); id_plot = id_plot + 1;
 	clf
 	subplot(3,1,1)
@@ -101,7 +124,7 @@ if datetime_column == 1
 else
 	% date and time column not together.
 	% do not use date time information, but number of samples. It is not a
-	% suggested thing to do, better to create a .csv file with date and
+	% recommended thing to do, better to create a .csv file with date and
 	% time column together.
 	
 	sample_tot = length(mag_sens);
@@ -142,7 +165,7 @@ else
 	title("Magnetic field, reoriented axes")
 	hold off
 	
-	% plot: Uncalibrated magnetic field, reoriented (single axis)
+	% plot: Uncalibrated magnetic field, reoriented (single axes)
 	figure('Name', ['figure ', num2str(id_plot),', magnetic field reoriented - single axes'], 'NumberTitle','off'); id_plot = id_plot + 1;
 	clf
 	subplot(3,1,1)

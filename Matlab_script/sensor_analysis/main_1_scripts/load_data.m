@@ -1,7 +1,38 @@
 % load data
 %
-% Load raw data from a .csv file and create variables to host them.
+% Load raw collected data from a .csv file and create variables to host 
+% them. During the loading procedure, some information has to be given:
 %
+%	a. Date and Time data into the .csv file
+%			1. same column (recommended)
+%			2. separeted column (not recommended, datetime info does not
+%			work yet)
+%
+%	b. Sensor model
+%			1. AGMD
+%			2. Axy-5
+%
+% Moreover, it is assumed that acceleration data has been taken with 10Hz
+% of frequency (future improvement should be to been able to select also 
+% this frequency. Then, it is asked to give frequencies of the other
+% sensors, that are magnetic field sensor, depth sensor and gyroscope.
+%
+%	c. magnetic field data frequency:
+%		1. acc_linked
+%		2. 1 Hz (Turchia 2023)
+%		3. 2 Hz
+%
+%	d. Gyroscope data frequency:
+%		1. acc_linked
+%		2. 1 Hz (Turchia 2023)
+%		3. 2 Hz
+%
+%	e. depth data frequency:
+%		1. acc_linked
+%		2. 1 Hz (Turchia 2023)
+%		3. 2 Hz
+
+%% comment
 % Comment about axes orientation:
 %	acc  x -- seems  x
 %	acc  y -- seems  y
@@ -9,7 +40,6 @@
 %	gyro x -- seems -x
 %	gyro y -- seems -y
 %	gyro z -- seems -z (in agm_z seems z)
-
 %% flag definition
 sensor_type		= 0;
 datetime_column = 0;

@@ -1,14 +1,32 @@
 % acc_plot
+% This script is demanded to plot acceleration data both in local reference
+% frame and in reoriented reference frame. Reoriented reference frame
+% consists in:
+% 	- x longitudinal along turtle carapace, positive in motion direction
+%	- z vertical w.r.t. turtle carapace, positive downwards
+%	- y trasversal w.r.t. turtle carapace, so that to obtain a right hand 
+%		reference frame
+%
+% There are three plot produced here:
+%	1. plot of sensor acceleration data, before reorientation
+%	2. plot of acceleration data, after reorientation
+%	3. plot of acceleration data, after reorientation - single axes plot
+%
+% Moreover, if date and time information are available (it happens when
+% they are in the same column into the .csv file), datetime is shown along
+% x-axis of the plot, otherwise it will be present the samples number.
 
-% date and time column not together
+%% plot
+
+%% date and time column not together, samples number information
 if datetime_column == 2 
 	% do not use date time information, but number of samples. It is not a
-	% suggested thing to do, better to create a .csv file with date and
+	% recommended thing to do, better to create a .csv file with date and
 	% time column together.
 	
 	end_sample = length(data_accx);
 	
-	% plot of sensor acc data, thus before reorientation
+	% plot of sensor acceleration data, before reorientation
 	figure('Name', ['figure ', num2str(id_plot),', acceleration axes not reoriented'], 'NumberTitle','off'); id_plot = id_plot + 1;
 	clf
 	subplot(2,1,1)
@@ -38,7 +56,7 @@ if datetime_column == 2
 	set(gca,'FontSize', 20)
 	title("Depth profile")
 	
-	% plot of acc data, thus after reorientation 
+	% plot of acceleration data, after reorientation:
 	%	x is along turtle carapace in the movement direction
 	%	z is positive downwards
 	%	y is so that to obtain a right hand reference frame
@@ -71,7 +89,7 @@ if datetime_column == 2
 	set(gca,'FontSize', 20)
 	title("Depth profile")
 	
-	% acceleration reoriented - single axes
+	% acceleration reoriented - single axes plot
 	figure('Name', ['figure ', num2str(id_plot),', acceleration reoriented - single axes'], 'NumberTitle','off'); id_plot = id_plot + 1;
 	clf	
 	subplot(3,1,1)
@@ -106,11 +124,12 @@ if datetime_column == 2
 		title('Acc_z reoriented') 	
 	sgtitle('Acceleration reoriented - single axes','FontSize', dim_font)
 
+%% datetime information
 % Date and Time column together, here it is used datetime information.
 % Highly recommended.
 elseif datetime_column == 1
 
-	% plot of sensor acc data, thus before reorientation	
+	% plot of sensor acceleration data, before reorientation	
 	figure('Name', ['figure ', num2str(id_plot),', acceleration axes not reoriented'], 'NumberTitle','off'); id_plot = id_plot + 1;
 	clf
 	subplot(2,1,1)
@@ -140,7 +159,7 @@ elseif datetime_column == 1
 	set(gca,'FontSize', 20)
 	title("Depth profile")
 	
-	% plot of acc data, thus after reorientation 
+	% plot of acceleration data, after reorientation:
 	%	x is along turtle carapace in the movement direction
 	%	z is positive downwards
 	%	y is so that to obtain a right hand reference frame
@@ -173,7 +192,7 @@ elseif datetime_column == 1
 	set(gca,'FontSize', 20)
 	title("Depth profile")
 	
-	% acceleration reoriented - single axes
+	% acceleration reoriented - single axes plot
 	figure('Name', ['figure ', num2str(id_plot),', acceleration reoriented - single axes'], 'NumberTitle','off'); id_plot = id_plot + 1;
 	clf	
 	subplot(3,1,1)

@@ -1,5 +1,17 @@
 % mag_calibration_plot
+% This script will show magnetic field (mf) dataset before and after 
+% calibration correction (data are those relative to the main turtle 
+% movement, also if the calibration session is in a different file):
+%
+% 1. plot: Uncalibrated vs Calibrated mf data best fitting (ellips - sphere)
+%				ellips - Uncalibrated mf
+%				sphere - Calibrated mf
+%
+% 2. plot: Uncalibrated mf data and best fitting ellips
+%
+% 3. plot: Calibrated mf data and best fitting sphere
 
+%% plot
 % plot: Uncalibrated vs Calibrated mf data best fitting (ellips - sphere)
 %	ellips - Uncalibrated mf
 %	sphere - Calibrated mf
