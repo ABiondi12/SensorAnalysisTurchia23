@@ -1,25 +1,36 @@
 % tab_dives_entire
-addpath("mat_file_tobeloaded");
-%% table structure
-% tabella con colonne:
+%
+% This script is demanded to summarize into a single table all the
+% meaningfull results obtained from the dataset analysis of a single turtle
+% homing journey.
+%
+% In particular, the structure of the table is the following:
+% Let's see the structure for big dives informations, but the same will be
+% produced also for shallow dives and sub-surface periods.
 % 
-% ID tarta					--> noto									
-% ID dive					--> counter									
+%% Table structure:
+%
+% ID dive					--> counter	for the big dive number	
 % datetime start dive		--> turtle_dive.big_dive.homing.datatime(1)				
-% tipo dive (sub-sh-big)	--> 3 tabelle, colonna con scritto se big, shallow...				
-% dive profile (S, U..)		--> turtle_dive.big_dive.homing.type								dive_typei_tot
-% max depth dive			--> turtle_big_depth o min(turtle_dive.big_dive.homing(i).depth)	turtlei_big_depth
-% dive duration				--> turtle_dive.big_dive.homing.duration							turtlei_big_time
+% dive depth type			--> big, shallow or sub-surface, three columns each
+%								composed by a sub-table
+% dive profile (S, U..)		--> turtle_dive.big_dive.homing.type (only for big dives is significant)								
+% max depth dive			--> turtle_big_depth o min(turtle_dive.big_dive.homing(i).depth)
+% dive duration				--> turtle_dive.big_dive.homing.duration
 % day/night					--> turtle_dive.big_dive.homing.daynight				
 % offshore/inshore			--> turtle_dive.big_dive.homing.offinshore				
 % 
-% ODBA medio dive			--> turtle_DBA.big_dive.homing.mean								struct2array
-% ODBA ascend				--> turtle_DBA.big_dive.homing.asc									struct2array
-% ODBA descend				--> turtle_DBA.big_dive.homing.disc								struct2array
-% ODBA bottom				--> turtle_DBA.big_dive.homing.bott								struct2array
+% ODBA mean dive			--> turtle_DBA.big_dive.homing.mean								
+% ODBA ascent phase			--> turtle_DBA.big_dive.homing.asc									
+% ODBA descent phase		--> turtle_DBA.big_dive.homing.disc								
+% ODBA bottom phase			--> turtle_DBA.big_dive.homing.bott								
+%
+% As already mentioned, the same parameters taken for big dives are also
+% inserted in the table for shallow dives and sub surface periods
+% (turtle_DBA.shallow_dive.homing.*** and turtle_DBA.sub_surface.homing.***,
+% respectively).
 
 %% load dives information
-
 % no load for now
 %{
 if exist('turtle_dive.mat', 'var')  == 0
@@ -33,14 +44,7 @@ end
 %}
 %% prepare data for tab
 
-	%% big dive
-	
-		%% unused
-% turtle_ID_big		= 2.*ones(size(turtle2_big_time, 1), size(turtle2_big_time, 2));
-% turtle_ID_sh		= 2.*ones(size(turtle2_sh_time, 1), size(turtle2_sh_time, 2));
-% turtle2_ID_sub	= 2.*ones(size(turtle2_sub_time, 1), size(turtle2_sub_time, 2));
-
-		%% used
+%% big dive
 % turtle_big_time_i --> time init
 turtle_ID_big_dive = [1:big_num]';
 dive_type_big_range([1:big_num], 1) = "big";
@@ -62,7 +66,8 @@ turtle_big_ODBA_mean	= turtle_big_ODBA(:, 1);
 turtle_big_ODBA_asc		= turtle_big_ODBA(:, 4);
 turtle_big_ODBA_disc	= turtle_big_ODBA(:, 3);
 turtle_big_ODBA_bott	= turtle_big_ODBA(:, 5);
-	%% shallow dive
+
+%% shallow dive
 turtle_ID_sh_dive = [1:sh_num]';
 
 % turtle_sh_time_i --> time init
@@ -84,8 +89,8 @@ turtle_sh_ODBA_mean = turtle_sh_ODBA(:, 1);
 turtle_sh_ODBA_asc([1:sh_num], 1) = -1;
 turtle_sh_ODBA_disc([1:sh_num], 1) = -1;
 turtle_sh_ODBA_bott([1:sh_num], 1) = -1;
-	%% subsurface
 
+	%% subsurface
 turtle_ID_sub_dive = [1:sub_num]';
 
 % turtle_sub_time_i --> time init

@@ -1,6 +1,62 @@
 % ODBA_analysis_paper_plot
+%
+% Script demanded to handle the plot of all the results for ODBA in big
+% dives, shallow dives and sub-surface periods.
+% 
+% In particular, there are the following plots:
+%
+%	1. box plots of big, shallow and sub surface
+%
+%	2. boxplot big dives' type
+%		2.1 complete dive
+%		2.2 descent phase only
+%		2.3 bottom phase only
+%		2.4 ascent phase only
+%
+%	3. histogram big dives
+%		3.1 ODBA distribution complete dive
+%		3.2 ODBA distribution descent phase only
+%		3.3 ODBA distribution bottom phase only
+%		3.4 ODBA distribution ascent phase only
+%
+%	4. ODBA distribution day-night and offshore-inshore big dives
+%		4.1 complete dive
+%		4.2 descent phase only
+%		4.3 bottom phase only
+%		4.4 ascent phase only
+%		and for each (* is one among 1,2,3,4 relative to the phase):
+%			4.*.1 day-night
+%			4.*.2 offshore-inshore
+%			4.*.3 day-night and offshore-inshore
+%
+%	5. histogram big dives S type
+%		5.1 ODBA distribution complete dive
+%		5.2 ODBA distribution descent phase only
+%		5.3 ODBA distribution bottom phase only
+%		5.4 ODBA distribution ascent phase only
+%
+%	6. ODBA distribution day-night and offshore-inshore big dives S type
+%		6.1 complete dive
+%		6.2 descent phase only
+%		6.3 bottom phase only
+%		6.4 ascent phase only
+%		and for each (* is one among 1,2,3,4 relative to the phase):
+%			6.*.1 day-night
+%			6.*.2 offshore-inshore
+%			6.*.3 day-night and offshore-inshore
+%
+%	7. histogram shallow dives
+%
+%	8. ODBA distribution day-night and offshore-inshore shallow dives
+%		8.1 day-night
+%		8.2 offshore-inshore
+%		8.3 day-night and offshore-inshore
+%
+% For now, it is commented at the end of the script
+% "main_4_ODBA_statistic_paper", so for its execution be sure to previously
+% uncomment the corresponding row.
 
-close ALL
+%% init parameters
 C = {'s', 'u', 'v', 'm'};
 
 %% turtle
@@ -14,12 +70,12 @@ count_m = length(id_m);
 type = [count_s, count_u, count_v, count_m];
 
 count_s_d = length(day_id_s);	
-% count_2u_d = length(day_id_2_u);	% da exe ancora
+% count_2u_d = length(day_id_2_u);		% to be executed yet
 % count_2v_d = length(day_id_2_v);	
 % count_2m_d = length(day_id_2_m);	
 
 count_s_n = length(night_id_s);	
-% count_2u_n = length(night_id_2_u);	% da exe ancora
+% count_2u_n = length(night_id_2_u);	% to be executed yet
 % count_2v_n = length(night_id_2_v);	
 % count_2m_n = length(night_id_2_m);	
 

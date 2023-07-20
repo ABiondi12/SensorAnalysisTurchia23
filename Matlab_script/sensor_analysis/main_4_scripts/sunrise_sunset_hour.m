@@ -1,4 +1,32 @@
 % sunrise_sunset_hour
+%
+% This script contains the sunrise and sunset hours for the specific
+% time and space instant during which the turtle has performed the homing 
+% travel (supposed as reference the first day and the capture beach).
+%
+% There are three different sunset and sunrise definitions:
+%	1. Civil		
+%	2. Nautical		
+%	3. Astronomical 
+%
+% Here, it is asked what definition has to be used in the script for the
+% evaluation of the periods of daylight and of darkness.
+% We recommend to use nautical sunrise and sunset hours for the division
+% between day (light) and night (darkness).
+%
+% NOTE:
+% To apply the same code with different dataset, it is necessary to
+% manually update the sunrise and sunset days and hours by changing their
+% values directly in the code (for all the three definitions). These values
+% are available online once selected date and space position.
+%
+% The variables to be updated are the following:
+%
+%	sunrise_hour	= (datetime(year, month, day, hour, min, sec, msec));
+%	sunset_hour		= (datetime(year, month, day, hour, min, sec, msec));
+
+%% parameters
+
 sun_kind = 0;
 
 clear sunrise_hour
