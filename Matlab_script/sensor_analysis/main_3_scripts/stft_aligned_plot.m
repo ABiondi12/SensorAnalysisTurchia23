@@ -1,3 +1,18 @@
+% stft_aligned_plot
+%
+% This script handles the plot, for the entire dataset and for each big 
+% dive, separately, of the Time-Frequency analysis over the acceleration
+% data along the x and the y axis, respectively.
+%
+% Plot are shown w.r.t. depth profile in order to study the variation 
+% and presence/absence of a dominant frequency depending on the 
+% turtle behaviour (especially for what concern the dive profile).
+%
+% Moreover, there is also the plot of the ODBA computed over each dive
+% profile, again compared with the dive pattern. This is done for
+% evaluating if there is some evidence in the variation of the ODBA
+% depending on the dive phase (descent, bottom, ascent phase).
+
 %% Matlab_pspectrum plot
 dim_fontb = 20;
 dim_font = 30;

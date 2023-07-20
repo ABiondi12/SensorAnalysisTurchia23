@@ -1,7 +1,32 @@
 % mean_ODBA_paper
+%
+% This script is demanded to handle the ODBA analysis.
+% In particular, it consists in the evaluation of ODBA and VeDBA energetic  
+% indices associated to each dive (big and shallow) and sub-surface section, 
+% adapted to the requirement that has been chosen to be used in the paper 
+% results.
+%
+% Here it is also performed the division among descent, bottom, and  
+% ascent phases of big dives only, in order to evaluate if energetic 
+% index differs significantly depending on turtle behavior during a deep 
+% dive.
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% In particular, by starting from the ODBA analysis already performed in
+% "dive_DBA_homing" script, the following operations are implemented:
+%
+% 1. mean and variance for ODBA (and VeDBA)
+%	Here, there is the computation, for each section, of the average value 
+%	(and associated variance) assumed by the ODBA and VeDBA indices. The 
+%	same is done by separating the descent, bottom, and ascent phases for 
+%	the big dives only.
+%
+%	Note:	there will be a single reference value for each dives and each 
+%			surface phases (periods between two consecutive dives).
+%
+% 2. Creation of a struct and saving operation as .mat file.
 
-% Here, there are computed ODBA and VeDBA values associated to each dive
-% and shallow section.
 %% results
 % ODBA and VeDBA are higher in shallow phases then in dives.
 % Each point of graphs produced below corresponds to index mean over the

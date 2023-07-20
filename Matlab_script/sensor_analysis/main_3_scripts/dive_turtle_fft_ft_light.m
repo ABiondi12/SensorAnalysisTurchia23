@@ -1,12 +1,52 @@
 % dive_turtle_fft_ft_light
 %
-% computes fft-ft analysis over dives and surfaces and save into struct
-% their results.
-
-% acc are raw reoriented data
-% din are dynamic component (acc - static, gravity) - Unused
-% din_nw are only for sub surface section and are dynamic component - waves
-% probably effect
+% This script computes fft-ft analysis over dives (big and shallow) and 
+% surface periods for the acceleration data along x, y and z axis, 
+% separately; the results are then saved into a properly created struct.
+% 
+% Specifically, for the entire dataset and then for every session 
+% (big dive, shallow dive, sub-surface period), separately, it is evaluated
+% and plotted a time-frequency analysis, performed using a Short-time
+% Fourier transform over the acceleration data. 
+% This evaluation is performed to highlight dominant frequencies over 
+% the acceleration of the turtle that can be eventually associated to 
+% its flippers beat. This is particularly relevant for the analysis of big  
+% dives pattern.
+%
+% Plot are shown w.r.t. depth profile in order to study the variation 
+% and presence/absence of a dominant frequency depending on the 
+% turtle behaviour.
+%
+% The Short-Time fourier transform is executed through the Matlab function
+% pspectrum(.., .., 'spectrogram', ...) with an overlap percentage of 99\%
+% in the moving window shift. For more details, directly refer to the
+% function using the "help" command (help pspectrum).
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% NOTE:
+% Short-Time Fourier Transform consists in a Fourier transform performed
+% over time, thus not on the entire dataset but rather on a section that is
+% then shifted with a moving window. In this way, temporal information is 
+% recovered, which is usually lost by using the Fourier transform on the 
+% entire data set.
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% The acceleration data used here are raw reoriented data. 
+% For sub-surface periods only, the same stft analysis is also performed
+% over acceleration data previously filtered so that to delete low
+% frequency components that may be associated to the waves effect (the
+% frequency of the waves is reasonably lower than those of the flippers
+% beat). This "dynamic acceleration" can be obtain either with a high pass
+% filter or a low pass filter applied over the acceleration data (in the
+% latter case, the obtained filtered value has to be subtracted from the
+% entire acceleration data to keep only the higher frequency components).
+%
+% This is done only for the sub-surface periods since we assume that the
+% effect of the waves does not affect the water column under the first
+% meter in depth.
+%
 
 %% init
 turtle_dive_fft = turtle_dive;			%% raw acc data

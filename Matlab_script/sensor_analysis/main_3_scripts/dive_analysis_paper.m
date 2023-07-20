@@ -1,7 +1,64 @@
 % dive_analysis_paper
-% evaluate dive division - add sunrise and sunset information for paper
-% elaboration
+%
+% At first, this script is demanded to evaluate dives division by
+% collocating them in two groups: 
+%	day and night performed dives (in order to eventually highlight 
+%	differences in turtle behaviour during the night w.r.t. the day.
+%
+% This is achieved by adding sunrise and sunset information as new fields 
+% to the previously created and filled dive struct (for paper elaboration).
+%
+% This is handled, once known sunrise and sunset hours, by evaluating every
+% dive collocation in time (day-night) and space (offshore-inshore) and by 
+% assigning these flags to every dives in the previously created structure. 
+%
+% It is performed into this script by calling the script
+% "sunrise_sunset_hour" for the knowledge of sunrise and sunset hours
+% depending on the day and then the function "day_night_amount" for the
+% assignment of every dive to the right day-night field flag (day or
+% night).
+%
+% For more details, refer directly to the script "sunrise_sunset_hour" and
+% the function "day_night_amount" by calling the "help" procedure (help
+% name_of_the_function/script).
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Then, the following statistic parameters are evaluated:
+%	- max
+%	- median
+%	- mean
+%	- std
+%	- range
+%	- quartile
+%
+% These values are computed over the following groups:
+%
+%	- time spent in big dives offshore
+%   - time spent in big dives inshore
+%	- time spent in big dives during the day
+%	- time spent in big dives during the night
+%	- time spent in big dives during the day offshore
+%	- time spent in big dives during the day inshore
+%	- time spent in big dives during the night offshore
+%	- time spent in big dives during the night inshore
+%
+%	- depth in big dives offshore
+%   - depth in big dives inshore
+%	- depth in big dives during the day
+%	- depth in big dives during the night
+%	- depth in big dives during the day offshore
+%	- depth in big dives during the day inshore
+%	- depth in big dives during the night offshore
+%	- depth in big dives during the night inshore
+%
+% And the same are evaluated also for shallow dives and sub-surface phases.
+%
+% It is also implemented by keeping into account dive shape (for big dive
+% only).
+%
 
+%% init parameters
 if exist('id_plot', 'var') == 0
 	id_plot = 1;
 end 
@@ -536,7 +593,7 @@ turtle_sub_time	= zeros(sub_num, 1);
 turtle_sub_time_i	= datetime.empty(0, 1);
 turtle_sub_depth	= zeros(sub_num, 1);
 
-turtle_sub_time_tot_d_div = 0; % sono quelle che derivano dalla divisione in day e night, ma sono meno precise delle altre 
+turtle_sub_time_tot_d_div = 0;  % sono quelle che derivano dalla divisione in day e night, ma sono meno precise delle altre 
 turtle_sub_time_tot_n_div = 0;	% perché tratti lunghi di sub non vengono divisi, bensì assegnati tutti come day o night
 								% anche se sono a cavallo di alba/tramonto.
 
