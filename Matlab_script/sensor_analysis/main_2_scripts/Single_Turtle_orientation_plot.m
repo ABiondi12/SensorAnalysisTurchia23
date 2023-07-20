@@ -1,3 +1,30 @@
+% Single_Turtle_orientation_plot
+% This script is demanded to handle the plot section for the firsts data
+% elaborations. At the beginning, it is possible (if auto_calib_use = 0, 
+% this parameter can be set at the beginning of the script main_1_raw_data) 
+% to choose if to show magnetic field data before or after calibration.
+%
+% The plot scripts that are called from this script are the following:
+%
+%	1. norm_acc_mag_plot
+%			plot for the norm of the measured vectors (acceleration and
+%			magnetic field)
+%
+%	2. angle_g_mf_plot
+%			plot the computed angle over time between the gravity 
+%			vector (obtained as static component from the acceleration data
+%			by filtering them with a low pass filter) and the measured 
+%			magnetic field vector.
+%
+%	3. ypr_plot
+%			plot of yaw, pitch and roll angles, computed in main_2_ypr 
+%			script, over time.
+%
+% For more details, refer directly to the specific scripts by calling the
+% help command (help name_of_the_script).
+%
+
+%% plot parameters
 dim_font = 30;
 dim_fontb = 15;
 
@@ -39,7 +66,7 @@ if calib == 1
 	yaw_m_norm_plot		= yaw_m_norm_calib;
 	yaw_g_norm_plot		= yaw_g_norm_calib;
 else
-	fprintf('Use magnetic field after calibration \n')
+	fprintf('Use magnetic field before calibration \n')
 	mag_reor_plot		= mag_reor;
 	norm_mag_reor_plot	= norm_mag_reor;
 	mag_norm_reor_plot	= mag_norm_reor;

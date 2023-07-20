@@ -1,12 +1,52 @@
 % run_dive_analysis
 %
-% dataset that is in use into this script and has to be present:
-%		turtle_dataset	= turtle_dive
+% In this script, dives are selected and isolated from the entire dataset
+% and the dive struct is so populated, by dividing dives into the three
+% categories related to the maximum reached depth (big, shallow, and
+% sub-surface dives). For big dives only, there is also the evaluation and
+% assignment of a shape to the dive (among s, v, u, m).
 %
-% Struct that are going to be used during this script's execution
-% in order to build struct containing dive and surf informations:
-%		dive_data = struct('datatime', [], 'time_in', [], 'time_f', [], 'type', [], 'depth', [], 'accx', [], 'accy', [], 'accz', [], 'yaw', [], 'pitch', [], 'roll', [], 'ODBA', [], 'ODBA_mean', [], 'ODBA_var', [], 'VeDBA', [], 'VeDBA_mean', [], 'VeDBA_var', 'AAV', [], 'offinshore', [], 'daynight', []);
-%		sup_data  = struct('datatime', [], 'time_in', [], 'time_f', [], 'depth', [], 'accx', [], 'accy', [], 'accz', [], 'yaw', [], 'pitch', [], 'roll', [], 'ODBA', [], 'ODBA_mean', [], 'ODBA_var', [], 'VeDBA', [], 'VeDBA_mean', [], 'VeDBA_var', 'AAV', []);
+% Look at the code and at the present comments for the criterion used for
+% isolate dives and classify them.
+%	
+% Depth is used as parameters with which evaluate if turtle is performing a
+% dive or a surface swim phase.
+%
+%	check dive's type: 
+%			if max depth do not reach values under -5 meters,
+%			it will be clessified as 'not a dive, but a surface
+%			pattern', while if depth goes under such a threshold,
+%			criteria have been implemented in order to distinguish among
+%			U, V, S and M (mixed, if none of the previous kind of dive
+%			has been clearly identified about the in-studing dive).		
+%
+% Dive struct is then created, for the three dive categories, and 
+% populated for every dive with information about datetime, time of
+% beginning and end, depth profile, acc, mag, gyro, shape of the dive
+% (for big dive only)... The struct is then saved with the name 
+% "turtle_dive".
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% In this script, it is also computed the ODBA energy index for the entire
+% dataset and for each single dive. ODBA computation is performed through
+% a call of the script "dive_DBA_homing", which populates both ODBA and 
+% ODBA_paper fields. These two fields of the dive struct differ for the 
+% window over which it is computed a mean of the value of the energy index.
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% At the end of the script, the structure will be saved as .mat file under
+% the name "turtle_dive.mat".
+%
+% NOTE:
+%		dataset that is in use into this script and has to be present:
+%			turtle_dataset	= turtle_dive
+%
+%		Struct that are going to be used during this script's execution
+%		in order to build struct containing dive and surf informations:
+%		dive_data = struct('datatime', [], 'datatime_depth', [], 'time_in', [], 'time_f', [], 'type', [], 'depth', [], 'accx', [], 'accy', [], 'accz', [], 'yaw', [], 'pitch', [], 'roll', [], 'ODBA', [], 'ODBA_mean', [], 'ODBA_var', [], 'VeDBA', [], 'VeDBA_mean', [], 'VeDBA_var', 'AAV', [], 'offinshore', [], 'daynight', []);
+%		sup_data  = struct('datatime', [], 'datatime_depth', [], 'time_in', [], 'time_f', [], 'depth', [], 'accx', [], 'accy', [], 'accz', [], 'yaw', [], 'pitch', [], 'roll', [], 'ODBA', [], 'ODBA_mean', [], 'ODBA_var', [], 'VeDBA', [], 'VeDBA_mean', [], 'VeDBA_var', 'AAV', [], 'offinshore', [], 'daynight', []);
 
 %% parameters
 in_a_dive = 0;	% takes into account whether or not we are in a dive
@@ -65,8 +105,7 @@ offset_depth_h	= max(turtle_dataset_h); % possible offset evaluation in depth da
 for i = 1: size(datetime_acc, 1)-2
 	if turtle_dataset_h(i)> thr_sup_h	% while turtle is still in surface
 		if turtle_dataset_h(i+1) < thr_sup_h && in_a_dive == 0  % && turtle_dataset_h(i+1)-turtle_dataset_h(i+2) >= thr_dive
-			% start dive if depth goes under -0.5m
-% 			
+			% start dive if depth goes under -0.5m	
 % 			ii = i;
 % 			while turtle_dataset_h(ii)< thr_h && ii > time_f_id_old + 5	
 % 				ii = ii - 1;
@@ -253,8 +292,9 @@ for i = 1: size(datetime_acc, 1)-2
 	end
 end
 
+%% ODBA evaluation
 % once dive and surf phases have been splitted out into two structs, energy
-% indeces will be evaluated over them inside 'dive_DBA_homing_turchia'
+% indeces will be evaluated over them inside 'dive_DBA_homing'
 dive_DBA_homing 
 
 %% prepare struct

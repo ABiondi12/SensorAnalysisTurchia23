@@ -1,5 +1,7 @@
 % turtle_info
+% Script that hosts the name of the variables that will be saved.
 
+%% name of the structs to be saved as Matlab variable files
 turtle_dive_name		= 'turtle_dive.mat';
 turtle_dive_fft_name	= 'turtle_dive_fft.mat';
 turtle_DBA_name			= 'turtle_DBA.mat';
