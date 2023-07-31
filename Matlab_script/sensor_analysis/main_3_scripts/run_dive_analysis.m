@@ -298,26 +298,6 @@ end
 dive_DBA_homing 
 
 %% prepare struct
-turtle_nm = 0;
-fprintf('Turtle name: \n')
-fprintf('1. Melis \n')
-fprintf('2. Banu \n')
-fprintf('3. Fati \n')
-fprintf('4. Emine \n')
-
-while turtle_nm <= 0 || turtle_nm > 4
-	turtle_nm = input('');
-end
-
-if turtle_nm == 1
-	turtle_name = "Melis";
-elseif turtle_nm == 2
-	turtle_name = "Banu";
-elseif turtle_nm == 3
-	turtle_name = "Fati";
-elseif turtle_nm == 4
-	turtle_name = "Emine";
-end
 
 turtle_dives = struct('homing', dives_h);
 turtle_sdives = struct('homing', sdives_h);
@@ -363,7 +343,8 @@ end
 if new_dive_dataset == 1 || ov_to_do == 1
 	turtle_dive_dataset = turtle_dive;
 	fprintf([turtle_dive_name, ': saving struct \n'])
-	save('turtle_dive', 'turtle_dive', '-v7.3');
+	% save('turtle_dive', 'turtle_dive', '-v7.3');
+	save(turtle_dive_name, 'turtle_dive', '-v7.3');
 	fprintf('turtle_dive.mat saved! \n')
 end
 

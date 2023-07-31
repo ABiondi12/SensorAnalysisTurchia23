@@ -115,7 +115,11 @@ else
 			total_amount_day	= total_amount_day + day_last * ((days_in_month(init_month) - init_day) + finish_day - 1);
 			total_amount_night	= total_amount_night + night_last * ((days_in_month(init_month) - init_day) + finish_day - 1);
 		else
-			fprintf('too many data, a dive cannot last more than few hours \')
+			if finish_month - init_month == 1 && finish_day == 1
+			total_amount_day	= total_amount_day + day_last * ((days_in_month(init_month) - init_day) + finish_day - 1);
+			total_amount_night	= total_amount_night + night_last * ((days_in_month(init_month) - init_day) + finish_day - 1);
+
+			fprintf('too many data, a dive period cannot last more than few days \')
 		end
 	end
 end

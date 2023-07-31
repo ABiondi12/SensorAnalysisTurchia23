@@ -71,9 +71,9 @@ auto_calib = 1;		% if 0, choose if to perform calibration on mf data
 auto_calib_use = 1; % if 0, choose if to use calibrated mf data
 					% if 1, automatically use calibrated mf data
 %% file load
-data		= readtable('05_S2.csv');	% Banu
-data_calib	= readtable('05_S1.csv');	% Calib session, only if differs 
-										% w.r.t. the data session
+data		= readtable('Sevval_S1.csv');	% Sevval
+data_calib	= readtable('05_S1.csv');		% Calib session, only if differs 
+											% w.r.t. the data session
 % load raw data and create variables for them
 load_data
 
