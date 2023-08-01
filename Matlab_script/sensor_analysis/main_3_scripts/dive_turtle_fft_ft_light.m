@@ -72,7 +72,11 @@ for ii = 1 : counter
 	
 	[P_accx, F_accx, T_accx] = pspectrum(accx, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 	[spect_zero_max, spect_lf_max, spect_max, freq_spect_zero_max, freq_spect_lf_max, freq_spect_max] = trial_freq_spect_fftft(turtle_name, motion_type, P_accx, F_accx, 0, 'noplot', t_fft_dp_dive, depth_dive);
-	
+
+	turtle_dive_fft.big_dive.homing(ii).P_accx = P_accx;
+	turtle_dive_fft.big_dive.homing(ii).F_accx = F_accx;
+	turtle_dive_fft.big_dive.homing(ii).T_accx = T_accx;
+
 	turtle_dive_fft.big_dive.homing(ii).spect_zero_max_accx = spect_zero_max;
 	turtle_dive_fft.big_dive.homing(ii).freq_spect_zero_max_accx = freq_spect_zero_max;
 	turtle_dive_fft.big_dive.homing(ii).spect_lf_max_accx = spect_lf_max;
@@ -97,7 +101,11 @@ for ii = 1 : counter
 	accy = turtle_dive_fft.big_dive.homing(ii).accy;
 	[P_accy, F_accy, T_accy] = pspectrum(accy, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 	[spect_zero_max, spect_lf_max, spect_max, freq_spect_zero_max, freq_spect_lf_max, freq_spect_max] = trial_freq_spect_fftft(turtle_name, motion_type, P_accy, F_accy, 0, 'noplot', t_fft_dp_dive, depth_dive);
-	
+
+	turtle_dive_fft.big_dive.homing(ii).P_accy = P_accy;
+	turtle_dive_fft.big_dive.homing(ii).F_accy = F_accy;
+	turtle_dive_fft.big_dive.homing(ii).T_accy = T_accy;
+
 	turtle_dive_fft.big_dive.homing(ii).spect_zero_max_accy = spect_zero_max;
 	turtle_dive_fft.big_dive.homing(ii).freq_spect_zero_max_accy = freq_spect_zero_max;
 	turtle_dive_fft.big_dive.homing(ii).spect_lf_max_accy = spect_lf_max;
@@ -124,7 +132,11 @@ for ii = 1 : counter
 	accz = turtle_dive_fft.big_dive.homing(ii).accz;
 	[P_accz, F_accz, T_accz] = pspectrum(accz, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 	[spect_zero_max, spect_lf_max, spect_max, freq_spect_zero_max, freq_spect_lf_max, freq_spect_max] = trial_freq_spect_fftft(turtle_name, motion_type, P_accz, F_accz, 0, 'noplot', t_fft_dp_dive, depth_dive);
-	
+
+	turtle_dive_fft.big_dive.homing(ii).P_accz = P_accz;
+	turtle_dive_fft.big_dive.homing(ii).F_accz = F_accz;
+	turtle_dive_fft.big_dive.homing(ii).T_accz = T_accz;
+
 	turtle_dive_fft.big_dive.homing(ii).spect_zero_max_accz = spect_zero_max;
 	turtle_dive_fft.big_dive.homing(ii).freq_spect_zero_max_accz = freq_spect_zero_max;
 	turtle_dive_fft.big_dive.homing(ii).spect_lf_max_accz = spect_lf_max;
@@ -162,6 +174,10 @@ for ii = 1 : sh_counter
 	[P_accx, F_accx, T_accx] = pspectrum(accx, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 	[spect_zero_max, spect_lf_max, spect_max, freq_spect_zero_max, freq_spect_lf_max, freq_spect_max] = trial_freq_spect_fftft(turtle_name, motion_type, P_accx, F_accx, 0, 'noplot', t_fft_dp_dive, depth_dive);
 	
+	turtle_dive_fft.shallow_dive.homing(ii).P_accx = P_accx;
+	turtle_dive_fft.shallow_dive.homing(ii).F_accx = F_accx;
+	turtle_dive_fft.shallow_dive.homing(ii).T_accx = T_accx;
+
 	turtle_dive_fft.shallow_dive.homing(ii).spect_zero_max_accx = spect_zero_max;
 	turtle_dive_fft.shallow_dive.homing(ii).freq_spect_zero_max_accx = freq_spect_zero_max;
 	turtle_dive_fft.shallow_dive.homing(ii).spect_lf_max_accx = spect_lf_max;
@@ -188,7 +204,11 @@ for ii = 1 : sh_counter
 	accy = turtle_dive_fft.shallow_dive.homing(ii).accy;
 	[P_accy, F_accy, T_accy] = pspectrum(accy, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 	[spect_zero_max, spect_lf_max, spect_max, freq_spect_zero_max, freq_spect_lf_max, freq_spect_max] = trial_freq_spect_fftft(turtle_name, motion_type, P_accy, F_accy, 0, 'noplot', t_fft_dp_dive, depth_dive);
-	
+
+	turtle_dive_fft.shallow_dive.homing(ii).P_accy = P_accy;
+	turtle_dive_fft.shallow_dive.homing(ii).F_accy = F_accy;
+	turtle_dive_fft.shallow_dive.homing(ii).T_accy = T_accy;
+
 	turtle_dive_fft.shallow_dive.homing(ii).spect_zero_max_accy = spect_zero_max;
 	turtle_dive_fft.shallow_dive.homing(ii).freq_spect_zero_max_accy = freq_spect_zero_max;
 	turtle_dive_fft.shallow_dive.homing(ii).spect_lf_max_accy = spect_lf_max;
@@ -215,7 +235,11 @@ for ii = 1 : sh_counter
 	accz = turtle_dive_fft.shallow_dive.homing(ii).accz;
 	[P_accz, F_accz, T_accz] = pspectrum(accz, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 	[spect_zero_max, spect_lf_max, spect_max, freq_spect_zero_max, freq_spect_lf_max, freq_spect_max] = trial_freq_spect_fftft(turtle_name, motion_type, P_accz, F_accz, 0, 'noplot', t_fft_dp_dive, depth_dive);
-	
+
+	turtle_dive_fft.shallow_dive.homing(ii).P_accz = P_accz;
+	turtle_dive_fft.shallow_dive.homing(ii).F_accz = F_accz;
+	turtle_dive_fft.shallow_dive.homing(ii).T_accz = T_accz;
+
 	turtle_dive_fft.shallow_dive.homing(ii).spect_zero_max_accz = spect_zero_max;
 	turtle_dive_fft.shallow_dive.homing(ii).freq_spect_zero_max_accz = freq_spect_zero_max;
 	turtle_dive_fft.shallow_dive.homing(ii).spect_lf_max_accz = spect_lf_max;
@@ -252,7 +276,11 @@ for ii = 1 : surf_counter
 	if isempty(accx) == 0 && size(accx, 1) > 1
 		[P_accx, F_accx, T_accx] = pspectrum(accx, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 		[spect_zero_max, spect_lf_max, spect_max, freq_spect_zero_max, freq_spect_lf_max, freq_spect_max] = trial_freq_spect_fftft(turtle_name, motion_type, P_accx, F_accx, 0, 'noplot', t_fft_dp_dive, depth_dive);
-		
+
+		turtle_dive_fft.sub_surface.homing(ii).P_accx = P_accx;
+		turtle_dive_fft.sub_surface.homing(ii).F_accx = F_accx;
+		turtle_dive_fft.sub_surface.homing(ii).T_accx = T_accx;
+
 		turtle_dive_fft.sub_surface.homing(ii).spect_zero_max_accx = spect_zero_max;
 		turtle_dive_fft.sub_surface.homing(ii).freq_spect_zero_max_accx = freq_spect_zero_max;
 		turtle_dive_fft.sub_surface.homing(ii).spect_lf_max_accx = spect_lf_max;
@@ -282,6 +310,10 @@ for ii = 1 : surf_counter
 	if isempty(dinx) == 0 && size(dinx, 1) > 1
 		[P_dinx_nw, F_dinx_nw, T_dinx_nw] = pspectrum(dinx, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 		[spect_zero_max_nw, spect_lf_max_nw, spect_max_nw, freq_spect_zero_max_nw, freq_spect_lf_max_nw, freq_spect_max_nw] = trial_freq_spect_fftft(turtle_name, motion_type, P_dinx_nw, F_dinx_nw, 0, 'noplot', t_fft_dp_dive, depth_dive);
+
+		turtle_dive_fft.sub_surface.homing(ii).P_dinx_nw = P_dinx_nw;
+		turtle_dive_fft.sub_surface.homing(ii).F_dinx_nw = F_dinx_nw;
+		turtle_dive_fft.sub_surface.homing(ii).T_dinx_nw = T_dinx_nw;
 		
 		turtle_dive_fft.sub_surface_no_waves.homing(ii).spect_zero_max_accx_nw = spect_zero_max_nw;
 		turtle_dive_fft.sub_surface_no_waves.homing(ii).freq_spect_zero_max_accx_nw = freq_spect_zero_max_nw;
@@ -296,7 +328,11 @@ for ii = 1 : surf_counter
 	if isempty(accy) == 0 && size(accy, 1) > 1
 		[P_accy, F_accy, T_accy] = pspectrum(accy, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 		[spect_zero_max, spect_lf_max, spect_max, freq_spect_zero_max, freq_spect_lf_max, freq_spect_max] = trial_freq_spect_fftft(turtle_name, motion_type, P_accy, F_accy, 0, 'noplot', t_fft_dp_dive, depth_dive);
-		
+
+		turtle_dive_fft.sub_surface.homing(ii).P_accy = P_accy;
+		turtle_dive_fft.sub_surface.homing(ii).F_accy = F_accy;
+		turtle_dive_fft.sub_surface.homing(ii).T_accy = T_accy;		
+
 		turtle_dive_fft.sub_surface.homing(ii).spect_zero_max_accy = spect_zero_max;
 		turtle_dive_fft.sub_surface.homing(ii).freq_spect_zero_max_accy = freq_spect_zero_max;
 		turtle_dive_fft.sub_surface.homing(ii).spect_lf_max_accy = spect_lf_max;
@@ -326,7 +362,11 @@ for ii = 1 : surf_counter
 	if isempty(diny) == 0 && size(diny, 1) > 1
 		[P_diny_nw, F_diny_nw, T_diny_nw] = pspectrum(diny, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 		[spect_zero_max_nw, spect_lf_max_nw, spect_max_nw, freq_spect_zero_max_nw, freq_spect_lf_max_nw, freq_spect_max_nw] = trial_freq_spect_fftft(turtle_name, motion_type, P_diny_nw, F_diny_nw, 0, 'noplot', t_fft_dp_dive, depth_dive);
-		
+
+		turtle_dive_fft.sub_surface_no_waves.homing(ii).P_diny_nw = P_diny_nw;
+		turtle_dive_fft.sub_surface_no_waves.homing(ii).F_diny_nw = F_diny_nw;
+		turtle_dive_fft.sub_surface_no_waves.homing(ii).T_diny_nw = T_diny_nw;
+
 		turtle_dive_fft.sub_surface_no_waves.homing(ii).spect_zero_max_accy_nw = spect_zero_max_nw;
 		turtle_dive_fft.sub_surface_no_waves.homing(ii).freq_spect_zero_max_accy_nw = freq_spect_zero_max_nw;
 		turtle_dive_fft.sub_surface_no_waves.homing(ii).spect_lf_max_accy_nw = spect_lf_max_nw;
@@ -340,6 +380,10 @@ for ii = 1 : surf_counter
 	if isempty(accz) == 0 && size(accz, 1) > 1
 		[P_accz, F_accz, T_accz] = pspectrum(accz, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 		[spect_zero_max, spect_lf_max, spect_max, freq_spect_zero_max, freq_spect_lf_max, freq_spect_max] = trial_freq_spect_fftft(turtle_name, motion_type, P_accz, F_accz, 0, 'noplot', t_fft_dp_dive, depth_dive);
+
+		turtle_dive_fft.sub_surface_no_waves.homing(ii).P_accz = P_accz;
+		turtle_dive_fft.sub_surface_no_waves.homing(ii).F_accz = F_accz;
+		turtle_dive_fft.sub_surface_no_waves.homing(ii).T_accz = T_accz;
 		
 		turtle_dive_fft.sub_surface.homing(ii).spect_zero_max_accz = spect_zero_max;
 		turtle_dive_fft.sub_surface.homing(ii).freq_spect_zero_max_accz = freq_spect_zero_max;
@@ -370,6 +414,10 @@ for ii = 1 : surf_counter
 	if isempty(dinz) == 0 && size(dinz, 1) > 1
 		[P_dinz_nw, F_dinz_nw, T_dinz_nw] = pspectrum(dinz, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
 		[spect_zero_max_nw, spect_lf_max_nw, spect_max_nw, freq_spect_zero_max_nw, freq_spect_lf_max_nw, freq_spect_max_nw] = trial_freq_spect_fftft(turtle_name, motion_type, P_dinz_nw, F_dinz_nw, 0, 'noplot', t_fft_dp_dive, depth_dive);
+
+		turtle_dive_fft.sub_surface_no_waves.homing(ii).P_dinz_nw = P_dinz_nw;
+		turtle_dive_fft.sub_surface_no_waves.homing(ii).F_dinz_nw = F_dinz_nw;
+		turtle_dive_fft.sub_surface_no_waves.homing(ii).T_dinz_nw = T_dinz_nw;
 		
 		turtle_dive_fft.sub_surface_no_waves.homing(ii).spect_zero_max_accz_nw = spect_zero_max_nw;
 		turtle_dive_fft.sub_surface_no_waves.homing(ii).freq_spect_zero_max_accz_nw = freq_spect_zero_max_nw;
@@ -414,6 +462,6 @@ end
 if new_dive_fft_dataset == 1 || ov_to_do == 1
 	turtle_dive_fft_analysis = turtle_dive_fft;
 	fprintf([turtle_dive_fft_name, ': saving struct \n'])
-	save('turtle_dive_fft_analysis', 'turtle_dive_fft_analysis', '-v7.3');
-	fprintf('turtle_dive_fft_analysis.mat saved! \n')
+	save(turtle_dive_fft_name, 'turtle_dive_fft_analysis', '-v7.3');
+	fprintf([turtle_dive_fft_name,' saved! \n'])
 end

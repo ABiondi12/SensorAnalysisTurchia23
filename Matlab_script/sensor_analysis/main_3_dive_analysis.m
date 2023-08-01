@@ -119,6 +119,22 @@
 %
 %	This is implemented inside the script "mean_ODBA_paper", thus refer to
 %	it for more details.
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 6. single stft plot
+%
+%		Here, for a single big dive, shallow dive and sub surface period,
+%		it is possible to evaluate and plot a time-frequency analysis,   
+%		performed using a short-time Fourier transform over the acc data.
+%		This evaluation is performed to highlight dominant frequencies over 
+%		the acceleration of the turtle that can be eventually associated to 
+%		its flippers beat.
+%		Plot are shown w.r.t. depth profile in order to study the variation 
+%		and presence/absence of a dominant frequency depending on the 
+%		turtle behaviour.
+%
+%	The period has to be chosen at the beginning of the running session.
 
 %% creation of dive dataset structure
 dive_dataset_creation	 
@@ -139,3 +155,38 @@ stft_aligned_plot
 
 %% ODBA analysis
 mean_ODBA_paper
+
+%% single stft plot
+single_plot = 0;
+first = 1;
+again = 1;
+
+while again == 1
+		
+	if first == 1
+		first = 0;
+		
+		fprintf("Do you want to see a single stft plot? \n")
+		fprintf("1. Yes \n")
+		fprintf("2. No \n")
+
+		while single_plot < 1 && single_plot > 2
+			single_plot = input('');
+		end
+	else
+		single_plot = again;
+	end
+	
+	if single_plot == 1
+		stft_single_aligned_plot
+
+		again = 0;
+		fprintf("Do you want to see another single stft plot? \n")
+		fprintf("1. Yes \n")
+		fprintf("2. No \n")
+
+		while again < 1 && again > 2
+			again = input('');
+		end
+	end
+end

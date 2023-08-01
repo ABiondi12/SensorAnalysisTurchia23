@@ -345,7 +345,7 @@ if new_dive_dataset == 1 || ov_to_do == 1
 	fprintf([turtle_dive_name, ': saving struct \n'])
 	% save('turtle_dive', 'turtle_dive', '-v7.3');
 	save(turtle_dive_name, 'turtle_dive', '-v7.3');
-	fprintf('turtle_dive.mat saved! \n')
+	fprintf([turtle_dive_name,' saved! \n'])
 end
 
 %% save struct din

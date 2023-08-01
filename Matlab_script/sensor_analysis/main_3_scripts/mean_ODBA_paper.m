@@ -223,6 +223,6 @@ end
 if new_DBA_dataset == 1 || ov_to_do == 1
 		turtle_DBA_paper = turtle_DBA;
 		fprintf([turtle_DBA_name_paper ': saving struct \n'])
-		save('turtle_DBA_paper', 'turtle_DBA_paper', '-v7.3');
-		fprintf([turtle_DBA_name_paper ': turtle_DBA_paper.mat saved! \n'])
+		save(turtle_DBA_name_paper, 'turtle_DBA_paper', '-v7.3');
+		fprintf([turtle_DBA_name_paper, ' saved! \n'])
 end

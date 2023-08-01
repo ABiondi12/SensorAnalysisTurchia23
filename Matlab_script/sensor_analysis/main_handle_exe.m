@@ -53,6 +53,7 @@ addpath("csv_file\Turchia2023\Sevval-A");
 addpath("csv_file\Turchia2023\Deniz");
 addpath("csv_file\Turchia2023\Elif");
 addpath("csv_file\Turchia2023\Funda");
+
 %% main_launch
 fprintf('1. Start raw data elaboration \n')
 main_1_raw_data
