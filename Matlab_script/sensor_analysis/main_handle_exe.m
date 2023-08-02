@@ -46,11 +46,7 @@ auto_calib_use = 1; % if 0, choose if to use calibrated mf data
 auto_calib_datetime	 = 1;	% if 1, automatic datetime insertion (suggested)
 							% if 0, manual datetime insertion
 auto_column_together = 1;	% if 1, date and time information are taken 
-							% as in the same column (suggested)
-
-%% file name selection: to be updated for every new elaboration
-
-turtle_info		
+							% as in the same column (suggested)	
 						
 %% add path
 addpath("fcn");
@@ -73,6 +69,10 @@ addpath("csv_file\Turchia2023\Sevval-A");
 addpath("csv_file\Turchia2023\Deniz");
 addpath("csv_file\Turchia2023\Elif");
 addpath("csv_file\Turchia2023\Funda");
+
+%% file name selection: to be updated for every new elaboration
+
+turtle_info	
 
 %% main_launch
 fprintf('1. Start raw data elaboration \n')
