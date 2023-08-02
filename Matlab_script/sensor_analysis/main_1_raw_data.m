@@ -23,6 +23,9 @@
 %			for AGM --> acc is 10 Hz; mag, gyro and depth are 1 Hz 
 %			for axy --> acc is 10 Hz; mag is 1 Hz
 %
+% NOTE:
+%	axy data are in UTC time
+%	AGM data are in local time (UTC + 3h)
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 2. DATA REORIENTATION
@@ -59,21 +62,13 @@
 % shown.
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %% flag definition
 data_type	= -1;
 calib_perf	= 0;
 
-choose_data = 1;	% if 0, choose of data to be shown by input
-					% if 1, automatic elaboration of all data (suggested)								
-auto_calib = 1;		% if 0, choose if to perform calibration on mf data
-					% if 1, automatic perform of calibration on mf data
-auto_calib_use = 1; % if 0, choose if to use calibrated mf data
-					% if 1, automatically use calibrated mf data
 %% file load
-data		= readtable('Sevval_S1.csv');	% Sevval
-data_calib	= readtable('05_S1.csv');		% Calib session, only if differs 
-											% w.r.t. the data session
+
+% w.r.t. the data session
 % load raw data and create variables for them
 load_data
 

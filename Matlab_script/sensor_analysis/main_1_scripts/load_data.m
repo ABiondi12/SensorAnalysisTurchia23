@@ -49,18 +49,22 @@ freq_depth		= 0;
 
 %% Select data parameters
 
-fprintf("Datetime or Date - time information? \n")
-fprintf("1. Date and Time columns together \n")
-fprintf("2. Date and Time columns divided (not properly working for now) \n")
+if auto_column_together == 0
+	fprintf("Datetime or Date - time information? \n")
+	fprintf("1. Date and Time columns together \n")
+	fprintf("2. Date and Time columns divided (not properly working for now) \n")
 
-% Datetime column into .csv file. Only Date and Time together works
-% properly by also including datetime information.
-% In Date and Time column divided, we do not use date time information, 
-% but number of samples. It is not a recommended thing to do, it is better 
-% to create a .csv file with date and time column together.
-	
-while datetime_column <= 0 || datetime_column > 2
-	datetime_column = input('');
+	% Datetime column into .csv file. Only Date and Time together works
+	% properly by also including datetime information.
+	% In Date and Time column divided, we do not use date time information, 
+	% but number of samples. It is not a recommended thing to do, it is better 
+	% to create a .csv file with date and time column together.
+
+	while datetime_column <= 0 || datetime_column > 2
+		datetime_column = input('');
+	end
+elseif auto_column_together == 1
+	datetime_column = 1;
 end
 
 % Choice of the sensor model.
@@ -70,6 +74,22 @@ fprintf("2. Axy-5 \n")
 
 while sensor_type <= 0 || sensor_type > 2
 	sensor_type = input('');
+end
+
+%% read table
+
+if sensor_type == 1
+	name_table = name_table_agm;
+elseif sensor_type == 2
+	name_table = name_table_axy;
+end
+
+data		= readtable(name_table);
+data_calib	= readtable(name_table_calib);	
+
+if strcmp(name_table, name_table_modify)
+	data_new = [data(1:1936431, :);data(1936422:1936430, :); data(1936432:end, :)];
+	data = data_new;
 end
 
 % Select frequency for magnetometer
@@ -96,8 +116,8 @@ if sensor_type == 1	% AGM
 	% Select frequency for gyroscope
 	%	acc = 10 Hz - gyro = 1 Hz for AGM
 	fprintf("Choose the gyroscope frequency: \n")
-	fprintf("1. acc_linked \n")
-	fprintf("2. 1 Hz (Turchia 2023) \n")
+	fprintf("1. acc_linked (Turchia 2023) \n")
+	fprintf("2. 1 Hz \n")
 	fprintf("3. 2 Hz \n")
 	
 	while freq_gyro <= 0 || freq_gyro > 3

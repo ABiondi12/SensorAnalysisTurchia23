@@ -31,6 +31,27 @@ dim_font	= 30;
 dim_fontb	= 15;
 id_plot		= 1;
 
+%% dataset correction - DO NOT change this section
+% There is an error in Didar dataset (missing one second).
+name_table_modify	= 'Didar_agm.csv';	% not to be changed
+
+%% flag definition
+
+choose_data = 1;	% if 0, choose of data to be shown by input
+					% if 1, automatic elaboration of all data (suggested)								
+auto_calib = 1;		% if 0, choose if to perform calibration on mf data
+					% if 1, automatic perform of calibration on mf data (suggested)
+auto_calib_use = 1; % if 0, choose if to use calibrated mf data
+					% if 1, automatically use calibrated mf data (suggested)
+auto_calib_datetime	 = 1;	% if 1, automatic datetime insertion (suggested)
+							% if 0, manual datetime insertion
+auto_column_together = 1;	% if 1, date and time information are taken 
+							% as in the same column (suggested)
+
+%% file name selection: to be updated for every new elaboration
+
+turtle_info		
+						
 %% add path
 addpath("fcn");
 addpath("main_1_scripts");
@@ -38,7 +59,6 @@ addpath("main_2_scripts");
 addpath("main_3_scripts");
 addpath("main_4_scripts");
 addpath("csv_file");
-addpath("csv_file\old_trial");
 addpath("csv_file\Turchia2023");
 addpath("csv_file\Turchia2023\Banu-C");
 addpath("csv_file\Turchia2023\Banu-C\axy");

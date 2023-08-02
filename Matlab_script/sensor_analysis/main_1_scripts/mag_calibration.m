@@ -67,6 +67,7 @@
 
 %% select calibration section
 same_dataset = 0;
+day_max = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 31, 31];
 
 while same_dataset ~= 1 && same_dataset ~= 2
 	fprintf('Calibration set is at the beginning of the dataset?\n')
@@ -76,36 +77,87 @@ while same_dataset ~= 1 && same_dataset ~= 2
 	same_dataset = input('');
 end
 
-% hand-self insertion of start and stop time of the calibration section
-fprintf('Calibration session: \n')
-fprintf('Start year: \n')
-Yi = input('');
-fprintf('Start month: \n')
-Mi = input('');
-fprintf('Start day: \n')
-Di = input('');
-fprintf('Start hour: \n')
-Hi = input('');
-fprintf('Start minute: \n')
-MIi = input('');
-fprintf('Start second: \n')
-Si = input('');
-MSi = 000;
+if auto_calib_datetime == 0
+	% hand-self insertion of start and stop time of the calibration section
+	fprintf('Calibration session: \n')
+	fprintf('Start year (format 2020, 2021, ...): \n')
+	Yi = input('');
+	while Yi < 2000 || Yi > 2100
+		fprintf('invalid year value, try again \n')
+		Yi = input('');
+	end
+	fprintf('Start month (format 01, 02,..., 11, 12): \n')
+	Mi = input('');
+	while Mi < 1 || Mi > 12
+		fprintf('invalid month value, try again \n')
+		Mi = input('');
+	end
+	fprintf('Start day (format 01, 02, ..., 30, 31): \n')
+	Di = input('');
+	while Di < 1 || Di > day_max(Mi)
+		fprintf('invalid day value, try again \n')
+		Di = input('');
+	end
+	fprintf('Start hour (format 01, 02, ..., 23, 00): \n')
+	Hi = input('');
+	while Hi < 0 || Hi > 23
+		fprintf('invalid hour value, try again \n')
+		Hi = input('');
+	end
+	fprintf('Start minute (format 00, 01, 02, ..., 58, 59): \n')
+	MIi = input('');
+	while MIi < 0 || MIi > 59
+		fprintf('invalid minute value, try again \n')
+		MIi = input('');
+	end
+	fprintf('Start second (format 00, 01, 02, ..., 58, 59): \n')
+	Si = input('');
+	while Si < 0 || Si > 59
+		fprintf('invalid second value, try again \n')
+		Si = input('');
+	end
+	MSi = 000;
 
-fprintf('Stop year: \n')
-Yf = input('');
-fprintf('Stop month: \n')
-Mf = input('');
-fprintf('Stop day: \n')
-Df = input('');
-fprintf('Stop hour: \n')
-Hf = input('');
-fprintf('Stop minute: \n')
-MIf = input('');
-fprintf('Stop second: \n')
-Sf = input('');
-MSf = 000;
-
+	fprintf('Stop year (format 2020, 2021, ...): \n')
+	Yf = input('');
+	while Yf < 2000 || Yf > 2100
+		fprintf('invalid year value, try again \n')
+		Yf = input('');
+	end
+	fprintf('Stop month (format 01, 02,..., 11, 12): \n')
+	Mf = input('');
+	while Mf < 1 || Mf > 12
+		fprintf('invalid month value, try again \n')
+		Mf = input('');
+	end
+	fprintf('Stop day (format 01, 02, ..., 30, 31): \n')
+	Df = input('');
+	while Df < 1 || Df > day_max(Mi)
+		fprintf('invalid day value, try again \n')
+		Df = input('');
+	end
+	fprintf('Stop hour (format 01, 02, ..., 23, 00): \n')
+	Hf = input('');
+	while Hf < 0 || Hf > 23
+		fprintf('invalid hour value, try again \n')
+		Hf = input('');
+	end
+	fprintf('Stop minute (format 00, 01, 02, ..., 58, 59): \n')
+	MIf = input('');
+	while MIf < 0 || MIf > 59
+		fprintf('invalid minute value, try again \n')
+		MIf = input('');
+	end
+	fprintf('Stop second (format 00, 01, 02, ..., 58, 59): \n')
+	Sf = input('');
+	while Sf < 0 || Sf > 59
+		fprintf('invalid second value, try again \n')
+		Sf = input('');
+	end
+	MSf = 000;
+elseif auto_calib_datetime == 1
+	auto_calib_session
+end
 %% Calibration perform
 if same_dataset == 1	% Yes
 	[start_id_calib, stop_id_calib] = time_id(datetime_mag, Yi, Mi, Di, Hi, MIi, Si, MSi, Yf, Mf, Df, Hf, MIf, Sf, MSf);
@@ -118,18 +170,19 @@ else					% no
 	acc_sens_calib		= [data_accx_calib, data_accy_calib, data_accz_calib];
 	
 	if sensor == 2		% axy
-		datetime_mag_calib	= table2array(data_calib(1:10:end, 2));
-		data_magx_calib		= table2array(data_calib(1:10:end, 6));
-		data_magy_calib		= table2array(data_calib(1:10:end, 7));
-		data_magz_calib		= table2array(data_calib(1:10:end, 8));
+		datetime_mag_calib	= table2array(data_calib(1:mag_step:end, 2));
+		data_magx_calib		= table2array(data_calib(1:mag_step:end, 6));
+		data_magy_calib		= table2array(data_calib(1:mag_step:end, 7));
+		data_magz_calib		= table2array(data_calib(1:mag_step:end, 8));
 	elseif sensor == 1	% AGM
-		datetime_mag_calib	= table2array(data_calib(:, 2));
-		data_magx_calib		= table2array(data_calib(:, 9));        
-		data_magy_calib		= table2array(data_calib(:, 10));
-		data_magz_calib		= table2array(data_calib(:, 11));
-		data_gyrox_calib	= table2array(data_calib(:, 6));
-		data_gyroy_calib	= table2array(data_calib(:, 7));
-		data_gyroz_calib	= table2array(data_calib(:, 8));
+		datetime_mag_calib	= table2array(data_calib(1:mag_step:end, 2));
+		data_magx_calib		= table2array(data_calib(1:mag_step:end, 9));        
+		data_magy_calib		= table2array(data_calib(1:mag_step:end, 10));
+		data_magz_calib		= table2array(data_calib(1:mag_step:end, 11));
+		datetime_gyro		= table2array(data_calib(1:gyro_step:end, 2));
+		data_gyrox_calib	= table2array(data_calib(1:gyro_step:end, 6));
+		data_gyroy_calib	= table2array(data_calib(1:gyro_step:end, 7));
+		data_gyroz_calib	= table2array(data_calib(1:gyro_step:end, 8));
 		gyro_sens_calib		= [data_gyrox_calib, data_gyroy_calib, data_gyroz_calib];
 	end
 	mag_calib = [data_magx_calib, data_magy_calib, data_magz_calib];
@@ -146,8 +199,11 @@ end
 % function that execute the calibration:
 %	compute correction indeces
 %	apply indices over the entire dataset
-[mag_postcalib, soft_iron, hard_iron, exp_mag_strength, sphere_fit, ellips_fit] = mag_calib_main(mag_reor, mag_reor_calib);
+%		mag_calib_postcalib = post calibration of the calibration set
+%		mag_postcalib		= post calibration of the entire dataset
+[mag_calib_postcalib, mag_postcalib, soft_iron, hard_iron, exp_mag_strength, sphere_fit, ellips_fit] = mag_calib_main(mag_reor, mag_reor_calib);
 norma_mag_postcalib = norm(mag_postcalib);
+norma_mag_calib_postcalib = norm(mag_calib_postcalib);
 
 %% plot
 mag_calibration_plot

@@ -16,7 +16,7 @@
 %
 % 5. plot:		calibrated magnetic field reoriented  - single axes
 
-%% plot
+%% plot: sphere and ellipsoid
 % plot: Uncalibrated vs Calibrated mf data best fitting (ellips - sphere)
 %	ellips - Uncalibrated mf
 %	sphere - Calibrated mf
@@ -35,6 +35,55 @@ legend('Uncalibrated best fitting', 'Calibrated best fitting','Location', 'south
 set(gca,'FontSize', 20)
 title("Uncalibrated vs Calibrated" + newline + "magnetic field fitting")
 hold off
+
+%% plot: only calibration set
+yn_calib_show = 0;
+
+fprintf("Do you want to see also the calibration session? \n")
+fprintf("1. Yes \n")
+fprintf("2. No \n")
+
+while yn_calib_show < 1 || yn_calib_show > 2
+	yn_calib_show = input('');
+end
+
+if yn_calib_show == 1
+	% plot: Uncalibrated mf data and best fitting ellips
+	figure('Name', ['figure ', num2str(id_plot),', uncalibrated magnetic field fitting - calibration session'], 'NumberTitle','off'); id_plot = id_plot + 1;
+	clf
+	plot3(ellips_fit(:, 1), ellips_fit(:, 2), ellips_fit(:, 3), 'LineStyle','none','Marker', 'o','MarkerSize',1,'MarkerEdgeColor','g', 'MarkerFaceColor','g')
+	hold on
+	plot3(mag_reor_calib(:, 1), mag_reor_calib(:, 2), mag_reor_calib(:, 3), 'LineStyle','none','Marker', 'o','MarkerSize', 3)
+	grid on
+	box on
+	axis equal
+	xlabel('x uT','FontSize', 20)
+	ylabel('y uT','FontSize', 20)
+	zlabel('z uT','FontSize', 20)
+	legend('Uncalibrated best fitting', 'magnetic field','Location', 'southeast','FontSize', 20)
+	set(gca,'FontSize', 20)
+	title("Uncalibrated magnetic field fitting - calibration session")
+	hold off
+
+	% plot: Calibrated mf data and best fitting sphere
+	figure('Name', ['figure ', num2str(id_plot),', calibrated magnetic field fitting - calibration session'], 'NumberTitle','off'); id_plot = id_plot + 1;
+	clf
+	plot3(sphere_fit(:, 1), sphere_fit(:, 2), sphere_fit(:, 3), 'LineStyle','none','Marker', 'o','MarkerSize',1,'MarkerEdgeColor','g', 'MarkerFaceColor','g')
+	hold on
+	plot3(mag_calib_postcalib(:, 1), mag_calib_postcalib(:, 2), mag_calib_postcalib(:, 3), 'LineStyle','none','Marker', 'o','MarkerSize', 3)
+	grid on
+	box on
+	axis equal
+	xlabel('x uT','FontSize', 20)
+	ylabel('y uT','FontSize', 20)
+	zlabel('z uT','FontSize', 20)
+	legend('Calibrated best fitting', 'Calibrated magnetic field','Location', 'southeast','FontSize', 20)
+	set(gca,'FontSize', 20)
+	title("Calibrated magnetic field fitting - calibration session")
+	hold off
+end
+
+%% plot
 
 % plot: Uncalibrated mf data and best fitting ellips
 figure('Name', ['figure ', num2str(id_plot),', uncalibrated magnetic field fitting'], 'NumberTitle','off'); id_plot = id_plot + 1;

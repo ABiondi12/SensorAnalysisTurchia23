@@ -1,4 +1,4 @@
-function [mag_postcalib, soft_iron, hard_iron, exp_mag_strength, sphere_fit, ellips_fit]=mag_calib_main(mag_sens, mag_calib)
+function [mag_calib_postcalib, mag_sens_postcalib, soft_iron, hard_iron, exp_mag_strength, sphere_fit, ellips_fit]=mag_calib_main(mag_sens, mag_calib)
 % mag_calib_main
 % Function that takes as input uncalibrated magnetic field data and, if not
 % on the same dataset, magnetic field data over which to compute
@@ -55,8 +55,8 @@ function [mag_postcalib, soft_iron, hard_iron, exp_mag_strength, sphere_fit, ell
 % pre-deployment in prof. Luschi dataset) is corrected. If this calibration
 % results to be failry good, then you have to apply the same formula over
 % the entire dataset (turtle travel in open sea).
-mag_postcalib = (mag_sens-hard_iron)*soft_iron;
-
+mag_sens_postcalib = (mag_sens-hard_iron)*soft_iron;
+mag_calib_postcalib = (mag_calib-hard_iron)*soft_iron;
 % reconstruct fitting ellipsoid (pre-calibration) and obtained sphere (post
 % calibration).
 num_p = 50;

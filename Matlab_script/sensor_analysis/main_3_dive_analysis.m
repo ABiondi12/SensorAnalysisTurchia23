@@ -140,7 +140,7 @@
 dive_dataset_creation	 
 
 %% dive information selection
-turtle_info				 
+% turtle_info				 
 run_dive_analysis	% also ODBA computation (call of dive_DBA_homing)
 					% dive_DBA_homing populates both ODBA and ODBA_paper,
 					% which differ for the window over which is computed a
@@ -151,12 +151,13 @@ dive_analysis_paper
 
 %% short-time Fourier transform execution over dives and plot
 dive_turtle_fft_ft_light 
-stft_aligned_plot		 
+% stft_aligned_plot		 
 
 %% ODBA analysis
 mean_ODBA_paper
 
 %% single stft plot
+
 single_plot = 0;
 first = 1;
 again = 1;
@@ -164,29 +165,42 @@ again = 1;
 while again == 1
 		
 	if first == 1
-		first = 0;
 		
 		fprintf("Do you want to see a single stft plot? \n")
 		fprintf("1. Yes \n")
 		fprintf("2. No \n")
 
-		while single_plot < 1 && single_plot > 2
+		while single_plot < 1 || single_plot > 2
 			single_plot = input('');
-		end
-	else
+		end	
+		
+	elseif first == 0
 		single_plot = again;
 	end
 	
+	first = 0;
+	
 	if single_plot == 1
+		
+		fprintf("Single period plot: starting of the process... \n")
 		stft_single_aligned_plot
-
+		fprintf("Single period plot: process completed. \n")
+		
 		again = 0;
 		fprintf("Do you want to see another single stft plot? \n")
 		fprintf("1. Yes \n")
 		fprintf("2. No \n")
 
-		while again < 1 && again > 2
+		while again < 1 || again > 2
 			again = input('');
 		end
+		
+		if again ~= 1
+			fprintf("Single period plot: ending of the process... \n")
+		end
+	else
+		again = 0;
+		fprintf("Single period plot: ending of the process... \n")
 	end
 end
+fprintf("Single period plot: process ended. \n")
