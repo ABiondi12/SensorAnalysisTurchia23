@@ -14,9 +14,6 @@
 % depending on the period phase.
 
 %% Matlab_pspectrum plot
-dim_fontb = 20;
-dim_font = 30;
-
 if exist('id_plot', 'var') == 0
 	id_plot = 1;
 end
@@ -35,25 +32,28 @@ fprintf("1. Big dive \n")
 fprintf("2. Shallow dive \n")
 fprintf("3. Sub surface period \n")
 
-while type_period < 1 && type_period > 3
+while type_period < 1 || type_period > 3
 	type_period = input('');
 end
 
 if type_period == 1
 	max_num = counter;
+	string_period = 'Big dive ';
 elseif type_period == 2
 	max_num = sh_counter;
+	string_period = 'Shallow dive ';
 elseif type_period == 3
 	max_num = surf_counter;
+	string_period = 'Sub surface period ';
 end
 
 num_period = 0;
 
 fprintf("Select the period you want to see:  \n")
 fprintf("min: 1 \n")
-fprintf(["max: ", max_num, " \n"])
+fprintf(['max: ', num2str(max_num), ' \n'])
 
-while num_period < 1 && num_period > max_num
+while num_period < 1 || num_period > max_num
 	num_period = input('');
 end
 
@@ -101,13 +101,7 @@ odba = turtle_dive_show.homing(num_period).ODBA;
 	ylabel('Depth (m)','FontSize', dim_fontb)
 	% legend('Location', 'best','FontSize', dim_fontb)
 	set(gca,'FontSize', dim_fontb)
-	if type_period == 1
-		sgtitle(['Big dive ', i_char, ', type ', dive_type, ', ' , name_turtle, ' : ODBA'],'FontSize', dim_font)
-	elseif type_period == 2
-		sgtitle(['Shallow dive ', i_char, ', ', name_turtle, ' : ODBA'],'FontSize', dim_font)
-	elseif type_period == 3
-		sgtitle(['Sub surface period ', i_char, ', ', name_turtle, ' : ODBA'],'FontSize', dim_font)
-	end
+	sgtitle(['Dive num ', i_char, ', type ', dive_type, ', ', name_turtle, ' : ODBA'],'FontSize', dim_font)
 
 		%% accx
 	[P_accx, F_accx, T_accx] = pspectrum(accx, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);	%%
@@ -128,13 +122,7 @@ odba = turtle_dive_show.homing(num_period).ODBA;
 	ylabel('Depth (m)','FontSize', dim_fontb)
 	% legend('Location', 'best','FontSize', dim_fontb)
 	set(gca,'FontSize', dim_fontb)
-	if type_period == 1
-		sgtitle(['Big dive ', i_char, ', type ', dive_type, ', ' , name_turtle, ' : time-frequency analysis, accx'],'FontSize', dim_font)
-	elseif type_period == 2
-		sgtitle(['Shallow dive ', i_char, ', ', name_turtle, ' : time-frequency analysis, accx'],'FontSize', dim_font)
-	elseif type_period == 3
-		sgtitle(['Sub surface period ', i_char, ', ', name_turtle, ' : time-frequency analysis, accx'],'FontSize', dim_font)
-	end
+	sgtitle([string_period, ' num ', i_char, ', type ', dive_type, ', ', name_turtle, ' : time-frequency analysis, accx'],'FontSize', dim_font)
 	
 	%% accy
 	[P_accy, F_accy, T_accy] = pspectrum(accy, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
@@ -155,13 +143,7 @@ odba = turtle_dive_show.homing(num_period).ODBA;
 	ylabel('Depth (m)','FontSize', dim_fontb)
 	% legend('Location', 'best','FontSize', dim_fontb)
 	set(gca,'FontSize', dim_fontb)
-	if type_period == 1
-		sgtitle(['Big dive ', i_char, ', type ', dive_type, ', ' , name_turtle, ' : time-frequency analysis, accy'],'FontSize', dim_font)
-	elseif type_period == 2
-		sgtitle(['Shallow dive ', i_char, ', ', name_turtle, ' : time-frequency analysis, accy'],'FontSize', dim_font)
-	elseif type_period == 3
-		sgtitle(['Sub surface period ', i_char, ', ', name_turtle, ' : time-frequency analysis, accy'],'FontSize', dim_font)
-	end
+	sgtitle(['plot: ', string_period, ' num ', i_char, ', type ', dive_type, ', ', name_turtle, ' : time-frequency analysis, accy'],'FontSize', dim_font)
 
 		%% accz
 
@@ -183,11 +165,6 @@ odba = turtle_dive_show.homing(num_period).ODBA;
 	ylabel('Depth (m)','FontSize', dim_fontb)
 	legend('Location', 'best','FontSize', dim_fontb)
 	set(gca,'FontSize', dim_fontb)
-	if type_period == 1
-		sgtitle(['Big dive ', i_char, ', type ', dive_type, ', ' , name_turtle, ' : time-frequency analysis, accz'],'FontSize', dim_font)
-	elseif type_period == 2
-		sgtitle(['Shallow dive ', i_char, ', ', name_turtle, ' : time-frequency analysis, accz'],'FontSize', dim_font)
-	elseif type_period == 3
-		sgtitle(['Sub surface period ', i_char, ', ', name_turtle, ' : time-frequency analysis, accz'],'FontSize', dim_font)
-	end
+	sgtitle([string_period , i_char, ', type ', dive_type, ', ' , name_turtle, ' : time-frequency analysis, accz'],'FontSize', dim_font)
+
 %}

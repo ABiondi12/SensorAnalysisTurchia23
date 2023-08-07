@@ -19,6 +19,11 @@
 % Refers to each of them, separately, by calling "help name_of_the_script"
 % for knowing what is executed inside of each specific sub-main script.
 %
+% At the beginning, there is the selection of some flag for obtaining a
+% higher level of automatization of the code execution. By keeping the flag
+% equal to 1, the related decision is already selected (with the suggested 
+% option) and there is no control from the user during the code execution.
+%
 % At the very end, after every sub-main scripts has been executed, a table
 % that summarize the results is created and saved.
 
@@ -32,19 +37,28 @@ dim_fontb	= 15;
 id_plot		= 1;
 
 %% dataset correction - DO NOT change this section
-% There is an error in Didar dataset (missing one second).
+% There is an error in Didar dataset (missing one second), thus the code
+% automatically adjust the dataset by cloning the previous second in the 
+% missing one.
 name_table_modify	= 'Didar_agm.csv';	% not to be changed
 
 %% flag definition
+% These variables are used as shortcut for obtaining an higher level of
+% automatism (options are automatically selected at the beginning and not
+% asked during the code execution).
 
-choose_data = 1;	% if 0, choose of data to be shown by input
-					% if 1, automatic elaboration of all data (suggested)								
-auto_calib = 1;		% if 0, choose if to perform calibration on mf data
-					% if 1, automatic perform of calibration on mf data (suggested)
-auto_calib_use = 1; % if 0, choose if to use calibrated mf data
-					% if 1, automatically use calibrated mf data (suggested)
+choose_data = 1;			% if 0, choose of data to be shown by input
+							% if 1, automatic elaboration of all data (suggested)		
+							
+auto_calib = 1;				% if 0, choose if to perform calibration on mf data
+							% if 1, automatic perform of calibration on mf data (suggested)
+							
+auto_calib_use = 1;			% if 0, choose if to use calibrated mf data
+							% if 1, automatically use calibrated mf data (suggested)
+							
 auto_calib_datetime	 = 1;	% if 1, automatic datetime insertion (suggested)
 							% if 0, manual datetime insertion
+							
 auto_column_together = 1;	% if 1, date and time information are taken 
 							% as in the same column (suggested)	
 						
@@ -70,8 +84,8 @@ addpath("csv_file\Turchia2023\Deniz");
 addpath("csv_file\Turchia2023\Elif");
 addpath("csv_file\Turchia2023\Funda");
 
-%% file name selection: to be updated for every new elaboration
-
+%% Turle name selection
+% Selection of the turtle and variables name definition
 turtle_info	
 
 %% main_launch

@@ -44,27 +44,27 @@ while sun_kind <=0 || sun_kind > 3
 end
 
 if sun_kind == 1
-	if turtle_nm > 0 && turtle_nm < 6
+	if turtle_nm >= 1 && turtle_nm < 7
 		sunrise_hour	= (datetime(2023, 05, 30, 05, 16, 00, 000));
 		sunset_hour		= (datetime(2023, 05, 30, 20, 46, 00, 000));
-	else
+	elseif turtle_nm >= 7 && turtle_nm < 10
 		sunrise_hour	= (datetime(2023, 06, 26, 04, 59, 00, 000));
 		sunset_hour		= (datetime(2023, 06, 26, 21, 13, 00, 000));
 	end
 	
 elseif sun_kind == 2
-	if turtle_nm > 0 && turtle_nm < 6
+	if turtle_nm >= 1 && turtle_nm < 7
 		sunrise_hour	= (datetime(2023, 05, 30, 04, 39, 00, 000));
 		sunset_hour		= (datetime(2023, 05, 30, 21, 23, 00, 000));
-	else
+	elseif turtle_nm >= 7 && turtle_nm < 10
 		sunrise_hour	= (datetime(2023, 06, 26, 04, 16, 00, 000));
 		sunset_hour		= (datetime(2023, 06, 26, 21, 56, 00, 000));
 	end
 elseif sun_kind == 3
-	if turtle_nm > 0 && turtle_nm < 6
+	if turtle_nm >= 1 && turtle_nm < 7
 		sunrise_hour	= (datetime(2023, 05, 30, 03, 58, 00, 000));
 		sunset_hour		= (datetime(2023, 05, 30, 22, 04, 00, 000));
-	else
+	elseif turtle_nm >= 7 && turtle_nm < 10
 		sunrise_hour	= (datetime(2023, 06, 26, 03, 25, 00, 000));
 		sunset_hour		= (datetime(2023, 06, 26, 22, 47, 00, 000));
 	end

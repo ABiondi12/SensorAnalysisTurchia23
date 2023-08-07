@@ -734,5 +734,5 @@ turtle_sub_ODBA_med		= median(turtle_sub_ODBA);
 turtle_sub_ODBA_quart	= quantile(turtle_sub_ODBA, [.25 .50 .75]); % the quartiles of x
 
 %% Plot
-% ODBA_analysis_paper_plot
+ODBA_analysis_paper_plot
 

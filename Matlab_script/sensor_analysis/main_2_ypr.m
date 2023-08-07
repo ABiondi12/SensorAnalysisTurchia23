@@ -2,7 +2,7 @@
 % In this script there are evaluated:
 %
 %	1_ angle between local magnetic field and acceleration vectors (with
-%	the hypotesis that only gravity field occurs, because turtles movement
+%	the hypothesis that only gravity field occurs, because turtles movement
 %	are much slow with respect to gravity magnitude, so we expect their
 %	proper accelerations along 3 axis will be negligible w.r.t. g).
 %
@@ -21,14 +21,23 @@
 % position from each turtle dataset)
 
 % Turchia coordinates
-height		= 0;
-lat			= 36.6060000; % from satellite info about turtles patterns
-long		= 28.8150000; % from satellite info about turtles patterns
-year_calib	= 2023;
-month_calib	= 5;
-day_calib	= 30;
-model		= '2020';
-	
+if turtle_nm >= 1 && turtle_nm < 7
+	height		= 0;
+	lat			= 36.6060000; % from satellite info about turtles patterns
+	long		= 28.8150000; % from satellite info about turtles patterns
+	year_calib	= 2023;
+	month_calib	= 5;
+	day_calib	= 30;
+	model		= '2020';
+elseif turtle_nm >= 7 && turtle_nm < 10
+	height		= 0;
+	lat			= 36.6060000; % from satellite info about turtles patterns
+	long		= 28.8150000; % from satellite info about turtles patterns
+	year_calib	= 2023;
+	month_calib	= 06;
+	day_calib	= 26;
+	model		= '2020';
+end
 % local magnetic field from online dataset (NED frame)
 % Results have nanoTesla magnitude
 %   Output calculated by wrldmagm are:
@@ -249,16 +258,17 @@ pitch_norm		= smoothdata(pitch_norm, 'movmean', n_2s);
 roll_norm		= smoothdata(roll_norm, 'movmean', n_2s);
 
 % with calibrated magnetic field
+%{
 yaw_m_calib			= smoothdata(yaw_m_calib, 'movmean', more*n_2s);
 yaw_g_calib			= smoothdata(yaw_g_calib, 'movmean', more*n_2s);
 pitch_calib			= smoothdata(pitch_calib, 'movmean', n_2s);
 roll_calib			= smoothdata(roll_calib, 'movmean', n_2s);
-
+%}
 mean_yaw_m_calib	= mean(yaw_m_calib);
 
 yaw_m_norm_calib	= smoothdata(yaw_m_norm_calib, 'movmean', more*n_2s);
 yaw_g_norm_calib	= smoothdata(yaw_g_norm_calib, 'movmean', more*n_2s);
-pitch_norm_calib		= smoothdata(pitch_norm_calib, 'movmean', n_2s);
+pitch_norm_calib	= smoothdata(pitch_norm_calib, 'movmean', n_2s);
 roll_norm_calib		= smoothdata(roll_norm_calib, 'movmean', n_2s);
 
 %% Plot script (commented for now)

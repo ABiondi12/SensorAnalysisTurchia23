@@ -43,7 +43,7 @@
 %		populated for every dive with information about datetime, time of
 %		beginning and end, depth profile, acc, mag, gyro, shape of the dive
 %		(for big dive only)... The struct is then saved with the name
-%		"turtle_dive".
+%		"turtle_dive_***" (*** = name of the turtle).
 %		
 %		This entire part is demanded to the script "run_dive_analysis",
 %		thus refer to it for more details.
@@ -139,8 +139,7 @@
 %% creation of dive dataset structure
 dive_dataset_creation	 
 
-%% dive information selection
-% turtle_info				 
+%% dive information selection			 
 run_dive_analysis	% also ODBA computation (call of dive_DBA_homing)
 					% dive_DBA_homing populates both ODBA and ODBA_paper,
 					% which differ for the window over which is computed a
@@ -150,8 +149,8 @@ run_dive_analysis	% also ODBA computation (call of dive_DBA_homing)
 dive_analysis_paper		 
 
 %% short-time Fourier transform execution over dives and plot
-dive_turtle_fft_ft_light 
-% stft_aligned_plot		 
+dive_turtle_fft_ft_light
+stft_aligned_plot		 
 
 %% ODBA analysis
 mean_ODBA_paper
