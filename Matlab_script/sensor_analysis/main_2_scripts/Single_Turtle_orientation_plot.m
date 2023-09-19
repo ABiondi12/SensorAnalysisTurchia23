@@ -53,10 +53,12 @@ if calib == 1
 	mag_reor_plot		= mag_postcalib;
 	norm_mag_reor_plot	= norm_mag_reor_calib;
 	mag_norm_reor_plot	= mag_norm_reor_calib;
-	angle_c_plot		= angle_c_calib;
-	angle_c_norm_plot	= angle_c_norm_calib;
-	angle_s_plot		= angle_s_calib;
-	angle_s_norm_plot	= angle_s_norm_calib;
+	if auto_norm_g_mf_angle == 1 && g_mf_angle_enable == 1
+		angle_c_plot		= angle_c_calib;
+		angle_c_norm_plot	= angle_c_norm_calib;
+		angle_s_plot		= angle_s_calib;
+		angle_s_norm_plot	= angle_s_norm_calib;
+	end
 	roll_plot			= roll_calib;
 	pitch_plot			= pitch_calib;
 	yaw_m_plot			= yaw_m_calib;
@@ -70,10 +72,12 @@ else
 	mag_reor_plot		= mag_reor;
 	norm_mag_reor_plot	= norm_mag_reor;
 	mag_norm_reor_plot	= mag_norm_reor;
-	angle_c_plot		= angle_c;
-	angle_c_norm_plot	= angle_c_norm;
-	angle_s_plot		= angle_s;
-	angle_s_norm_plot	= angle_s_norm;
+	if auto_norm_g_mf_angle == 1 && g_mf_angle_enable == 1
+		angle_c_plot		= angle_c;
+		angle_c_norm_plot	= angle_c_norm;
+		angle_s_plot		= angle_s;
+		angle_s_norm_plot	= angle_s_norm;
+	end
 	roll_plot			= roll;
 	pitch_plot			= pitch;
 	yaw_m_plot			= yaw_m;
@@ -85,11 +89,31 @@ else
 end
 
 %% acceleration plot
-norm_acc_mag_plot
-
+yn_norm = 0;
+if auto_norm_g_mf_angle == 1
+	fprintf('Do you want to see the norm of g and mf data? \n')
+	fprintf('1. Yes \n')
+	fprintf('2. No \n')
+	while yn_norm <= 0 || yn_norm > 2
+		yn_norm = input('');
+	end
+	if yn_norm == 1
+		norm_acc_mag_plot
+	end
+end
 %% angle between g and magnetic field reoriented 
-angle_g_mf_plot
-
+yn_angle = 0;
+if auto_norm_g_mf_angle == 1 && g_mf_angle_enable == 1
+	fprintf('Do you want to see the angle between g and mf data? \n')
+	fprintf('1. Yes \n')
+	fprintf('2. No \n')
+	while yn_angle <= 0 || yn_angle > 2
+		yn_angle = input('');
+	end
+	if yn_angle == 1
+		angle_g_mf_plot
+	end
+end
 %% YPR 
 % standard and non-standard versions must be equal, here we use rotated 
 % measurement vectors

@@ -9,15 +9,15 @@
 % file to Matlab variables. During data loading, the following specifics
 % are to be specified:
 %	a. sensor type
-%		sensor = 1	for AGM
-%		sensor = 2	for Axy-5
+%		sensor = 1	for AGM - recommended
+%		sensor = 2	for Axy-5 
 %	b. data type (to be shown)
 %		type = 0		for all - recommended (acc, mag, gyro for AGM)
 %		type = 1		for acc
 %		type = 2		for mag
 %		type = 3		for gyro (available only for AGM)
 %	c. date and time in the same column or not
-%		datetime_column = 1 for yes (recommended)
+%		datetime_column = 1 for yes - recommended
 %		datetime_column = 2 for no
 %	d. frequency for magnetic field, gyroscope and depth
 %			for AGM --> acc is 10 Hz; mag, gyro and depth are 1 Hz 

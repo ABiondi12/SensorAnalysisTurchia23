@@ -15,13 +15,16 @@
 
 %% Local magnetic field extrapulation from online dataset in NED ref. frame
 
-% chosen an indicative point to compute magnetic field, local space and
-% time variability is very low so we decides to adopt the same one for
+% chosen an indicative point to compute magnetic field, 'time-space'
+% variability is very low, so we decides to adopt the same one for
 % every turtles and every days. (If necessary, you can select day and
 % position from each turtle dataset)
 
+% NOTE: it is necessary to change lat and long values by updating them to
+% the correct space coordinates of the release.
+
 % Turchia coordinates
-if turtle_nm >= 1 && turtle_nm < 7
+if turtle_nm >= 1 && turtle_nm < 7	% first release
 	height		= 0;
 	lat			= 36.6060000; % from satellite info about turtles patterns
 	long		= 28.8150000; % from satellite info about turtles patterns
@@ -29,7 +32,7 @@ if turtle_nm >= 1 && turtle_nm < 7
 	month_calib	= 5;
 	day_calib	= 30;
 	model		= '2020';
-elseif turtle_nm >= 7 && turtle_nm < 10
+elseif turtle_nm >= 7 && turtle_nm < 10	% second release
 	height		= 0;
 	lat			= 36.6060000; % from satellite info about turtles patterns
 	long		= 28.8150000; % from satellite info about turtles patterns
@@ -59,11 +62,11 @@ F_micro = F/1000;		% total intensity (magnitude)
 % from online database. We use normalized vectors, since we are only 
 % interested in directions.
 
-% normalized mf vector
+% normalized magnetic field vector
 XYZ_m_norm = XYZ_micro/norm(XYZ_micro);
 % XYZ_m_norm = XYZ_micro/F_micro;	F_micro is the magnitude of mf
 
-% normalized g vector expressed in NED reference frame
+% normalized gravity vector expressed in NED reference frame
 acc_NED = [0 0 1];
 
 % % NED with N along magnetic north direction, we see E as zero
@@ -109,18 +112,30 @@ end
 % accelerometer - gravity field will be seen as [0 0 g]^T if accelerometer
 %					has z axis along down direction
 	%% angle g_mf using reoriented collected data from loggers
+if auto_norm_g_mf_angle == 1
+	g_mf_angle_enable = 0;
+	fprintf('Do you want to compute the angle between g and mf? \n')
+	fprintf('1. Yes \n')
+	fprintf('2. No \n')
+	while g_mf_angle_enable <= 0 || g_mf_angle_enable > 2
+		g_mf_angle_enable = input('');
+	end
+	
+	if g_mf_angle_enable == 1
+		% z axis along down (NED)
+		fprintf('angle_g_mf using rotated sensor measures \n')
+		[angle_c, angle_s, angle_tn]= angle_g_mf(acc_reor, mag_reor, mag_step);
+		fprintf('angle_g_mf using rotated sensor measures once divided by their norm \n')
+		[angle_c_norm, angle_s_norm, angle_tn_norm]= angle_g_mf(acc_norm_reor, mag_norm_reor, mag_step);
 
-	% z axis along down (NED)
-fprintf('angle_g_mf using rotated sensor measures \n')
-[angle_c, angle_s, angle_tn]= angle_g_mf(acc_reor, mag_reor, mag_step);
-fprintf('angle_g_mf using rotated sensor measures once divided by their norm \n')
-[angle_c_norm, angle_s_norm, angle_tn_norm]= angle_g_mf(acc_norm_reor, mag_norm_reor, mag_step);
-
-fprintf('angle_g_mf using rotated sensor measures and calibrated magnetic field \n')
-[angle_c_calib, angle_s_calib, angle_tn_calib]= angle_g_mf(acc_reor, mag_postcalib, mag_step);
-fprintf('angle_g_mf using rotated sensor measures once divided by their norm  and calibrated magnetic field \n')
-[angle_c_norm_calib, angle_s_norm_calib, angle_tn_norm_calib]= angle_g_mf(acc_norm_reor, mag_norm_reor_calib, mag_step);
-
+		if auto_calib == 1 || calib_perf == 1
+			fprintf('angle_g_mf using rotated sensor measures and calibrated magnetic field \n')
+			[angle_c_calib, angle_s_calib, angle_tn_calib]= angle_g_mf(acc_reor, mag_postcalib, mag_step);
+			fprintf('angle_g_mf using rotated sensor measures once divided by their norm  and calibrated magnetic field \n')
+			[angle_c_norm_calib, angle_s_norm_calib, angle_tn_norm_calib]= angle_g_mf(acc_norm_reor, mag_norm_reor_calib, mag_step);
+		end
+	end
+end
 %% YPR computation
 	%% Approach description (italiano per adesso)
 % Calcoliamo roll e pitch valutando l'accelerazione di gravità g.

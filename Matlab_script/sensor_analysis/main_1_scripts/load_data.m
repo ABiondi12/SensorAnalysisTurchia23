@@ -14,7 +14,7 @@
 %
 % Moreover, it is assumed that acceleration data has been taken with 10Hz
 % of frequency (future improvement should be to been able to select also 
-% this frequency. Then, it is asked to give frequencies of the other
+% this frequency). Then, it is asked to give frequencies of the other
 % sensors, that are magnetic field sensor, depth sensor and gyroscope.
 %
 %	c. magnetic field data frequency:

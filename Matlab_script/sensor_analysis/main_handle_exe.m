@@ -6,7 +6,7 @@
 %
 % There are simply called some sub-main scripts, each of them executing a
 % different group of tasks, from raw data loading and reorientation, to
-% stft evaluation, dives division and analysis and energy indices over each
+% stft evaluation, dives division and analysis of energy indices over each
 % of them.
 %
 % The other main scripts that are recalled from here are, in order:
@@ -61,7 +61,15 @@ auto_calib_datetime	 = 1;	% if 1, automatic datetime insertion (suggested)
 							
 auto_column_together = 1;	% if 1, date and time information are taken 
 							% as in the same column (suggested)	
-						
+
+auto_norm_g_mf_angle = 0;	% if 0, not show these values (suggested)
+							% if 1, you can choose to show this values
+							
+							% note: norm is automatically calculated since
+							% it is necessary for other operation, while
+							% the angle between g and mf is computed only
+							% if requested from the user (with this flag
+							% equal to 1)
 %% add path
 addpath("fcn");
 addpath("main_1_scripts");

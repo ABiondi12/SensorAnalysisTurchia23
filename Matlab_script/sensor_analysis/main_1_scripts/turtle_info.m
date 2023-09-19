@@ -1,5 +1,5 @@
 % turtle_info
-% Script that allow to select the turtle (from the Dalmag 2023 dataset) to
+% Script that allows to select the turtle (from the Dalmag 2023 dataset) to
 % be analysed through a "command window" selection of the name. After that,
 % the name of the .csv files containing the dataset corresponding to the
 % selected turtle are saved and the name of the .mat files that will be
@@ -115,8 +115,3 @@ elseif turtle_nm == 9
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Funda.mat';
 	turtle_freq_name		= 'turtle_freq_Funda.mat';
 end
-
-% turtle_dive_name_din = 'turtle_dive_din.mat';
-% turtle_dive_fft_name_din = 'turtle_dive_fft_din.mat';
-% turtle_DBA_name_din = 'turtle_DBA_din.mat';
-% turtle_freq_name_din = 'turtle_freq_din.mat';
