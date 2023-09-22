@@ -102,7 +102,7 @@ title('ODBA analysis: depth behaviour')
 % tot
 figure('Name', ['figure ', num2str(id_plot),': ODBA analysis of big dives'], 'NumberTitle','off'); id_plot = id_plot + 1;	
 clf
-boxplot(turtle_big_ODBA, dive_type', 'Notch', 'on', 'Labels', {'s Dive', 'v Dive', 'm Dive'})
+boxplot(turtle_big_ODBA, dive_type_tot, 'Notch', 'on', 'Labels', {'s Dive', 'v Dive', 'm Dive', 'u Dive'})
 ylabel('Time (s)')
 set(gca,'FontSize', dim_fontb)
 title('ODBA analysis of big dives')
@@ -110,7 +110,7 @@ title('ODBA analysis of big dives')
 % disc
 figure('Name', ['figure ', num2str(id_plot),': ODBA analysis of big dives, disc phase'], 'NumberTitle','off'); id_plot = id_plot + 1;	
 clf
-boxplot(turtle_big_ODBA_disc, dive_type', 'Notch', 'on', 'Labels', {'s Dive', 'v Dive', 'm Dive'})
+boxplot(turtle_big_ODBA_disc, dive_type_tot, 'Notch', 'on', 'Labels', {'s Dive', 'v Dive', 'm Dive', 'u Dive'})
 ylabel('depth (s)')
 set(gca,'FontSize', dim_fontb)
 title('ODBA analysis of big dives, disc phase')
@@ -118,7 +118,7 @@ title('ODBA analysis of big dives, disc phase')
 % bott
 figure('Name', ['figure ', num2str(id_plot),': ODBA analysis of big dives, bott phase'], 'NumberTitle','off'); id_plot = id_plot + 1;	
 clf
-boxplot(turtle_big_ODBA_bott, dive_type', 'Notch', 'on', 'Labels', {'s Dive', 'v Dive', 'm Dive'})
+boxplot(turtle_big_ODBA_bott, dive_type_tot, 'Notch', 'on', 'Labels', {'s Dive', 'v Dive', 'm Dive', 'u Dive'})
 ylabel('depth (s)')
 set(gca,'FontSize', dim_fontb)
 title('ODBA analysis of big dives, bott phase')
@@ -126,7 +126,7 @@ title('ODBA analysis of big dives, bott phase')
 % asc
 figure('Name', ['figure ', num2str(id_plot),': ODBA analysis of big dives, asc phase'], 'NumberTitle','off'); id_plot = id_plot + 1;	
 clf
-boxplot(turtle_big_ODBA_asc, dive_type', 'Notch', 'on', 'Labels', {'s Dive', 'v Dive', 'm Dive'})
+boxplot(turtle_big_ODBA_asc, dive_type_tot, 'Notch', 'on', 'Labels', {'s Dive', 'v Dive', 'm Dive', 'u Dive'})
 ylabel('depth (s)')
 set(gca,'FontSize', dim_fontb)
 title('ODBA analysis of big dives, asc phase')

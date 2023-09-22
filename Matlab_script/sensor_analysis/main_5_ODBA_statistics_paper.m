@@ -1,4 +1,4 @@
-% main_4_ODBA_statistics_paper
+% main_5_ODBA_statistics_paper
 %
 %	In this script there is the evaluation of ODBA statistics, like:
 %		- max
@@ -20,6 +20,84 @@
 %	in-day, in-night). Also with this additional division, the parameters
 %	are computed for the various dive phases (descent, bottom, ascent) and
 %	by keeping into account only s-shaped dives.
+
+
+%% init
+if exist('all_together', 'var') == 0
+    % metti qua il load dei dati che servono
+	
+	clear_all_variables
+	
+    flag_def
+    [turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(0);
+	
+	if exist('raw_data_struct', 'var') == 0
+		fprintf('load raw values \n')
+		load_raw_data
+	else
+		if strcmp(raw_data_struct.name, turtle_name)
+			fprintf('raw data already present in the workspace \n')
+		else
+			fprintf('raw data referred to another turtle are already present in the workspace \n')
+			unconsistent_turtle = 0;
+			fprintf('Do you want to use the selected turtle or the one present in the workspace? \n')
+			fprintf('1. Workspace \n')
+			fprintf('2. Last selected \n')
+			while unconsistent_turtle < 1 || unconsistent_turtle > 2
+				turtle_switch = input('');
+			end
+			if turtle_switch == 1
+				[turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(raw_data_struct.ID);
+			elseif turtle_switch == 2
+				fprintf('overwrite operation: start load raw data referred to the current turtle... \n')
+				load_raw_data
+				fprintf('overwrite operation: completed \n')				
+			end
+		end
+	end
+	
+	if exist('ypr_data_struct', 'var') == 0
+		fprintf('load ypr values \n')
+		load_ypr_data
+	else
+		if strcmp(ypr_data_struct.name, turtle_name)
+			fprintf('ypr data already present in the workspace \n')
+		else
+			fprintf('ypr data referred to another turtle are already present in the workspace \n')
+			fprintf('overwrite operation: start load ypr data referred to the current turtle... \n')
+			load_ypr_data
+			fprintf('overwrite operation: completed \n')				
+		end
+	end
+	
+	if exist('turtle_dive', 'var') == 0
+		fprintf('load single dives values \n')
+		load_dive_data
+	else
+		if strcmp(turtle_dive.name, turtle_name)
+			fprintf('single dives data already present in the workspace \n')
+		else
+			fprintf('single dives data referred to another turtle are already present in the workspace \n')
+			fprintf('overwrite operation: start load single dives data referred to the current turtle... \n')
+			load_dive_data
+			fprintf('overwrite operation: completed \n')				
+		end
+	end
+	
+	if exist('turtle_DBA_paper', 'var') == 0
+		fprintf('load ODBA paper values \n')
+		load_ODBA_paper_data
+	else
+		if strcmp(turtle_DBA_paper.name, turtle_name)
+			fprintf('ODBA paper data already present in the workspace \n')
+		else
+			fprintf('ODBA paper data referred to another turtle are already present in the workspace \n')
+			fprintf('overwrite operation: start load ODBA paper data referred to the current turtle... \n')
+			load_ODBA_paper_data
+			fprintf('overwrite operation: completed \n')				
+		end
+	end
+end
 
 %% evaluate dive division
 
@@ -59,7 +137,7 @@ turtle_big_ODBA			= zeros(big_num, 1);
 turtle_big_ODBA_bott	= zeros(big_num, 1);
 turtle_big_ODBA_asc		= zeros(big_num, 1);
 turtle_big_ODBA_disc	= zeros(big_num, 1);
-dive_type				= zeros(big_num, 1);
+% dive_type_tot			= zeros(big_num, 1);
 
 id_s = [];	
 id_u = [];	

@@ -13,6 +13,42 @@
 %	UPDATE: use filtered values of acc measures in order to keep only low
 %	frequency components, corresponding to static acceleration (gravity)
 
+%% init
+if exist('all_together', 'var') == 0 && exist('from_main_1', 'var') == 0
+    % metti qua i load dei dati grezzi che sono derivanti dal main1 e il
+    % nome della tartaruga, altrimenti hai già tutto dal main1
+	
+	clear_all_variables
+	
+    flag_def
+    [turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(0);
+	
+	if exist('raw_data_struct', 'var') == 0
+		fprintf('load raw values \n')
+		load_raw_data
+	else
+		if strcmp(raw_data_struct.name, turtle_name)
+			fprintf('raw data already present in the workspace \n')
+		else
+			fprintf('raw data referred to another turtle are already present in the workspace \n')
+			unconsistent_turtle = 0;
+			fprintf('Do you want to use the selected turtle or the one present in the workspace? \n')
+			fprintf('1. Workspace \n')
+			fprintf('2. Last selected \n')
+			while unconsistent_turtle < 1 || unconsistent_turtle > 2
+				turtle_switch = input('');
+			end
+			if turtle_switch == 1
+				[turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(raw_data_struct.ID);
+			elseif turtle_switch == 2
+				fprintf('overwrite operation: start load raw data referred to the current turtle... \n')
+				load_raw_data
+				fprintf('overwrite operation: completed \n')				
+			end
+		end
+	end
+end
+
 %% Local magnetic field extrapulation from online dataset in NED ref. frame
 
 % chosen an indicative point to compute magnetic field, 'time-space'
@@ -260,31 +296,37 @@ fprintf('YPR using rotated sensor measures once divided by their norm and calibr
 
 n_2s = 2*Fs;	% 2s smooth
 more = 50;		% 100s smooth
-yaw_m			= smoothdata(yaw_m, 'movmean', more*n_2s);
-yaw_g			= smoothdata(yaw_g, 'movmean', more*n_2s);
-pitch			= smoothdata(pitch, 'movmean', n_2s);
-roll			= smoothdata(roll, 'movmean', n_2s);
+smooth_yaw_m	= smoothdata(yaw_m, 'movmean', more*n_2s);
+smooth_yaw_g	= smoothdata(yaw_g, 'movmean', more*n_2s);
+smooth_pitch	= smoothdata(pitch, 'movmean', n_2s);
+smooth_roll		= smoothdata(roll, 'movmean', n_2s);
 
-mean_yaw_m	= mean(yaw_m);
+mean_yaw_m	= mean(smooth_yaw_m);
 
-yaw_m_norm	= smoothdata(yaw_m_norm, 'movmean', more*n_2s);
-yaw_g_norm	= smoothdata(yaw_g_norm, 'movmean', more*n_2s);
-pitch_norm		= smoothdata(pitch_norm, 'movmean', n_2s);
-roll_norm		= smoothdata(roll_norm, 'movmean', n_2s);
+smooth_yaw_m_norm	= smoothdata(yaw_m_norm, 'movmean', more*n_2s);
+smooth_yaw_g_norm	= smoothdata(yaw_g_norm, 'movmean', more*n_2s);
+smooth_pitch_norm	= smoothdata(pitch_norm, 'movmean', n_2s);
+smooth_roll_norm	= smoothdata(roll_norm, 'movmean', n_2s);
 
 % with calibrated magnetic field
-%{
-yaw_m_calib			= smoothdata(yaw_m_calib, 'movmean', more*n_2s);
-yaw_g_calib			= smoothdata(yaw_g_calib, 'movmean', more*n_2s);
-pitch_calib			= smoothdata(pitch_calib, 'movmean', n_2s);
-roll_calib			= smoothdata(roll_calib, 'movmean', n_2s);
-%}
-mean_yaw_m_calib	= mean(yaw_m_calib);
+smooth_yaw_m_calib	= smoothdata(yaw_m_calib, 'movmean', more*n_2s);
+smooth_yaw_g_calib	= smoothdata(yaw_g_calib, 'movmean', more*n_2s);
+smooth_pitch_calib	= smoothdata(pitch_calib, 'movmean', n_2s);
+smooth_roll_calib	= smoothdata(roll_calib, 'movmean', n_2s);
 
-yaw_m_norm_calib	= smoothdata(yaw_m_norm_calib, 'movmean', more*n_2s);
-yaw_g_norm_calib	= smoothdata(yaw_g_norm_calib, 'movmean', more*n_2s);
-pitch_norm_calib	= smoothdata(pitch_norm_calib, 'movmean', n_2s);
-roll_norm_calib		= smoothdata(roll_norm_calib, 'movmean', n_2s);
+mean_yaw_m_calib	= mean(smooth_yaw_m_calib);
+
+smooth_yaw_m_norm_calib	= smoothdata(yaw_m_norm_calib, 'movmean', more*n_2s);
+smooth_yaw_g_norm_calib	= smoothdata(yaw_g_norm_calib, 'movmean', more*n_2s);
+smooth_pitch_norm_calib	= smoothdata(pitch_norm_calib, 'movmean', n_2s);
+smooth_roll_norm_calib	= smoothdata(roll_norm_calib, 'movmean', n_2s);
 
 %% Plot script (commented for now)
-% Single_Turtle_orientation_plot
+Single_Turtle_orientation_plot
+
+%% save date
+if exist('all_together', 'var') == 0 
+    % metti qua il salvataggio dei dati intermedi prodotti e che possono
+    % servire poi per le successive elaborazioni
+	save_ypr_data
+end

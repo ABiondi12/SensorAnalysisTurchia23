@@ -42,6 +42,8 @@ id_plot		= 1;
 % missing one.
 name_table_modify	= 'Didar_agm.csv';	% not to be changed
 
+all_together = 1;           % if exists, the code is executed all together, otherwise you have to call each main_i separately and in order
+
 %% flag definition
 % These variables are used as shortcut for obtaining an higher level of
 % automatism (options are automatically selected at the beginning and not
@@ -94,7 +96,7 @@ addpath("csv_file\Turchia2023\Funda");
 
 %% Turle name selection
 % Selection of the turtle and variables name definition
-turtle_info	
+[turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(0);	
 
 %% main_launch
 fprintf('1. Start raw data elaboration \n')
@@ -103,13 +105,16 @@ main_1_raw_data
 fprintf('2. Start ypr computation \n')
 main_2_ypr
 
-fprintf('3. Start dives analysis and stft \n')
+fprintf('3. Start dives analysis and ODBA \n')
 main_3_dive_analysis
 
-fprintf('4. Start ODBA computation \n')
-main_4_ODBA_statistics_paper
+fprintf('4. Start stft computation \n')
+main_4_stft
+
+fprintf('5. Start ODBA evaluation \n')
+main_5_ODBA_statistics_paper
 
 %% table creation
-fprintf('5. Start table creation \n')
+fprintf('6. Start table creation \n')
 tab_dives_entire
 fprintf('Table correctly created and saved \n')

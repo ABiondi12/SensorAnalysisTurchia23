@@ -62,6 +62,22 @@
 % shown.
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+if exist('all_together', 'var') == 0
+	clear_all_variables
+	
+	% variable def
+    dim_font	= 30;
+    dim_fontb	= 15;
+    id_plot		= 1;
+    name_table_modify	= 'Didar_agm.csv';	% not to be changed
+    flag_def
+	
+    %% Turle name selection
+    % Selection of the turtle and variables name definition
+    [turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(0);	
+end
+
 %% flag definition
 data_type	= -1;
 calib_perf	= 0;
@@ -176,4 +192,19 @@ if sensor_type == 1
 		legend('depth', 'sub surface-shallow dive', 'shallow dive-big dive','Location', 'best', 'FontSize', dim_font);
 		set(gca,'FontSize', dim_font) 
 		title('Depth profile and ranges')
+end
+
+if exist('all_together', 'var') == 0 || step_saving == 1
+	save_raw_data
+end
+if exist('all_together', 'var') == 0
+    % se non si esegue tutto insieme, allora facciamo main_1 e main_2
+    % insieme, ma lasciamo comunque la possibilità di fare solo main 2
+    % salvando qua i dati di acc, mag, mag calib e gyro che poi verranno
+    % ricaricati da main2 (solo nel caso in cui si parta da main 2 senza
+    % passare da main 1
+    
+    from_main_1 = 1;
+    
+    main_2_ypr
 end
