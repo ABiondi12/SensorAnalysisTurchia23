@@ -33,7 +33,7 @@ if exist (turtle_ypr_name, 'file') == 2
 	
 	if yn_ans == 1
 		ov_to_do = 1;
-		fprintf([turtle_ypr_name, ': start overwrite \n'])
+		fprintf([turtle_ypr_name, ': start overwrite... \n'])
 	elseif yn_ans == 2
 		ov_to_do = 0;
 		fprintf([turtle_ypr_name, ': overwrite operation aborted \n'])

@@ -29,7 +29,7 @@ if exist('all_together', 'var') == 0
 	clear_all_variables
 	
     flag_def
-    [turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(0);
+    [turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(0);
 	
 	if exist('raw_data_struct', 'var') == 0
 		fprintf('load raw values \n')
@@ -39,15 +39,15 @@ if exist('all_together', 'var') == 0
 			fprintf('raw data already present in the workspace \n')
 		else
 			fprintf('raw data referred to another turtle are already present in the workspace \n')
-			unconsistent_turtle = 0;
+			turtle_switch = 0;
 			fprintf('Do you want to use the selected turtle or the one present in the workspace? \n')
 			fprintf('1. Workspace \n')
 			fprintf('2. Last selected \n')
-			while unconsistent_turtle < 1 || unconsistent_turtle > 2
+			while turtle_switch < 1 || turtle_switch > 2
 				turtle_switch = input('');
 			end
 			if turtle_switch == 1
-				[turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(raw_data_struct.ID);
+				[turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(raw_data_struct.ID);
 			elseif turtle_switch == 2
 				fprintf('overwrite operation: start load raw data referred to the current turtle... \n')
 				load_raw_data
@@ -147,10 +147,10 @@ id_m = [];
 [day_id, night_id, offshore_id, inshore_id, off_day_id, off_night_id, in_day_id, in_night_id] = find_id_day_shore(turtle_dive.big_dive.homing); 
 
 for i = 1:big_num
-	turtle_big_ODBA(i)		= turtle_DBA_paper.big_dive.homing.ODBA.mean(i);
-	turtle_big_ODBA_bott(i)	= turtle_DBA_paper.big_dive.homing.ODBA.bott(i);
-	turtle_big_ODBA_asc(i)	= turtle_DBA_paper.big_dive.homing.ODBA.asc(i);
-	turtle_big_ODBA_disc(i)	= turtle_DBA_paper.big_dive.homing.ODBA.disc(i);
+	turtle_big_ODBA(i, 1)		= turtle_DBA_paper.big_dive.homing.ODBA.mean(i);
+	turtle_big_ODBA_bott(i, 1)	= turtle_DBA_paper.big_dive.homing.ODBA.bott(i);
+	turtle_big_ODBA_asc(i, 1)	= turtle_DBA_paper.big_dive.homing.ODBA.asc(i);
+	turtle_big_ODBA_disc(i, 1)	= turtle_DBA_paper.big_dive.homing.ODBA.disc(i);
 
 	dive_type = turtle_dive.big_dive.homing(i).type;
 	
@@ -718,7 +718,7 @@ sh_num			= size(turtle_dive.shallow_dive.homing, 2);
 turtle_sh_ODBA	= zeros(sh_num, 1);
 
 for i = 1:sh_num
-	turtle_sh_ODBA(i)	= turtle_DBA_paper.shallow_dive.homing.ODBA.mean(i);
+	turtle_sh_ODBA(i, 1)	= turtle_DBA_paper.shallow_dive.homing.ODBA.mean(i);
 end
 
 [day_ids, night_ids, offshore_ids, inshore_ids, off_day_ids, off_night_ids, in_day_ids, in_night_ids] = find_id_day_shore(turtle_dive.shallow_dive.homing); 
@@ -799,7 +799,7 @@ sub_num			= size(turtle_dive.sub_surface.homing, 2);
 turtle_sub_ODBA	= zeros(sub_num, 1);
 
 for i = 1:sub_num
-	turtle_sub_ODBA(i) = turtle_DBA_paper.sub_surface.homing.ODBA.mean(i);
+	turtle_sub_ODBA(i, 1) = turtle_DBA_paper.sub_surface.homing.ODBA.mean(i);
 end
 
 	%% ODBA statistics
@@ -811,6 +811,38 @@ turtle_sub_ODBA_range	= range(turtle_sub_ODBA);
 turtle_sub_ODBA_med		= median(turtle_sub_ODBA);	
 turtle_sub_ODBA_quart	= quantile(turtle_sub_ODBA, [.25 .50 .75]); % the quartiles of x
 
+	%% table creation
+table_creation = 0;
+fprintf('Do you want to create a summary table for the current analysis? \n')
+fprintf('1. Yes \n')
+fprintf('2. No \n')
+while table_creation < 1 || table_creation > 2
+	table_creation = input('');
+end
+
+if table_creation == 1
+	fprintf('6. Start table creation \n')
+	tab_dives_entire
+	fprintf('Table correctly created and saved \n')
+else
+	fprintf('Table creation aborted \n')
+end
 %% Plot
-ODBA_analysis_paper_plot
+
+plot_creation = 0;
+fprintf('Do you want to create plots for the current analysis? \n')
+fprintf('1. Yes \n')
+fprintf('2. No \n')
+while plot_creation < 1 || plot_creation > 2
+	plot_creation = input('');
+end
+
+if plot_creation == 1
+	fprintf('6. Start plots generation \n')
+	ODBA_analysis_paper_plot
+	fprintf('Plots correctly generated \n')
+else
+	fprintf('Plots generation aborted \n')
+end
+
 

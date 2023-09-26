@@ -30,18 +30,6 @@
 % (turtle_DBA.shallow_dive.homing.*** and turtle_DBA.sub_surface.homing.***,
 % respectively).
 
-%% load dives information
-% no load for now
-%{
-if exist('turtle_dive.mat', 'var')  == 0
-	load('turtle_dive.mat')
-end
-
-% load DBA information
-if exist('turtle_DBA_paper.mat', 'var')  == 0
-	load('turtle_DBA_paper.mat')
-end
-%}
 %% prepare data for tab
 
 %% big dive
@@ -61,11 +49,11 @@ daynight_big_tab([night_id], 1)	= "night";
 offinshore_big_tab([offshore_id], 1) = "offshore";
 offinshore_big_tab([inshore_id], 1)	= "inshore";
 
-turtle_big_ODBA			= struct2array(turtle_DBA_paper.big_dive.homing.ODBA);
-turtle_big_ODBA_mean	= turtle_big_ODBA(:, 1);
-turtle_big_ODBA_asc		= turtle_big_ODBA(:, 4);
-turtle_big_ODBA_disc	= turtle_big_ODBA(:, 3);
-turtle_big_ODBA_bott	= turtle_big_ODBA(:, 5);
+turtle_big_ODBA_table			= struct2array(turtle_DBA_paper.big_dive.homing.ODBA);
+turtle_big_ODBA_mean	= turtle_big_ODBA_table(:, 1);
+turtle_big_ODBA_asc		= turtle_big_ODBA_table(:, 4);
+turtle_big_ODBA_disc	= turtle_big_ODBA_table(:, 3);
+turtle_big_ODBA_bott	= turtle_big_ODBA_table(:, 5);
 
 %% shallow dive
 turtle_ID_sh_dive = [1:sh_num]';
@@ -84,8 +72,8 @@ daynight_sh_tab([night_ids], 1) = "night";
 offinshore_sh_tab([offshore_ids], 1)	= "offshore";
 offinshore_sh_tab([inshore_ids], 1)		= "inshore";
 
-turtle_sh_ODBA = struct2array(turtle_DBA_paper.shallow_dive.homing.ODBA);
-turtle_sh_ODBA_mean = turtle_sh_ODBA(:, 1);
+turtle_sh_ODBA_table = struct2array(turtle_DBA_paper.shallow_dive.homing.ODBA);
+turtle_sh_ODBA_mean = turtle_sh_ODBA_table(:, 1);
 turtle_sh_ODBA_asc([1:sh_num], 1) = -1;
 turtle_sh_ODBA_disc([1:sh_num], 1) = -1;
 turtle_sh_ODBA_bott([1:sh_num], 1) = -1;
@@ -108,8 +96,8 @@ daynight_sub_tab([night_idsub], 1) = "night";
 offinshore_sub_tab([offshore_idsub], 1) = "offshore";
 offinshore_sub_tab([inshore_idsub], 1) = "inshore";
 
-turtle_sub_ODBA = struct2array(turtle_DBA_paper.sub_surface.homing.ODBA);
-turtle_sub_ODBA_mean = turtle_sub_ODBA(:, 1);
+turtle_sub_ODBA_table = struct2array(turtle_DBA_paper.sub_surface.homing.ODBA);
+turtle_sub_ODBA_mean = turtle_sub_ODBA_table(:, 1);
 turtle_sub_ODBA_asc([1:sub_num], 1)	 = -1;
 turtle_sub_ODBA_disc([1:sub_num], 1) = -1;
 turtle_sub_ODBA_bott([1:sub_num], 1) = -1;

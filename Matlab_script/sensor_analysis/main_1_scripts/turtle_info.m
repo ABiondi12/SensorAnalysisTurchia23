@@ -1,4 +1,4 @@
-function [turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(turtle_nm)
+function [turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_freq_name] = turtle_info(turtle_nm)
 % turtle_info
 % Function that allows to select the turtle (from the Dalmag 2023 dataset) to
 % be analysed through a "command window" selection of the name. After that,

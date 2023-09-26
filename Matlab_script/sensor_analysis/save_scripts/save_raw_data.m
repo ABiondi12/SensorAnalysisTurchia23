@@ -48,14 +48,14 @@ if exist(turtle_raw_name, 'file') == 2
 	
 	if yn_ans == 1
 		ov_to_do = 1;
-		fprintf([turtle_raw_name, ': start overwrite \n'])
+		fprintf([turtle_raw_name, ': start overwrite... \n'])
 	elseif yn_ans == 2
 		ov_to_do = 0;
-		fprintf([turtle_raw_name, ': overwrite operation aborted \n'])
+		fprintf([turtle_raw_name, ': overwrite operation aborted! \n'])
 	end
 	
 else
-	fprintf([turtle_raw_name, ': dataset not exists, start making it \n'])
+	fprintf([turtle_raw_name, ': dataset does not exist, start making it... \n'])
 	new_raw_dataset = 1;
 end
 
