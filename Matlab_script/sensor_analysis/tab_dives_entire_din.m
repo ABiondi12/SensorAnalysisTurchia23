@@ -49,7 +49,7 @@ daynight_big_tab([night_id], 1)	= "night";
 offinshore_big_tab([offshore_id], 1) = "offshore";
 offinshore_big_tab([inshore_id], 1)	= "inshore";
 
-turtle_big_ODBA_table	= struct2array(turtle_DBA_paper.big_dive.homing.ODBA);
+turtle_big_ODBA_table	= struct2array(turtle_DBA_paper_din.big_dive.homing.ODBA);
 turtle_big_ODBA_mean	= turtle_big_ODBA_table(:, 1);
 turtle_big_ODBA_asc		= turtle_big_ODBA_table(:, 4);
 turtle_big_ODBA_disc	= turtle_big_ODBA_table(:, 3);
@@ -72,7 +72,7 @@ daynight_sh_tab([night_ids], 1) = "night";
 offinshore_sh_tab([offshore_ids], 1)	= "offshore";
 offinshore_sh_tab([inshore_ids], 1)		= "inshore";
 
-turtle_sh_ODBA_table = struct2array(turtle_DBA_paper.shallow_dive.homing.ODBA);
+turtle_sh_ODBA_table = struct2array(turtle_DBA_paper_din.shallow_dive.homing.ODBA);
 turtle_sh_ODBA_mean = turtle_sh_ODBA_table(:, 1);
 turtle_sh_ODBA_asc([1:sh_num], 1) = -1;
 turtle_sh_ODBA_disc([1:sh_num], 1) = -1;
@@ -96,7 +96,7 @@ daynight_sub_tab([night_idsub], 1) = "night";
 offinshore_sub_tab([offshore_idsub], 1) = "offshore";
 offinshore_sub_tab([inshore_idsub], 1) = "inshore";
 
-turtle_sub_ODBA_table = struct2array(turtle_DBA_paper.sub_surface.homing.ODBA);
+turtle_sub_ODBA_table = struct2array(turtle_DBA_paper_din.sub_surface.homing.ODBA);
 turtle_sub_ODBA_mean = turtle_sub_ODBA_table(:, 1);
 turtle_sub_ODBA_asc([1:sub_num], 1)	 = -1;
 turtle_sub_ODBA_disc([1:sub_num], 1) = -1;
@@ -154,4 +154,4 @@ tab_entire.ODBA_bott =	[turtle_big_ODBA_bott;...
 						 turtle_sub_ODBA_bott];
 					 
 tab_entire_tab = struct2table(tab_entire);
-writetable(tab_entire_tab, 'tab_entire_analysis', 'FileType', 'text');
+writetable(tab_entire_tab, 'tab_entire_analysis_din', 'FileType', 'text');

@@ -11,4 +11,6 @@ end
 if clear_workspace == 1
 	clear
 	close all
+	
+	step_data_def
 end

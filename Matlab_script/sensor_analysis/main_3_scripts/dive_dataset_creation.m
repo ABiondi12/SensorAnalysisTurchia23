@@ -63,7 +63,7 @@ if ~exist('empty_dive', 'var')
 end
 
 if ~exist('dive_data_din', 'var')
-	dive_data_din = struct('datatime', [], 'time_in', [], 'time_f', [], 'type', [], 'depth', [], 'dinx', [], 'diny', [], 'dinz', [], 'yaw', [], 'pitch', [], 'roll', [], 'ODBA', [], 'ODBA_mean', [], 'ODBA_var', [] , 'ODBA_paper', [], 'VeDBA', [], 'VeDBA_mean', [], 'VeDBA_var', [], 'AAV', []);
+	dive_data_din = struct('datatime', [], 'datatime_depth', [], 'time_in', [], 'time_f', [], 'type', [], 'depth', [], 'dinx', [], 'diny', [], 'dinz', [], 'yaw', [], 'pitch', [], 'roll', [], 'ODBA', [], 'ODBA_mean', [], 'ODBA_var', [] , 'ODBA_paper', [], 'VeDBA', [], 'VeDBA_mean', [], 'VeDBA_var', [], 'AAV', []);
 end
 
 if ~exist('empty_dive_din', 'var')
@@ -158,7 +158,7 @@ if ~exist('empty_sup', 'var')
 end
 
 if ~exist('sup_data_din', 'var')
-	sup_data_din = struct('datatime', [], 'datatime_depth', [], 'time_in', [], 'time_f', [], 'depth', [], 'dinx', [], 'diny', [], 'dinz', [], 'dinx_nw', [], 'diny_nw', [], 'dinz_nw', [], 'yaw', [], 'pitch', [], 'roll', [], 'ODBA', [], 'ODBA_mean', [], 'ODBA_var', [], 'ODBA_paper', [], 'VeDBA', [], 'VeDBA_mean', [], 'VeDBA_var', [], 'AAV', []);
+	sup_data_din = struct('datatime', [], 'datatime_depth', [], 'time_in', [], 'time_f', [], 'depth', [], 'dinx', [], 'diny', [], 'dinz', [], 'dinx_nw', [], 'diny_nw', [], 'dinz_nw', [], 'yaw', [], 'pitch', [], 'roll', [], 'ODBA', [], 'ODBA_mean', [], 'ODBA_var', [], 'ODBA_paper', [], 'ODBA_nw', [], 'ODBA_mean_nw', [], 'ODBA_var_nw', [], 'ODBA_paper_nw', [], 'VeDBA', [], 'VeDBA_nw', [], 'VeDBA_mean', [], 'VeDBA_var', [], 'AAV', []);
 end
 
 if ~exist('empty_sup_din', 'var')
@@ -181,5 +181,9 @@ if ~exist('empty_sup_din', 'var')
 	empty_sup_din.ODBA_mean = [];
 	empty_sup_din.ODBA_var = [];
 	empty_sup_din.ODBA_paper = [];
+	empty_sup_din.ODBA_nw = [];
+	empty_sup_din.ODBA_mean_nw = [];
+	empty_sup_din.ODBA_var_nw = [];
+	empty_sup_din.ODBA_paper_nw = [];
 end
 	

@@ -57,21 +57,74 @@ while num_period < 1 || num_period > max_num
 	num_period = input('');
 end
 
+yn_din = 0;
+
+fprintf("Do you want to see the filtered version?  \n")
+fprintf("1. Yes \n")
+fprintf('2. No \n')
+
+while yn_din < 1 || yn_din > 2
+	yn_din = input('');
+end
 %% selected period
 
 if type_period == 1
-	turtle_dive_show = turtle_dive.big_dive;
+	if yn_din == 1
+		turtle_dive_show = turtle_dive_din.big_dive;
+	elseif yn_din == 2
+		turtle_dive_show = turtle_dive.big_dive;
+	end
 	dive_type = turtle_dive_show.homing(num_period).type;
 elseif type_period == 2
-	turtle_dive_show = turtle_dive.shallow_dive;
+	if yn_din == 1
+		turtle_dive_show = turtle_dive_din.shallow_dive;
+	elseif yn_din == 2
+		turtle_dive_show = turtle_dive.shallow_dive;
+	end
 elseif type_period == 3
-	turtle_dive_show = turtle_dive.sub_surface;
+	if yn_din == 1
+		turtle_dive_show = turtle_dive_din.sub_surface;
+	elseif yn_din == 2
+		turtle_dive_show = turtle_dive.sub_surface;
+	end
 end
 
 i_char = num2str(num_period);
-accx = turtle_dive_show.homing(num_period).accx;
-accy = turtle_dive_show.homing(num_period).accy;
-accz = turtle_dive_show.homing(num_period).accz;
+
+if yn_din == 1
+	if type_period == 3
+		yn_waves = 0;
+
+		fprintf("Do you want to see the waves filtered version?  \n")
+		fprintf("1. Yes \n")
+		fprintf('2. No \n')
+
+		while yn_waves < 1 || yn_waves > 2
+			yn_waves = input('');
+		end
+
+		if yn_waves == 1
+			accx = turtle_dive_show.homing(num_period).dinx_nw;
+			accy = turtle_dive_show.homing(num_period).diny_nw;
+			accz = turtle_dive_show.homing(num_period).dinz_nw;
+		elseif yn_waves == 2
+			accx = turtle_dive_show.homing(num_period).dinx;
+			accy = turtle_dive_show.homing(num_period).diny;
+			accz = turtle_dive_show.homing(num_period).dinz;
+		end
+		
+	else
+		accx = turtle_dive_show.homing(num_period).dinx;
+		accy = turtle_dive_show.homing(num_period).diny;
+		accz = turtle_dive_show.homing(num_period).dinz;
+	end
+	
+elseif yn_din == 2
+	accx = turtle_dive_show.homing(num_period).accx;
+	accy = turtle_dive_show.homing(num_period).accy;
+	accz = turtle_dive_show.homing(num_period).accz;
+end
+
 depth_plt = turtle_dive_show.homing(num_period).depth;
 t_fft_depth = turtle_dive_show.homing(num_period).datatime_depth;
 t_fft = turtle_dive_show.homing(num_period).datatime;

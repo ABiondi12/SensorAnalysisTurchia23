@@ -68,7 +68,6 @@ mean_ODBA_dive_h		= zeros(homing_counter, 1);
 mean_ODBA_dive_h_disc	= zeros(homing_counter, 1);
 mean_ODBA_dive_h_bott	= zeros(homing_counter, 1);
 mean_ODBA_dive_h_asc	= zeros(homing_counter, 1);
-mean_ODBA_surf_h		= zeros(surf_homing_counter, 1);
 
 if isempty(turtle_dive.big_dive.homing(1).pitch) == 0
 	mean_pitch_dive_h_disc	= zeros(homing_counter, 1);
@@ -78,7 +77,6 @@ if isempty(turtle_dive.big_dive.homing(1).pitch) == 0
 end
 
 var_ODBA_dive_h			= zeros(homing_counter, 1);
-var_ODBA_surf_h			= zeros(surf_homing_counter, 1);
 
 for i = 1:homing_counter
 	mean_ODBA_dive_h(i) = mean(turtle_dive.big_dive.homing(i).ODBA_paper);
@@ -138,10 +136,7 @@ for i = 1:homing_counter
 end
 %% shallow dive
 mean_ODBA_sdive_h		= zeros(sh_homing_counter, 1);
-mean_ODBA_sdive_h_din	= zeros(sh_homing_counter, 1);
-
 var_ODBA_sdive_h		= zeros(sh_homing_counter, 1);
-var_ODBA_sdive_h_din	= zeros(sh_homing_counter, 1);
 
 for i = 1:sh_homing_counter
 	% mean and variance of ODBA energy index assumed during dive-i
@@ -150,11 +145,113 @@ for i = 1:sh_homing_counter
 
 end
 %% sub surface
+mean_ODBA_surf_h		= zeros(surf_homing_counter, 1);
+var_ODBA_surf_h			= zeros(surf_homing_counter, 1);
+
 for i = 1:surf_homing_counter
 	mean_ODBA_surf_h(i) = mean(turtle_dive.sub_surface.homing(i).ODBA_paper);
 	var_ODBA_surf_h(i)	= var(turtle_dive.sub_surface.homing(i).ODBA_paper);
 end
 
+%% din version
+
+%% ODBA: mean and variance
+% There will be a value for each dives and each surface phases (that
+% stay for period between two consecutive dives)
+%% big dive
+mean_ODBA_dive_h_din		= zeros(homing_counter, 1);
+mean_ODBA_dive_h_disc_din	= zeros(homing_counter, 1);
+mean_ODBA_dive_h_bott_din	= zeros(homing_counter, 1);
+mean_ODBA_dive_h_asc_din	= zeros(homing_counter, 1);
+
+if isempty(turtle_dive_din.big_dive.homing(1).pitch) == 0
+	mean_pitch_dive_h_disc_din	= zeros(homing_counter, 1);
+	mean_pitch_dive_h_bott_din	= zeros(homing_counter, 1);
+	mean_pitch_dive_h_asc_din	= zeros(homing_counter, 1);
+	
+end
+
+var_ODBA_dive_h_din			= zeros(homing_counter, 1);
+
+for i = 1:homing_counter
+	mean_ODBA_dive_h_din(i) = mean(turtle_dive_din.big_dive.homing(i).ODBA_paper);
+	var_ODBA_dive_h_din(i)	= var(turtle_dive_din.big_dive.homing(i).ODBA_paper);
+	
+	% phases split: descendent, bottom, ascendent
+	depth				= turtle_dive.big_dive.homing(i).depth;
+	max_depth			= min(depth); % min since depth has negative values
+	
+	first_bottom_din			= 0;
+	no_bottom_counter_disc_din	= 0;
+	no_bottom_counter_asc_din	= 0;
+	bottom_counter_din			= 0;
+	tot_dive				= length(depth);
+	
+	for j = 1:tot_dive
+		if depth(j)- max_depth >= th_depth
+			
+			if first_bottom_din == 0		% bottom has to be reached yet
+				no_bottom_counter_disc_din		= no_bottom_counter_disc_din + 1;
+				mean_ODBA_dive_h_disc_din(i)	= mean_ODBA_dive_h_disc_din(i)	+ turtle_dive_din.big_dive.homing(i).ODBA_paper(ceil(j/num_5s));
+				
+				if isempty(turtle_dive_din.big_dive.homing(i).pitch) == 0
+					mean_pitch_dive_h_disc_din(i)	= mean_pitch_dive_h_disc_din(i)	+ turtle_dive_din.big_dive.homing(i).pitch(j);
+				end
+			elseif first_bottom_din == 1	% bottom has already been reached
+				no_bottom_counter_asc_din		= no_bottom_counter_asc_din + 1;
+				mean_ODBA_dive_h_asc_din(i)		= mean_ODBA_dive_h_asc_din(i)	+ turtle_dive_din.big_dive.homing(i).ODBA_paper(ceil(j/num_5s));
+				if isempty(turtle_dive_din.big_dive.homing(i).pitch) == 0
+					mean_pitch_dive_h_asc_din(i)	= mean_pitch_dive_h_asc_din(i)	+ turtle_dive_din.big_dive.homing(i).pitch(j);
+				end
+			end
+			
+		elseif depth(j)- max_depth < th_depth
+			if first_bottom_din == 0
+				first_bottom_din = 1;
+			end
+			bottom_counter_din				= bottom_counter_din + 1;
+			mean_ODBA_dive_h_bott_din(i)	= mean_ODBA_dive_h_bott_din(i)	+ turtle_dive_din.big_dive.homing(i).ODBA_paper(ceil(j/num_5s));
+			if isempty(turtle_dive_din.big_dive.homing(i).pitch) == 0
+				mean_pitch_dive_h_bott_din(i)	= mean_pitch_dive_h_bott_din(i)	+ turtle_dive_din.big_dive.homing(i).pitch(j);
+			end
+		end
+	end
+	
+	% mean computed by hand (cumulative sum of ODBA over time divided
+	% by time length (in terms of number of samples inside the dive)
+	mean_ODBA_dive_h_disc_din(i)	= mean_ODBA_dive_h_disc_din(i)	/ no_bottom_counter_disc_din;
+	mean_ODBA_dive_h_asc_din(i)		= mean_ODBA_dive_h_asc_din(i)	/ no_bottom_counter_asc_din;
+	mean_ODBA_dive_h_bott_din(i)	= mean_ODBA_dive_h_bott_din(i)	/ bottom_counter_din;
+		
+	if exist('mean_pitch_dive_h_disc_din', 'var')
+		mean_pitch_dive_h_disc_din(i)	= mean_pitch_dive_h_disc_din(i)	/ no_bottom_counter_disc_din;
+		mean_pitch_dive_h_asc_din(i)	= mean_pitch_dive_h_asc_din(i)	/ no_bottom_counter_asc_din;
+		mean_pitch_dive_h_bott_din(i)	= mean_pitch_dive_h_bott_din(i)	/ bottom_counter_din;
+	end
+end
+%% shallow dive
+mean_ODBA_sdive_h_din	= zeros(sh_homing_counter, 1);
+var_ODBA_sdive_h_din	= zeros(sh_homing_counter, 1);
+
+for i = 1:sh_homing_counter
+	% mean and variance of ODBA energy index assumed during dive-i
+	mean_ODBA_sdive_h_din(i) = mean(turtle_dive_din.shallow_dive.homing(i).ODBA_paper);
+	var_ODBA_sdive_h_din(i)	= var(turtle_dive_din.shallow_dive.homing(i).ODBA_paper);
+
+end
+%% sub surface
+mean_ODBA_surf_h_din	= zeros(surf_homing_counter, 1);
+var_ODBA_surf_h_din		= zeros(surf_homing_counter, 1);
+
+mean_ODBA_surf_h_din_nw	= zeros(surf_homing_counter, 1);
+var_ODBA_surf_h_din_nw	= zeros(surf_homing_counter, 1);
+
+for i = 1:surf_homing_counter
+	mean_ODBA_surf_h_din(i) = mean(turtle_dive_din.sub_surface.homing(i).ODBA_paper);
+	var_ODBA_surf_h_din(i)	= var(turtle_dive_din.sub_surface.homing(i).ODBA_paper);
+	mean_ODBA_surf_h_din_nw(i) = mean(turtle_dive_din.sub_surface.homing(i).ODBA_paper_nw);
+	var_ODBA_surf_h_din_nw(i)	= var(turtle_dive_din.sub_surface.homing(i).ODBA_paper_nw);
+end
 
 %% save struct ODBA and VeDBA
 

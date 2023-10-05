@@ -14,8 +14,8 @@ if exist(turtle_raw_name) == 2
 	depth			= raw_data_struct.depth;
 	acc_reor		= [raw_data_struct.accx_reor, raw_data_struct.accy_reor, raw_data_struct.accz_reor];
 	mag_reor		= [raw_data_struct.magx_reor, raw_data_struct.magy_reor, raw_data_struct.magz_reor];
-	mag_postcalib	= [raw_values.magx_calib, raw_values.magy_calib, raw_values.magz_calib];
-	gyro_reor		= [raw_values.gyrox_reor,raw_values.gyroy_reor ,raw_values.gyroz_reor];
+	mag_postcalib	= [raw_data_struct.magx_calib, raw_data_struct.magy_calib, raw_data_struct.magz_calib];
+	gyro_reor		= [raw_data_struct.gyrox_reor,raw_data_struct.gyroy_reor ,raw_data_struct.gyroz_reor];
 else
 	errorStruct.message = 'Data file not found.';
 	errorStruct.identifier = 'MyFunction:fileNotFound';

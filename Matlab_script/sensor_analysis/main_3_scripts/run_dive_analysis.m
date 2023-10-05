@@ -176,26 +176,29 @@ for i = 1: size(datetime_acc, 1)-2
 					sdive_j.accy	= acc_reor(time_in_id:time_f_id, 2);
 					sdive_j.accz	= acc_reor(time_in_id:time_f_id, 3);
 
-					% sdive_j_din.datatime	= sdive_j.datatime;
-					% sdive_j_din.time_in	= sdive_j.time_in;
-					% sdive_j_din.time_f	= sdive_j.time_f;
-					% sdive_j_din.depth		= sdive_j.depth;
+					% din version
+					sdive_j_din.datatime	= sdive_j.datatime;
+					sdive_j_din.datatime_depth	= sdive_j.datatime_depth;
+					sdive_j_din.time_in		= sdive_j.time_in;
+					sdive_j_din.time_f		= sdive_j.time_f;
+					sdive_j_din.depth		= sdive_j.depth;
 
 					sdive_j.yaw		= turtle_dataset_yaw(time_in_id:mag_step:time_f_id);
 					sdive_j.pitch	= turtle_dataset_pitch(time_in_id:mag_step:time_f_id);
 					sdive_j.roll	= turtle_dataset_roll(time_in_id:mag_step:time_f_id);
 
-						% sdive_j_din.yaw		= sdive_j.yaw;
-						% sdive_j_din.pitch	= sdive_j.pitch;
-						% sdive_j_din.roll	= sdive_j.roll;		
+					% din version
+					% sdive_j_din.yaw		= sdive_j.yaw;
+					% sdive_j_din.pitch	= sdive_j.pitch;
+					% sdive_j_din.roll	= sdive_j.roll;		
 
 					if sh_counter > 0
 						sdives_h = [sdives_h, sdive_j];
-						% sdives_h_din = [sdives_h_din, sdive_j_din];
+						sdives_h_din = [sdives_h_din, sdive_j_din];
 
 					elseif sh_counter == 0
 						sdives_h = sdive_j;
-						% sdives_h_din = sdive_j_din;
+						sdives_h_din = sdive_j_din;
 					end
 				else					
 					dive_j.datatime = datetime_acc(time_in_id:time_f_id);
@@ -207,29 +210,32 @@ for i = 1: size(datetime_acc, 1)-2
 					dive_j.accy		= acc_reor(time_in_id:time_f_id, 2);
 					dive_j.accz		= acc_reor(time_in_id:time_f_id, 3);
 
-					% dive_j_din.datatime = dive_j.datatime;
-					% dive_j_din.time_in	= dive_j.time_in;
-					% dive_j_din.time_f	= dive_j.time_f;
-					% dive_j_din.depth	= dive_j.depth;
+					% din version
+					dive_j_din.datatime = dive_j.datatime;
+					dive_j_din.datatime_depth = dive_j.datatime_depth;
+					dive_j_din.time_in	= dive_j.time_in;
+					dive_j_din.time_f	= dive_j.time_f;
+					dive_j_din.depth	= dive_j.depth;
 
 					dive_j.yaw		= turtle_dataset_yaw(time_in_id:mag_step:time_f_id);
 					dive_j.pitch	= turtle_dataset_pitch(time_in_id:mag_step:time_f_id);
 					dive_j.roll		= turtle_dataset_roll(time_in_id:mag_step:time_f_id);
-
+					
+					% din version
 					% dive_j_din.yaw		= dive_j.yaw;
 					% dive_j_din.pitch	= dive_j.pitch;
 					% dive_j_din.roll		= dive_j.roll;		
 					
 					dive_j.type = dive_type;
-					% dive_j_din.type = dive_type;
+					dive_j_din.type = dive_type;
 
 					if counter > 0
 						dives_h = [dives_h, dive_j];
-						% dives_h_din = [dives_h_din, dive_j_din];
+						dives_h_din = [dives_h_din, dive_j_din];
 
 					elseif counter == 0
 						dives_h = dive_j;
-						% dives_h_din = dive_j_din;
+						dives_h_din = dive_j_din;
 					end
 				end
 				% save information about period between this dive and the
@@ -245,18 +251,21 @@ for i = 1: size(datetime_acc, 1)-2
 				sup_j.accy		= acc_reor(time_f_id_old:time_in_id-1, 2);
 				sup_j.accz		= acc_reor(time_f_id_old:time_in_id-1, 3);
 
-				% sup_j_din.datatime	= sup_j.datatime;
-				% sup_j_din.time_in	= sup_j.time_in;
-				% sup_j_din.time_f	= sup_j.time_f;
-				% sup_j_din.depth		= sup_j.depth;
+				% din version
+				sup_j_din.datatime	= sup_j.datatime;
+				sup_j_din.datatime_depth	= sup_j.datatime_depth;
+				sup_j_din.time_in	= sup_j.time_in;
+				sup_j_din.time_f	= sup_j.time_f;
+				sup_j_din.depth		= sup_j.depth;
 
 				sup_j.yaw	= turtle_dataset_yaw(time_f_id_old:mag_step:time_in_id-1);
 				sup_j.pitch = turtle_dataset_pitch(time_f_id_old:mag_step:time_in_id-1);
 				sup_j.roll	= turtle_dataset_roll(time_f_id_old:mag_step:time_in_id-1);
 
-					% sup_j_din.yaw	= sup_j.yaw;
-					% sup_j_din.pitch	= sup_j.pitch;
-					% sup_j_din.roll	= sup_j.roll;
+				% din version
+				% sup_j_din.yaw	= sup_j.yaw;
+				% sup_j_din.pitch	= sup_j.pitch;
+				% sup_j_din.roll	= sup_j.roll;
 
 				if surf_counter > 0
 					surfs_h = [surfs_h, sup_j];
@@ -302,11 +311,11 @@ dive_DBA_homing
 turtle_dives = struct('homing', dives_h);
 turtle_sdives = struct('homing', sdives_h);
 turtle_surfs = struct('homing', surfs_h);
+
+turtle_dives_din = struct('homing', dives_h_din);
+turtle_sdives_din = struct('homing', sdives_h_din);
 turtle_surfs_din = struct('homing', surfs_h_din);
 
-% turtle_dives_din = struct('homing', dives_h_din);
-% turtle_sdives_din = struct('homing', sdives_h_din);
-
 turtle_dive = struct('name', turtle_name, 'big_dive', turtle_dives, 'shallow_dive', turtle_sdives, 'sub_surface', turtle_surfs, 'sub_surface_no_waves', turtle_surfs_din);
-% turtle_dive_din = struct('name', turtle_dataset.name, 'big_dive', turtle_dives_din, 'shallow_dive', turtle_sdives_din, 'sub_surface', turtle_surfs_din);
+turtle_dive_din = struct('name', turtle_name, 'big_dive', turtle_dives_din, 'shallow_dive', turtle_sdives_din, 'sub_surface', turtle_surfs_din);
 

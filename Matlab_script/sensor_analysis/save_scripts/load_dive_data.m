@@ -10,3 +10,14 @@ else
 
 	error(errorStruct)
 end
+
+%% din
+
+if exist(turtle_dive_name_din) == 2
+	load(turtle_dive_name_din);
+else
+	errorStruct.message = 'Data file not found.';
+	errorStruct.identifier = 'MyFunction:fileNotFound';
+
+	error(errorStruct)
+end

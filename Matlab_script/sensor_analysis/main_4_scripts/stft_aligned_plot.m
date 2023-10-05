@@ -27,67 +27,97 @@ name_turtle = turtle_name;
 % motion_type = 'homing';
 fs = 10;
 
-accx = acc_reor(:,1);
-accy = acc_reor(:,2);
-accz = acc_reor(:,3);
-depth_plt = depth;
-t_fft_depth = datetime_depth;   
-t_fft = datetime_acc;
-	%% accx
-[P_accx, F_accx, T_accx] = pspectrum(accx, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
+yn_entire_path = 0;
 
-% fh2 = figure('Name', ['figure ', num2str(id_plot), ' ', name_turtle, ' ', motion_type, ': Matlab time-frequency analysis, accx'], 'NumberTitle','off'); id_plot = id_plot + 1;
-fh2 = figure(id_plot); id_plot = id_plot + 1;
-clf
-sfh3 = subplot(2,1,1,'Parent',fh2);
-pspectrum(accx, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
-ylim([0, 2]);
-set(gca,'FontSize', dim_fontb)
-sfh4 = subplot(2,1,2,'Parent',fh2);
-plot(t_fft_depth, depth_plt, 'DisplayName', 'Depth');
-sfh4.Position = sfh4.Position + [0 0 -0.031 0];
-grid on
-axis tight
-xlabel('time','FontSize', dim_fontb)
-ylabel('Depth (m)','FontSize', dim_fontb)
-% legend('Location', 'best','FontSize', dim_fontb)
-set(gca,'FontSize', dim_fontb)
-sgtitle(['Turtle ', name_turtle, ': Matlab time-frequency analysis, accx'],'FontSize', dim_font)
-    
-	%% accy
-[P_accy, F_accy, T_accy] = pspectrum(accy, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
+fprintf('Do you want to see all the dataset? \n')
+fprintf('1. Yes \n')
+fprintf('2. No \n')
+while yn_entire_path < 1 || yn_entire_path > 2
+	yn_entire_path = input('');
+end
 
-% fh2 = figure('Name', ['figure ', num2str(id_plot), ' ', name_turtle, ' ', motion_type, ': Matlab time-frequency analysis, accy'], 'NumberTitle','off'); id_plot = id_plot + 1;
-fh2 = figure(id_plot); id_plot = id_plot + 1;
-clf
-sfh3 = subplot(2,1,1,'Parent',fh2);
-pspectrum(accy, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
-ylim([0, 2]);
-set(gca,'FontSize', dim_fontb)
-sfh4 = subplot(2,1,2,'Parent',fh2);
-plot(t_fft_depth, depth_plt, 'DisplayName', 'Depth');
-sfh4.Position = sfh4.Position + [0 0 -0.031 0];
-grid on;
-axis tight
-xlabel('time','FontSize', dim_fontb)
-ylabel('Depth (m)','FontSize', dim_fontb)
-% legend('Location', 'best','FontSize', dim_fontb)
-set(gca,'FontSize', dim_fontb)
-sgtitle(['Turtle ', name_turtle, ': Matlab time-frequency analysis, accy'],'FontSize', dim_font)
+if yn_entire_path == 1
+	accx = acc_reor(:,1);
+	accy = acc_reor(:,2);
+	accz = acc_reor(:,3);
+
+	depth_plt = depth;
+	t_fft_depth = datetime_depth;   
+	t_fft = datetime_acc;
+
+		%% accx
+	[P_accx, F_accx, T_accx] = pspectrum(accx, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
+
+	% fh2 = figure('Name', ['figure ', num2str(id_plot), ' ', name_turtle, ' ', motion_type, ': Matlab time-frequency analysis, accx'], 'NumberTitle','off'); id_plot = id_plot + 1;
+	fh2 = figure(id_plot); id_plot = id_plot + 1;
+	clf
+	sfh3 = subplot(2,1,1,'Parent',fh2);
+	pspectrum(accx, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
+	ylim([0, 2]);
+	set(gca,'FontSize', dim_fontb)
+	sfh4 = subplot(2,1,2,'Parent',fh2);
+	plot(t_fft_depth, depth_plt, 'DisplayName', 'Depth');
+	sfh4.Position = sfh4.Position + [0 0 -0.031 0];
+	grid on
+	axis tight
+	xlabel('time','FontSize', dim_fontb)
+	ylabel('Depth (m)','FontSize', dim_fontb)
+	% legend('Location', 'best','FontSize', dim_fontb)
+	set(gca,'FontSize', dim_fontb)
+	sgtitle(['Turtle ', name_turtle, ': Matlab time-frequency analysis, accx'],'FontSize', dim_font)
+
+		%% accy
+	[P_accy, F_accy, T_accy] = pspectrum(accy, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
+
+	% fh2 = figure('Name', ['figure ', num2str(id_plot), ' ', name_turtle, ' ', motion_type, ': Matlab time-frequency analysis, accy'], 'NumberTitle','off'); id_plot = id_plot + 1;
+	fh2 = figure(id_plot); id_plot = id_plot + 1;
+	clf
+	sfh3 = subplot(2,1,1,'Parent',fh2);
+	pspectrum(accy, fs, 'spectrogram', 'Leakage', 1, 'OverlapPercent', 99, 'MinThreshold',-60);
+	ylim([0, 2]);
+	set(gca,'FontSize', dim_fontb)
+	sfh4 = subplot(2,1,2,'Parent',fh2);
+	plot(t_fft_depth, depth_plt, 'DisplayName', 'Depth');
+	sfh4.Position = sfh4.Position + [0 0 -0.031 0];
+	grid on;
+	axis tight
+	xlabel('time','FontSize', dim_fontb)
+	ylabel('Depth (m)','FontSize', dim_fontb)
+	% legend('Location', 'best','FontSize', dim_fontb)
+	set(gca,'FontSize', dim_fontb)
+	sgtitle(['Turtle ', name_turtle, ': Matlab time-frequency analysis, accy'],'FontSize', dim_font)
+end
 
 %% deep dives
+
+yn_filtered = 0;
+fprintf('Do you want to use filtered acceleration data? \n')
+fprintf('1. Yes \n')
+fprintf('2. No \n')
+while yn_filtered < 1 || yn_filtered > 2
+	yn_filtered = input('');
+end
 
 for i = 1:counter
 
     i_char = num2str(i);
-	accx = turtle_dive.big_dive.homing(i).accx;
-	accy = turtle_dive.big_dive.homing(i).accy;
-	accz = turtle_dive.big_dive.homing(i).accz;
+	
+	if yn_filtered == 1
+		accx = turtle_dive_din.big_dive.homing(ii).dinx;
+		accy = turtle_dive_din.big_dive.homing(ii).diny;
+		accz = turtle_dive_din.big_dive.homing(ii).dinz;
+		odba = turtle_dive_din.big_dive.homing(i).ODBA;
+
+	elseif yn_filtered == 2
+		accx = turtle_dive.big_dive.homing(ii).accx;
+		accy = turtle_dive.big_dive.homing(ii).accy;
+		accz = turtle_dive.big_dive.homing(ii).accz;
+		odba = turtle_dive.big_dive.homing(i).ODBA;
+	end
+
 	depth_plt = turtle_dive.big_dive.homing(i).depth;
 	t_fft_depth = turtle_dive.big_dive.homing(i).datatime_depth;
 	t_fft = turtle_dive.big_dive.homing(i).datatime;
-	odba = turtle_dive.big_dive.homing(i).ODBA;
-    % odba_mean = turtle_dive.big_dive.homing(i).ODBA_paper;
     dive_type = turtle_dive.big_dive.homing(i).type;
 
 		%% ODBA
