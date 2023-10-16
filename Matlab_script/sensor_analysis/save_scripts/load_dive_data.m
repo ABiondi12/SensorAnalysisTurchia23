@@ -11,6 +11,10 @@ else
 	error(errorStruct)
 end
 
+counter		= size(turtle_dive.big_dive.homing, 2);
+sh_counter	= size(turtle_dive.shallow_dive.homing, 2);
+surf_counter = size(turtle_dive.sub_surface.homing, 2);
+
 %% din
 
 if exist(turtle_dive_name_din) == 2

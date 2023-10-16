@@ -18,6 +18,13 @@ if exist('id_plot', 'var') == 0
 	id_plot = 1;
 end
 
+if exist('dim_font', 'var') == 0
+	dim_font = 30;
+end
+
+if exist('dim_fontb', 'var') == 0
+	dim_fontb = 15;
+end
 %% period information
 
 name_turtle = turtle_name;

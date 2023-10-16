@@ -32,6 +32,20 @@ auto_norm_g_mf_angle = 0;	% if 0, not show these values (suggested)
 step_saving = 1;			% if 1, the code saves partial results
 							% if 0, the code only produces the final
 							% elaborations
+							
+%% plot variables
+if exist('id_plot', 'var') == 0
+	id_plot = 1;
+end
+
+if exist('dim_font', 'var') == 0
+	dim_font = 30;
+end
+
+if exist('dim_fontb', 'var') == 0
+	dim_fontb = 15;
+end
+
 %% add path
 addpath("fcn");
 addpath("main_1_scripts");
