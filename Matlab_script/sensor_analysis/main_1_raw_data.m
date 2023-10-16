@@ -67,9 +67,6 @@ if exist('all_together', 'var') == 0
 	clear_all_variables
 	
 	% variable def
-    dim_font	= 30;
-    dim_fontb	= 15;
-    id_plot		= 1;
     name_table_modify	= 'Didar_agm.csv';	% not to be changed
     flag_def
 	

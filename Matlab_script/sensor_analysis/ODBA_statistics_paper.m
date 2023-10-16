@@ -1,3 +1,7 @@
+if exist('turtle_big_time_i', 'var') == 0
+	dive_analysis_paper
+end
+
 %% big_dive
 big_num					= size(turtle_dive.big_dive.homing, 2);
 turtle_big_ODBA			= zeros(big_num, 1);
@@ -255,7 +259,7 @@ turtle_big_ODBA_mean_off_day_asc	= mean(turtle_big_ODBA_asc(off_day_id));
 turtle_big_ODBA_std_off_day_asc		= std(turtle_big_ODBA_asc(off_day_id));	
 turtle_big_ODBA_range_off_day_asc	= range(turtle_big_ODBA_asc(off_day_id));	
 turtle_big_ODBA_med_off_day_asc		= median(turtle_big_ODBA_asc(off_day_id));	
-turtle_big_ODBA_quart_off_day_asc  = quantile(turtle_big_ODBA_asc(off_day_id), [.25 .50 .75]); % the quartiles of x
+turtle_big_ODBA_quart_off_day_asc	= quantile(turtle_big_ODBA_asc(off_day_id), [.25 .50 .75]); % the quartiles of x
 
 turtle_big_ODBA_max_in_day_asc		= max(turtle_big_ODBA_asc(in_day_id));			
 turtle_big_ODBA_mean_in_day_asc		= mean(turtle_big_ODBA_asc(in_day_id));	
@@ -668,6 +672,8 @@ turtle_sub_ODBA	= zeros(sub_num, 1);
 for i = 1:sub_num
 	turtle_sub_ODBA(i, 1) = turtle_DBA_paper.sub_surface.homing.ODBA.mean(i);
 end
+
+[day_idsub, night_idsub, offshore_idsub, inshore_idsub, off_day_idsub, off_night_idsub, in_day_idsub, in_night_idsub] = find_id_day_shore(turtle_dive.sub_surface.homing); 
 
 	%% ODBA statistics
 % tot

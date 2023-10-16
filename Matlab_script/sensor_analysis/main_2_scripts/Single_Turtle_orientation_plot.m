@@ -25,13 +25,33 @@
 %
 
 %% plot parameters
-dim_font = 30;
-dim_fontb = 15;
+if exist('id_plot', 'var') == 0
+	id_plot = 1;
+end
+
+if exist('dim_font', 'var') == 0
+	dim_font = 30;
+end
+
+if exist('dim_fontb', 'var') == 0
+	dim_fontb = 15;
+end
 
 %% flag
 calib = 0;
 
 %% calibrated or not calibrated data
+if exist('calib_perf', 'var') == 0
+	calib_perf = 0;
+	fprintf('Magnetic field data has been previously calibrated? \n')
+	while calib_perf < 1 || calib_perf > 2
+		fprintf('1 = yes \n')
+		fprintf('2 = no \n')
+
+		calib_perf = input('');
+	end
+end
+
 if calib_perf == 1
 	if auto_calib_use == 0
 		while calib ~= 1 && calib ~= 2

@@ -316,6 +316,6 @@ turtle_dives_din = struct('homing', dives_h_din);
 turtle_sdives_din = struct('homing', sdives_h_din);
 turtle_surfs_din = struct('homing', surfs_h_din);
 
-turtle_dive = struct('name', turtle_name, 'big_dive', turtle_dives, 'shallow_dive', turtle_sdives, 'sub_surface', turtle_surfs, 'sub_surface_no_waves', turtle_surfs_din);
+turtle_dive = struct('name', turtle_name, 'big_dive', turtle_dives, 'shallow_dive', turtle_sdives, 'sub_surface', turtle_surfs);
 turtle_dive_din = struct('name', turtle_name, 'big_dive', turtle_dives_din, 'shallow_dive', turtle_sdives_din, 'sub_surface', turtle_surfs_din);
 

@@ -1,3 +1,7 @@
+if exist('turtle_big_time_i', 'var') == 0
+	dive_analysis_paper
+end
+
 %% big_dive
 big_num					= size(turtle_dive_din.big_dive.homing, 2);
 turtle_big_ODBA			= zeros(big_num, 1);
@@ -669,6 +673,8 @@ for i = 1:sub_num
 	turtle_sub_ODBA(i, 1) = turtle_DBA_paper_din.sub_surface.homing.ODBA.mean(i);
 end
 
+[day_idsub, night_idsub, offshore_idsub, inshore_idsub, off_day_idsub, off_night_idsub, in_day_idsub, in_night_idsub] = find_id_day_shore(turtle_dive_din.sub_surface.homing); 
+
 	%% ODBA statistics
 % tot
 turtle_sub_ODBA_max		= max(turtle_sub_ODBA);			
@@ -693,7 +699,7 @@ turtle_sub_ODBA_quart_nw	= quantile(turtle_sub_ODBA_nw, [.25 .50 .75]); % the qu
 
 	%% table creation
 table_creation = 0;
-fprintf('Do you want to create a summary table for the current analysis? \n')
+fprintf('Do you want to create a summary table for the current analysis (din version)? \n')
 fprintf('1. Yes \n')
 fprintf('2. No \n')
 while table_creation < 1 || table_creation > 2
@@ -710,7 +716,7 @@ end
 %% Plot
 
 plot_creation = 0;
-fprintf('Do you want to create plots for the current analysis? \n')
+fprintf('Do you want to create plots for the current analysis (din version)? \n')
 fprintf('1. Yes \n')
 fprintf('2. No \n')
 while plot_creation < 1 || plot_creation > 2

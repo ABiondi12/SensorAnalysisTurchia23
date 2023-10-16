@@ -23,6 +23,10 @@ if exist('all_together', 'var') == 0 && exist('from_main_1', 'var') == 0
     flag_def
     [turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_dive_name_din, turtle_dive_fft_name_din, turtle_DBA_name_paper_din, turtle_freq_name] = turtle_info(0);
 	
+	if exist('depth_step', 'var') == 0 || clear_workspace == 1
+		step_data_def
+	end
+	
 	if exist('raw_data_struct', 'var') == 0
 		fprintf('load raw values \n')
 		load_raw_data
@@ -322,7 +326,7 @@ smooth_yaw_g_norm_calib	= smoothdata(yaw_g_norm_calib, 'movmean', more*n_2s);
 smooth_pitch_norm_calib	= smoothdata(pitch_norm_calib, 'movmean', n_2s);
 smooth_roll_norm_calib	= smoothdata(roll_norm_calib, 'movmean', n_2s);
 
-%% Plot script (commented for now)
+%% Plot script
 Single_Turtle_orientation_plot
 
 %% save date

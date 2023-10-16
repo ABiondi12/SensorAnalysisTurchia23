@@ -47,7 +47,7 @@ daynight_big_tab([day_id], 1)	= "day";
 daynight_big_tab([night_id], 1)	= "night";
 
 offinshore_big_tab([offshore_id], 1) = "offshore";
-offinshore_big_tab([inshore_id], 1)	= "inshore";
+offinshore_big_tab([inshore_id], 1)	 = "inshore";
 
 turtle_big_ODBA_table	= struct2array(turtle_DBA_paper.big_dive.homing.ODBA);
 turtle_big_ODBA_mean	= turtle_big_ODBA_table(:, 1);
@@ -72,11 +72,11 @@ daynight_sh_tab([night_ids], 1) = "night";
 offinshore_sh_tab([offshore_ids], 1)	= "offshore";
 offinshore_sh_tab([inshore_ids], 1)		= "inshore";
 
-turtle_sh_ODBA_table = struct2array(turtle_DBA_paper.shallow_dive.homing.ODBA);
-turtle_sh_ODBA_mean = turtle_sh_ODBA_table(:, 1);
-turtle_sh_ODBA_asc([1:sh_num], 1) = -1;
-turtle_sh_ODBA_disc([1:sh_num], 1) = -1;
-turtle_sh_ODBA_bott([1:sh_num], 1) = -1;
+turtle_sh_ODBA_table	= struct2array(turtle_DBA_paper.shallow_dive.homing.ODBA);
+turtle_sh_ODBA_mean		= turtle_sh_ODBA_table(:, 1);
+turtle_sh_ODBA_asc([1:sh_num], 1)	= -1;
+turtle_sh_ODBA_disc([1:sh_num], 1)	= -1;
+turtle_sh_ODBA_bott([1:sh_num], 1)	= -1;
 
 	%% subsurface
 turtle_ID_sub_dive = [1:sub_num]';
