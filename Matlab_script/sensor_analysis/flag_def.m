@@ -26,13 +26,21 @@ auto_norm_g_mf_angle = 0;	% if 0, not show these values (suggested)
 							% the angle between g and mf is computed only
 							% if requested from the user (with this flag
 							% equal to 1)
-							
+auto_freq_selection = 1;    % if 0, choose the data acquisition frequencies
+							% if 1, default values based on collected data
+							% in 2023 dataset.
 %% new flags
 
 step_saving = 1;			% if 1, the code saves partial results
 							% if 0, the code only produces the final
 							% elaborations
 							
+plt_version = 0;			% if 1, create another dataset having wider dive margins
+	
+raw_plt_show = 0;
+calib_plt_show = 1;
+ypr_plt_show = 0;
+
 %% plot variables
 if exist('id_plot', 'var') == 0
 	id_plot = 1;
@@ -48,12 +56,15 @@ end
 
 %% add path
 addpath("fcn");
+addpath("general_scripts");
+addpath("main");
 addpath("main_1_scripts");
 addpath("main_2_scripts");
 addpath("main_3_scripts");
 addpath("main_4_scripts");
 addpath("main_5_scripts");
 addpath("save_scripts");
+addpath("load_scripts");
 addpath("csv_file");
 addpath("csv_file\Turchia2023");
 addpath("csv_file\Turchia2023\Banu-C");
@@ -69,3 +80,9 @@ addpath("csv_file\Turchia2023\Sevval-A");
 addpath("csv_file\Turchia2023\Deniz");
 addpath("csv_file\Turchia2023\Elif");
 addpath("csv_file\Turchia2023\Funda");
+
+%% correct dataset
+
+if exist('name_table_modify', 'var') == 0
+	name_table_modify	= 'Didar_agm.csv';
+end

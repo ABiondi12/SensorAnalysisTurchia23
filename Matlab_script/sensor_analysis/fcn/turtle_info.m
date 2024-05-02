@@ -1,4 +1,4 @@
-function [turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_dive_name_din, turtle_dive_fft_name_din, turtle_DBA_name_paper_din, turtle_freq_name] = turtle_info(turtle_nm)
+function [turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_plt_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_dive_name_din, turtle_dive_plt_name_din, turtle_dive_fft_name_din, turtle_DBA_name_paper_din, turtle_freq_name] = turtle_info(turtle_nm)
 % turtle_info
 % Function that allows to select the turtle (from the Dalmag 2023 dataset) to
 % be analysed through a "command window" selection of the name. After that,
@@ -33,11 +33,13 @@ if turtle_nm == 1
 	turtle_raw_name			= 'turtle_raw_Melis.mat';
 	turtle_ypr_name			= 'turtle_ypr_Melis.mat';
 	turtle_dive_name		= 'turtle_dive_Melis.mat';
+	turtle_dive_plt_name	= 'turtle_dive_plt_Melis.mat';
 	turtle_dive_fft_name	= 'turtle_dive_fft_Melis.mat';
 	turtle_DBA_name			= 'turtle_DBA_Melis.mat';
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Melis.mat';
 	
 	turtle_dive_name_din		= 'turtle_dive_din_Melis.mat';
+	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Melis.mat';
 	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Melis.mat';
 	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Melis.mat';
 
@@ -51,11 +53,13 @@ elseif turtle_nm == 2
 	turtle_raw_name			= 'turtle_raw_Banu.mat';
 	turtle_ypr_name			= 'turtle_ypr_Banu.mat';
 	turtle_dive_name		= 'turtle_dive_Banu.mat';
+	turtle_dive_plt_name	= 'turtle_dive_plt_Banu.mat';
 	turtle_dive_fft_name	= 'turtle_dive_fft_Banu.mat';
 	turtle_DBA_name			= 'turtle_DBA_Banu.mat';
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Banu.mat';
 	
 	turtle_dive_name_din		= 'turtle_dive_din_Banu.mat';
+	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Banu.mat';
 	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Banu.mat';
 	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Banu.mat';
 
@@ -69,11 +73,13 @@ elseif turtle_nm == 3
 	turtle_raw_name			= 'turtle_raw_Fati.mat';
 	turtle_ypr_name			= 'turtle_ypr_Fati.mat';
 	turtle_dive_name		= 'turtle_dive_Fati.mat';
+	turtle_dive_plt_name	= 'turtle_dive_plt_Fati.mat';
 	turtle_dive_fft_name	= 'turtle_dive_fft_Fati.mat';
 	turtle_DBA_name			= 'turtle_DBA_Fati.mat';
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Fati.mat';
 	
 	turtle_dive_name_din		= 'turtle_dive_din_Fati.mat';
+	turtle_dive_plt_name_din		= 'turtle_dive_din_plt_Fati.mat';
 	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Fati.mat';
 	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Fati.mat';
 	
@@ -87,11 +93,13 @@ elseif turtle_nm == 4
 	turtle_raw_name			= 'turtle_raw_Emine.mat';
 	turtle_ypr_name			= 'turtle_ypr_Emine.mat';
 	turtle_dive_name		= 'turtle_dive_Emine.mat';
+	turtle_dive_plt_name	= 'turtle_dive_plt_Emine.mat';
 	turtle_dive_fft_name	= 'turtle_dive_fft_Emine.mat';
 	turtle_DBA_name			= 'turtle_DBA_Emine.mat';
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Emine.mat';
 	
 	turtle_dive_name_din		= 'turtle_dive_din_Emine.mat';
+	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Emine.mat';
 	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Emine.mat';
 	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Emine.mat';
 	
@@ -105,13 +113,15 @@ elseif turtle_nm == 5
 	turtle_raw_name			= 'turtle_raw_Sevval.mat';
 	turtle_ypr_name			= 'turtle_ypr_Sevval.mat';
 	turtle_dive_name		= 'turtle_dive_Sevval.mat';
+	turtle_dive_plt_name	= 'turtle_dive_plt_Sevval.mat';
 	turtle_dive_fft_name	= 'turtle_dive_fft_Sevval.mat';
 	turtle_DBA_name			= 'turtle_DBA_Sevval.mat';
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Sevval.mat';
 	
 	turtle_dive_name_din		= 'turtle_dive_din_Sevval.mat';
+	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Sevval.mat';
 	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Sevval.mat';
-	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Sevval.mat';
+	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Sevval.mat';
 	
 	turtle_freq_name		= 'turtle_freq_Sevval.mat';
 	
@@ -123,13 +133,14 @@ elseif turtle_nm == 6
 	turtle_raw_name			= 'turtle_raw_Didar.mat';
 	turtle_ypr_name			= 'turtle_ypr_Didar.mat';
 	turtle_dive_name		= 'turtle_dive_Didar.mat';
-	turtle_dive_fft_name	= 'turtle_dive_fft_Didar.mat';
+	turtle_dive_plt_name	= 'turtle_dive_plt_Didar.mat';
 	turtle_DBA_name			= 'turtle_DBA_Didar.mat';
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Didar.mat';
 	
 	turtle_dive_name_din		= 'turtle_dive_din_Didar.mat';
+	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Didar.mat';
 	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Didar.mat';
-	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Didar.mat';
+	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Didar.mat';
 	
 	turtle_freq_name		= 'turtle_freq_Didar.mat';
 	
@@ -141,13 +152,15 @@ elseif turtle_nm == 7
 	turtle_raw_name			= 'turtle_raw_Deniz.mat';
 	turtle_ypr_name			= 'turtle_ypr_Deniz.mat';
 	turtle_dive_name		= 'turtle_dive_Deniz.mat';
+	turtle_dive_plt_name	= 'turtle_dive_plt_Deniz.mat';
 	turtle_dive_fft_name	= 'turtle_dive_fft_Deniz.mat';
 	turtle_DBA_name			= 'turtle_DBA_Deniz.mat';
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Deniz.mat';
 	
 	turtle_dive_name_din		= 'turtle_dive_din_Didar.mat';
+	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Didar.mat';
 	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Didar.mat';
-	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Didar.mat';
+	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Didar.mat';
 	
 	turtle_freq_name		= 'turtle_freq_Deniz.mat';
 	
@@ -159,11 +172,13 @@ elseif turtle_nm == 8
 	turtle_raw_name			= 'turtle_raw_Elif.mat';
 	turtle_ypr_name			= 'turtle_ypr_Elif.mat';
 	turtle_dive_name		= 'turtle_dive_Elif.mat';
+	turtle_dive_plt_name	= 'turtle_dive_plt_Elif.mat';
 	turtle_dive_fft_name	= 'turtle_dive_fft_Elif.mat';
 	turtle_DBA_name			= 'turtle_DBA_Elif.mat';
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Elif.mat';
 	
 	turtle_dive_name_din		= 'turtle_dive_din_Elif.mat';
+	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Elif.mat';
 	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Elif.mat';
 	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Elif.mat';
 	
@@ -177,13 +192,15 @@ elseif turtle_nm == 9
 	turtle_raw_name			= 'turtle_raw_Funda.mat';
 	turtle_ypr_name			= 'turtle_ypr_Funda.mat';
 	turtle_dive_name		= 'turtle_dive_Funda.mat';
+	turtle_dive_plt_name	= 'turtle_dive_plt_Funda.mat';
 	turtle_dive_fft_name	= 'turtle_dive_fft_Funda.mat';
 	turtle_DBA_name			= 'turtle_DBA_Funda.mat';
 	turtle_DBA_name_paper	= 'turtle_DBA_paper_Funda.mat';
 	
 	turtle_dive_name_din		= 'turtle_dive_din_Funda.mat';
+	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Funda.mat';
 	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Funda.mat';
-	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Funda.mat';
+	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Funda.mat';
 	
 	turtle_freq_name		= 'turtle_freq_Funda.mat';
 end

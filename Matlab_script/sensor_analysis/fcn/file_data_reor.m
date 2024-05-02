@@ -1,4 +1,4 @@
-function [acc_reor, mag_reor, gyro_reor]=file_data_reor(acc, mag, gyro, sensor_model)
+function [acc_reor, mag_reor, gyro_reor]=file_data_reor(acc, mag, gyro, sensor_model, auto_load_info)
 % file_data_reor
 % This function takes as input data from sensors, as accelerometer and
 % gyroscope, and gives as output their reoriented version so as to obtain a
@@ -125,17 +125,21 @@ if sensor_model == 1
 elseif sensor_model == 2
     mag_sens_orig = [mag_x, mag_y, -mag_z];	        % Axy-5
 end
-	
-logger_config = 0;
 
-fprintf("Choose the logger configuration: \n")
-fprintf("1. connector to the front \n")
-fprintf("2. connector to the back (Turtle carapace setup) \n")
-fprintf("3. connector to the right \n")
-fprintf("4. connector to the left \n")
+if auto_load_info == 0
 
-while logger_config <= 0 || logger_config > 4
-    logger_config = input('');
+	logger_config = 0;
+	fprintf("Choose the logger configuration: \n")
+	fprintf("1. connector to the front \n")
+	fprintf("2. connector to the back (Turtle carapace setup) \n")
+	fprintf("3. connector to the right \n")
+	fprintf("4. connector to the left \n")
+
+	while logger_config <= 0 || logger_config > 4
+		logger_config = input('');
+	end
+else
+	logger_config = 2;
 end
 
 if sensor_model == 1

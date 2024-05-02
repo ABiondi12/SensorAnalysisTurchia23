@@ -9,6 +9,7 @@ while clear_workspace < 1 || clear_workspace > 2
 end
 
 if clear_workspace == 1
-	clear
+	% clear
+	clearvars -except main_num
 	close all
 end

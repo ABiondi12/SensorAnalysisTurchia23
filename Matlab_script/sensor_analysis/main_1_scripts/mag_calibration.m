@@ -70,7 +70,7 @@ same_dataset = 0;
 day_max = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 31, 31];
 
 while same_dataset ~= 1 && same_dataset ~= 2
-	fprintf('Calibration set is at the beginning of the dataset?\n')
+	fprintf('Calibration section is in the same dataset?\n')
 	fprintf('1 = yes \n')
 	fprintf('2 = no \n')
 	
@@ -206,4 +206,6 @@ norma_mag_postcalib = norm(mag_postcalib);
 norma_mag_calib_postcalib = norm(mag_calib_postcalib);
 
 %% plot
-mag_calibration_plot
+if calib_plt_show == 1
+	mag_calibration_plot
+end

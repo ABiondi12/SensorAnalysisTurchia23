@@ -84,131 +84,159 @@ elseif sensor_type == 2
 	name_table = name_table_axy;
 end
 
-data		= readtable(name_table);
-data_calib	= readtable(name_table_calib);	
 
-if strcmp(name_table, name_table_modify)
-	data_new = [data(1:1936431, :);data(1936422:1936430, :); data(1936432:end, :)];
-	data = data_new;
-end
-
-% Select frequency for magnetometer
-%	acc = 10 Hz - mag = 1 Hz for AGM
-%	acc = 10 Hz - mag = 1 Hz for axy
-fprintf("Choose the magnetometer frequency: \n")
-fprintf("1. acc_linked \n")
-fprintf("2. 1 Hz (Turchia 2023) \n")
-fprintf("3. 2 Hz \n")
-
-while freq_mag <= 0 || freq_mag > 3
-	freq_mag = input('');
-end
-
-if freq_mag == 1
-	mag_step = 1;
-elseif freq_mag == 2
-	mag_step = 10;
+%% check for already present raw .mat file
+new_raw_dataset = 0;
+if exist(turtle_raw_name, 'file') == 2
+	fprintf([turtle_raw_name,': dataset already exists!!! \n'])
+	ov_to_do = 0;
+	
+	yn_ans = 0;
+	while yn_ans < 1 || yn_ans > 2
+		fprintf([turtle_raw_name, ': do you want to load the dataset again? \n'])
+		fprintf('1_ yes \n')
+		fprintf('2_ no \n')
+		yn_ans = input('');
+	end
+	
+	if yn_ans == 1
+		ov_to_do = 1;
+		fprintf([turtle_raw_name, ': start loading... \n'])
+	elseif yn_ans == 2
+		ov_to_do = 0;
+		fprintf([turtle_raw_name, ': load operation aborted! \n'])
+	end
 else
-	mag_step = 5;
+	new_raw_dataset = 1;
 end
 
-if sensor_type == 1	% AGM
-	% Select frequency for gyroscope
-	%	acc = 10 Hz - gyro = 1 Hz for AGM
-	fprintf("Choose the gyroscope frequency: \n")
-	fprintf("1. acc_linked (Turchia 2023) \n")
-	fprintf("2. 1 Hz \n")
-	fprintf("3. 2 Hz \n")
-	
-	while freq_gyro <= 0 || freq_gyro > 3
-		freq_gyro = input('');
-	end
-	
-	if freq_gyro == 1
-		gyro_step = 1;
-	elseif freq_gyro == 2
-		gyro_step = 10;
-	else
-		gyro_step = 5;
-	end
-	
-	% Select frequency for depth
-	%	acc = 10 Hz - depth = 1 Hz for AGM
-	fprintf("Choose the depth frequency: \n")
-	fprintf("1. acc_linked \n")
-	fprintf("2. 1 Hz (Turchia 2023) \n")
-	fprintf("3. 2 Hz \n")
-	
-	while freq_depth <= 0 || freq_depth > 3
-		freq_depth = input('');
-	end
-	
-	if freq_depth == 1
-		depth_step = 1;
-	elseif freq_depth == 2
-		depth_step = 10;
-	else
-		depth_step = 5;
-	end
-end
+%% Load data
 
-%% load data
-% date and time together
-if datetime_column == 1 
-	datetime_acc	= table2array(data(1:end, 2));
-	data_accx		= table2array(data(1:end, 3));
-	data_accy		= table2array(data(1:end, 4));
-	data_accz		= table2array(data(1:end, 5));
-	acc_sens		= [data_accx, data_accy, data_accz];
-	
-	if sensor_type == 2		% axy
-		datetime_mag	= table2array(data(1:mag_step:end, 2));
-		data_magx		= table2array(data(1:mag_step:end, 6));
-		data_magy		= table2array(data(1:mag_step:end, 7));
-		data_magz		= table2array(data(1:mag_step:end, 8));
-	elseif sensor_type == 1	% AGM
-		datetime_mag	= table2array(data(1:mag_step:end, 2));
-		data_magx		= table2array(data(1:mag_step:end, 9));   
-		data_magy		= table2array(data(1:mag_step:end, 10));
-		data_magz		= table2array(data(1:mag_step:end, 11));
-		datetime_gyro	= table2array(data(1:gyro_step:end, 2));
-		data_gyrox		= table2array(data(1:gyro_step:end, 6));
-		data_gyroy		= table2array(data(1:gyro_step:end, 7));
-		data_gyroz		= table2array(data(1:gyro_step:end, 8));
-		datetime_depth	= table2array(data(1:depth_step:end, 2));
-		depth			= table2array(data(1:depth_step:end, 13));
-		depth			= - depth;
-		gyro_sens		= [data_gyrox, data_gyroy, data_gyroz];
+step_data_def
+
+if (sensor_type == 1 && (new_raw_dataset == 1 || ov_to_do == 1)) || sensor_type == 2
+
+	data		= readtable(name_table);
+	data_calib	= readtable(name_table_calib);	
+
+	if strcmp(name_table, name_table_modify)
+		data_new = [data(1:1936431, :);data(1936422:1936430, :); data(1936432:end, :)];
+		data = data_new;
 	end
-elseif datetime_column == 2 % date and time together - not working for now
-	date_acc	= table2array(data(:, 2));
-	time_acc	= table2array(data(:, 3));
-	%	datetime_acc = date_acc + time_acc;
-	%	datetime_acc = datetime([date_acc, time_acc], 'InputFormat', 'GG/MM/YY HH:mm:ss.sss');
-	data_accx	= table2array(data(:, 4));
-	data_accy	= table2array(data(:, 5));
-	data_accz	= table2array(data(:, 6));
-	acc_sens	= [data_accx, data_accy, data_accz];
-	if sensor_type == 2		% axy
-		date_mag	= table2array(data(1:mag_step:end, 2));
-		time_mag	= table2array(data(1:mag_step:end, 3));
-		%	datetime_mag = datetime([date_mag, time_mag], 'InputFormat', 'GG/MM/YY HH:mm:ss.sss');
-		data_magx	= table2array(data(1:mag_step:end, 7));
-		data_magy	= table2array(data(1:mag_step:end, 8));
-		data_magz	= table2array(data(1:mag_step:end, 9));
-	elseif sensor_type == 1	% AGM
-		date_mag	= table2array(data(1:mag_step:end, 2));
-		time_mag	= table2array(data(1:mag_step:end, 3));
-		%	datetime_mag = datetime([date_mag, time_mag], 'InputFormat', 'GG/MM/YY HH:mm:ss.sss');
-		data_magx	= table2array(data(1:mag_step:end, 10));
-		data_magy	= table2array(data(1:mag_step:end, 11));
-		data_magz	= table2array(data(1:mag_step:end, 12));
-		data_gyrox	= table2array(data(1:gyro_step:end, 7));
-		data_gyroy	= table2array(data(1:gyro_step:end, 8));
-		data_gyroz	= table2array(data(1:gyro_step:end, 9));
-		depth		= table2array(data(1:depth_step:end, 14));
-		depth		= - depth;
-		gyro_sens	= [data_gyrox, data_gyroy, data_gyroz];
+
+	% Select frequency for magnetometer
+	%	acc = 10 Hz - mag = 1 Hz for AGM
+	%	acc = 10 Hz - mag = 1 Hz for axy
+
+	%% load data
+	% date and time together
+	if datetime_column == 1 
+		datetime_acc	= table2array(data(1:end, 2));
+		data_accx		= table2array(data(1:end, 3));
+		data_accy		= table2array(data(1:end, 4));
+		data_accz		= table2array(data(1:end, 5));
+		acc_sens		= [data_accx, data_accy, data_accz];
+
+		[nan_find_x, nan_find_y] = find(isnan(acc_sens));
+		if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
+			count = 0;
+			while isempty(nan_find_x) == 0 && isempty(nan_find_y) == 0 && count < 10 
+				count = count +1;
+				fprintf('Nan number found, correct...\n');
+				acc_sens(nan_find_x, nan_find_y) = acc_sens(nan_find_x-1, nan_find_y);
+				[nan_find_x, nan_find_y] = find(isnan(acc_sens));
+			end
+		end
+
+		if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
+			fprintf('too many NaN in the acceleration dataset, get a look to your data before proceeding \n');
+		end
+
+		if sensor_type == 2		% axy
+			datetime_mag	= table2array(data(1:mag_step:end, 2));
+			data_magx		= table2array(data(1:mag_step:end, 6));
+			data_magy		= table2array(data(1:mag_step:end, 7));
+			data_magz		= table2array(data(1:mag_step:end, 8));
+		elseif sensor_type == 1	% AGM
+			datetime_mag	= table2array(data(1:mag_step:end, 2));
+			data_magx		= table2array(data(1:mag_step:end, 9));   
+			data_magy		= table2array(data(1:mag_step:end, 10));
+			data_magz		= table2array(data(1:mag_step:end, 11));
+
+			datetime_gyro	= table2array(data(1:gyro_step:end, 2));
+			data_gyrox		= table2array(data(1:gyro_step:end, 6));
+			data_gyroy		= table2array(data(1:gyro_step:end, 7));
+			data_gyroz		= table2array(data(1:gyro_step:end, 8));
+
+			datetime_depth	= table2array(data(1:depth_step:end, 2));
+			depth			= table2array(data(1:depth_step:end, 13));
+			depth			= - depth;
+			gyro_sens		= [data_gyrox, data_gyroy, data_gyroz];
+
+			[nan_find_x, nan_find_y] = find(isnan(gyro_sens));
+			if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
+				count = 0;
+				while isempty(nan_find_x) == 0 && isempty(nan_find_y) == 0 && count < 10 
+					count = count +1;
+					fprintf('Nan number found, correct...\n');
+					gyro_sens(nan_find_x, nan_find_y) = gyro_sens(nan_find_x-1, nan_find_y);
+					[nan_find_x, nan_find_y] = find(isnan(gyro_sens));
+				end
+			end
+
+			if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
+				fprintf('too many NaN in the gyroscope dataset, get a look to your data before proceeding \n');
+			end
+
+		end
+
+	elseif datetime_column == 2 % date and time together - not working for now
+		date_acc	= table2array(data(:, 2));
+		time_acc	= table2array(data(:, 3));
+
+		data_accx	= table2array(data(:, 4));
+		data_accy	= table2array(data(:, 5));
+		data_accz	= table2array(data(:, 6));
+		acc_sens	= [data_accx, data_accy, data_accz];
+		if sensor_type == 2		% axy
+			date_mag	= table2array(data(1:mag_step:end, 2));
+			time_mag	= table2array(data(1:mag_step:end, 3));
+			%	datetime_mag = datetime([date_mag, time_mag], 'InputFormat', 'GG/MM/YY HH:mm:ss.sss');
+			data_magx	= table2array(data(1:mag_step:end, 7));
+			data_magy	= table2array(data(1:mag_step:end, 8));
+			data_magz	= table2array(data(1:mag_step:end, 9));
+		elseif sensor_type == 1	% AGM
+			date_mag	= table2array(data(1:mag_step:end, 2));
+			time_mag	= table2array(data(1:mag_step:end, 3));
+			%	datetime_mag = datetime([date_mag, time_mag], 'InputFormat', 'GG/MM/YY HH:mm:ss.sss');
+			data_magx	= table2array(data(1:mag_step:end, 10));
+			data_magy	= table2array(data(1:mag_step:end, 11));
+			data_magz	= table2array(data(1:mag_step:end, 12));
+			data_gyrox	= table2array(data(1:gyro_step:end, 7));
+			data_gyroy	= table2array(data(1:gyro_step:end, 8));
+			data_gyroz	= table2array(data(1:gyro_step:end, 9));
+			depth		= table2array(data(1:depth_step:end, 14));
+			depth		= - depth;
+			gyro_sens	= [data_gyrox, data_gyroy, data_gyroz];
+		end
 	end
+	mag_sens = [data_magx, data_magy, data_magz];
+
+	[nan_find_x, nan_find_y] = find(isnan(mag_sens));
+	if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
+		count = 0;
+		while isempty(nan_find_x) == 0 && isempty(nan_find_y) == 0 && count < 10 
+			count = count + 1;
+			fprintf('Nan number found, correct...\n');
+			mag_sens(nan_find_x, nan_find_y) = mag_sens(nan_find_x-1, nan_find_y);
+			[nan_find_x, nan_find_y] = find(isnan(mag_sens));
+		end
+	end
+
+	if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
+		fprintf('too many NaN in the magnetometer dataset, get a look to your data before proceeding \n');
+	end
+else
+	load_raw_data
+	fprintf('Load operation completed! \n')
 end
-mag_sens = [data_magx, data_magy, data_magz];

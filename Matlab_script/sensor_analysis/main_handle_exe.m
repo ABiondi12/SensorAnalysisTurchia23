@@ -32,10 +32,6 @@ clear
 clc
 close all
 
-dim_font	= 30;
-dim_fontb	= 15;
-id_plot		= 1;
-
 %% dataset correction - DO NOT change this section
 % There is an error in Didar dataset (missing one second), thus the code
 % automatically adjust the dataset by cloning the previous second in the 
@@ -49,54 +45,11 @@ all_together = 1;           % if exists, the code is executed all together, othe
 % automatism (options are automatically selected at the beginning and not
 % asked during the code execution).
 
-choose_data = 1;			% if 0, choose of data to be shown by input
-							% if 1, automatic elaboration of all data (suggested)		
-							
-auto_calib = 1;				% if 0, choose if to perform calibration on mf data
-							% if 1, automatic perform of calibration on mf data (suggested)
-							
-auto_calib_use = 1;			% if 0, choose if to use calibrated mf data
-							% if 1, automatically use calibrated mf data (suggested)
-							
-auto_calib_datetime	 = 1;	% if 1, automatic datetime insertion (suggested)
-							% if 0, manual datetime insertion
-							
-auto_column_together = 1;	% if 1, date and time information are taken 
-							% as in the same column (suggested)	
-
-auto_norm_g_mf_angle = 0;	% if 0, not show these values (suggested)
-							% if 1, you can choose to show this values
-							
-							% note: norm is automatically calculated since
-							% it is necessary for other operation, while
-							% the angle between g and mf is computed only
-							% if requested from the user (with this flag
-							% equal to 1)
-%% add path
-addpath("fcn");
-addpath("main_1_scripts");
-addpath("main_2_scripts");
-addpath("main_3_scripts");
-addpath("main_4_scripts");
-addpath("csv_file");
-addpath("csv_file\Turchia2023");
-addpath("csv_file\Turchia2023\Banu-C");
-addpath("csv_file\Turchia2023\Banu-C\axy");
-addpath("csv_file\Turchia2023\Didar-F");
-addpath("csv_file\Turchia2023\Emine-D");
-addpath("csv_file\Turchia2023\Emine-D\axy");
-addpath("csv_file\Turchia2023\Fati-E");
-addpath("csv_file\Turchia2023\Fati-E\axy");
-addpath("csv_file\Turchia2023\Melis-B");
-addpath("csv_file\Turchia2023\Melis-B\axy");
-addpath("csv_file\Turchia2023\Sevval-A");
-addpath("csv_file\Turchia2023\Deniz");
-addpath("csv_file\Turchia2023\Elif");
-addpath("csv_file\Turchia2023\Funda");
+flag_def
 
 %% Turle name selection
 % Selection of the turtle and variables name definition
-[turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_dive_name_din, turtle_dive_fft_name_din, turtle_DBA_name_paper_din, turtle_freq_name] = turtle_info(0);	
+[turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_plt_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_dive_name_din, turtle_dive_plt_name_din, turtle_dive_fft_name_din, turtle_DBA_name_paper_din, turtle_freq_name] = turtle_info(0);	
 
 %% main_launch
 fprintf('1. Start raw data elaboration \n')
@@ -108,13 +61,15 @@ main_2_ypr
 fprintf('3. Start dives analysis and ODBA \n')
 main_3_dive_analysis
 
-fprintf('4. Start stft computation \n')
-main_4_stft
+% fprintf('4. Start stft computation \n')
+% main_4_stft
 
-fprintf('5. Start ODBA evaluation \n')
-main_5_ODBA_statistics_paper
+% fprintf('5. Start ODBA evaluation \n')
+% main_5_ODBA_statistics_paper
 
 %% table creation
-fprintf('6. Start table creation \n')
-tab_dives_entire
-fprintf('Table correctly created and saved \n')
+% fprintf('6. Start table creation \n')
+% tab_dives_entire
+% fprintf('Table correctly created and saved \n')
+
+clear all_together

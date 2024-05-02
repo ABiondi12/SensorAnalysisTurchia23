@@ -13,6 +13,7 @@
 % evaluating if there is some evidence in the variation of the ODBA
 % depending on the period phase.
 
+% CAMBIA CON IL DATASET TURTLE_DIVE_PLT E TURTLE_DIVE_DIN_PLT
 %% Matlab_pspectrum plot
 if exist('id_plot', 'var') == 0
 	id_plot = 1;
@@ -77,22 +78,48 @@ end
 
 if type_period == 1
 	if yn_din == 1
-		turtle_dive_show = turtle_dive_din.big_dive;
+		if plt_version == 1
+			turtle_dive_show = turtle_dive_din_plt.big_dive;
+		else
+			turtle_dive_show = turtle_dive_din.big_dive;
+		end
 	elseif yn_din == 2
-		turtle_dive_show = turtle_dive.big_dive;
+		if plt_version == 1
+			turtle_dive_show = turtle_dive_plt.big_dive;
+		else
+			turtle_dive_show = turtle_dive.big_dive;
+		end
 	end
+	
 	dive_type = turtle_dive_show.homing(num_period).type;
+
 elseif type_period == 2
 	if yn_din == 1
-		turtle_dive_show = turtle_dive_din.shallow_dive;
+		if plt_version == 1
+			turtle_dive_show = turtle_dive_din_plt.shallow_dive;
+		else
+			turtle_dive_show = turtle_dive_din.shallow_dive;
+		end
 	elseif yn_din == 2
-		turtle_dive_show = turtle_dive.shallow_dive;
+		if plt_version == 1
+			turtle_dive_show = turtle_dive_plt.shallow_dive;
+		else
+			turtle_dive_show = turtle_dive.shallow_dive;
+		end
 	end
 elseif type_period == 3
 	if yn_din == 1
-		turtle_dive_show = turtle_dive_din.sub_surface;
+		if plt_version == 1
+			turtle_dive_show = turtle_dive_din_plt.sub_surface;
+		else
+			turtle_dive_show = turtle_dive_din.sub_surface;
+		end
 	elseif yn_din == 2
-		turtle_dive_show = turtle_dive.sub_surface;
+		if plt_version == 1
+			turtle_dive_show = turtle_dive_plt.sub_surface;
+		else
+			turtle_dive_show = turtle_dive.sub_surface;
+		end
 	end
 end
 

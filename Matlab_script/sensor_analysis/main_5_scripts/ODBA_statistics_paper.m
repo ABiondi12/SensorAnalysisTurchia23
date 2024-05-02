@@ -697,11 +697,15 @@ if table_creation == 1
 	fprintf('6. Start table creation \n')
 	tab_dives_entire
 	fprintf('Table correctly created and saved \n')
+	
+	fprintf('6. Start din table creation \n')
+	tab_dives_entire_din
+	fprintf('Table din correctly created and saved \n')
 else
-	fprintf('Table creation aborted \n')
+	fprintf('Table din creation aborted \n')
 end
-%% Plot
 
+%% Plot
 plot_creation = 0;
 fprintf('Do you want to create plots for the current analysis? \n')
 fprintf('1. Yes \n')
