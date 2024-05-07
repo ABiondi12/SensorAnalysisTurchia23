@@ -29,7 +29,7 @@ if new_ypr_dataset == 1 || ov_to_do == 0
 	mf_info
 	
 	%% angle g-mf evaluation
-	angle_g_mf
+	angle_g_mf_script
 
 	%% YPR computation
 	ypr_comp_main

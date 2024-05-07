@@ -55,11 +55,11 @@ flag_def
 fprintf('1. Start raw data elaboration \n')
 main_1_raw_data
 
-fprintf('2. Start ypr computation \n')
-main_2_ypr
+% fprintf('2. Start ypr computation \n')
+% main_2_ypr
 
-fprintf('3. Start dives analysis and ODBA \n')
-main_3_dive_analysis
+% fprintf('3. Start dives analysis and ODBA \n')
+% main_3_dive_analysis
 
 % fprintf('4. Start stft computation \n')
 % main_4_stft
