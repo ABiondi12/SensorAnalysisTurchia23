@@ -204,6 +204,9 @@ for i = 1: size(datetime_acc, 1)-2
 					sdive_j.accx	= acc_reor(time_in_id:time_f_id, 1);
 					sdive_j.accy	= acc_reor(time_in_id:time_f_id, 2);
 					sdive_j.accz	= acc_reor(time_in_id:time_f_id, 3);
+					sdive_j.yaw		= turtle_dataset_yaw(time_in_id:mag_step:time_f_id);
+					sdive_j.pitch	= turtle_dataset_pitch(time_in_id:mag_step:time_f_id);
+					sdive_j.roll	= turtle_dataset_roll(time_in_id:mag_step:time_f_id);
 
 					% din version
 					sdive_j_din.datatime	= sdive_j.datatime;
@@ -212,9 +215,9 @@ for i = 1: size(datetime_acc, 1)-2
 					sdive_j_din.time_f		= sdive_j.time_f;
 					sdive_j_din.depth		= sdive_j.depth;
 
-					sdive_j.yaw		= turtle_dataset_yaw(time_in_id:mag_step:time_f_id);
-					sdive_j.pitch	= turtle_dataset_pitch(time_in_id:mag_step:time_f_id);
-					sdive_j.roll	= turtle_dataset_roll(time_in_id:mag_step:time_f_id);
+					sdive_j_din.yaw		= turtle_dataset_yaw(time_in_id:mag_step:time_f_id);
+					sdive_j_din.pitch	= turtle_dataset_pitch(time_in_id:mag_step:time_f_id);
+					sdive_j_din.roll	= turtle_dataset_roll(time_in_id:mag_step:time_f_id);
 
 					% plt version
 					if plt_version == 1
@@ -226,6 +229,9 @@ for i = 1: size(datetime_acc, 1)-2
 						sdive_j_plt.accx	= acc_reor(time_in_id_plt:time_f_id_plt, 1);
 						sdive_j_plt.accy	= acc_reor(time_in_id_plt:time_f_id_plt, 2);
 						sdive_j_plt.accz	= acc_reor(time_in_id_plt:time_f_id_plt, 3);
+						sdive_j_plt.yaw		= turtle_dataset_yaw(time_in_id_plt:mag_step:time_f_id_plt);
+						sdive_j_plt.pitch	= turtle_dataset_pitch(time_in_id_plt:mag_step:time_f_id_plt);
+						sdive_j_plt.roll	= turtle_dataset_roll(time_in_id_plt:mag_step:time_f_id_plt);
 						
 						% plt version
 						sdive_j_din_plt.datatime	= sdive_j_plt.datatime;
@@ -234,9 +240,9 @@ for i = 1: size(datetime_acc, 1)-2
 						sdive_j_din_plt.time_f		= sdive_j_plt.time_f;
 						sdive_j_din_plt.depth		= sdive_j_plt.depth;
 
-						sdive_j_plt.yaw		= turtle_dataset_yaw(time_in_id_plt:mag_step:time_f_id_plt);
-						sdive_j_plt.pitch	= turtle_dataset_pitch(time_in_id_plt:mag_step:time_f_id_plt);
-						sdive_j_plt.roll	= turtle_dataset_roll(time_in_id_plt:mag_step:time_f_id_plt);
+						sdive_j_din_plt.yaw		= turtle_dataset_yaw(time_in_id_plt:mag_step:time_f_id_plt);
+						sdive_j_din_plt.pitch	= turtle_dataset_pitch(time_in_id_plt:mag_step:time_f_id_plt);
+						sdive_j_din_plt.roll	= turtle_dataset_roll(time_in_id_plt:mag_step:time_f_id_plt);
 					end
 					
 						
@@ -266,6 +272,9 @@ for i = 1: size(datetime_acc, 1)-2
 					dive_j.accx		= acc_reor(time_in_id:time_f_id, 1);
 					dive_j.accy		= acc_reor(time_in_id:time_f_id, 2);
 					dive_j.accz		= acc_reor(time_in_id:time_f_id, 3);
+					dive_j.yaw		= turtle_dataset_yaw(time_in_id:mag_step:time_f_id);
+					dive_j.pitch	= turtle_dataset_pitch(time_in_id:mag_step:time_f_id);
+					dive_j.roll		= turtle_dataset_roll(time_in_id:mag_step:time_f_id);
 					
 					% din version
 					dive_j_din.datatime = dive_j.datatime;
@@ -274,9 +283,9 @@ for i = 1: size(datetime_acc, 1)-2
 					dive_j_din.time_f	= dive_j.time_f;
 					dive_j_din.depth	= dive_j.depth;
 
-					dive_j.yaw		= turtle_dataset_yaw(time_in_id:mag_step:time_f_id);
-					dive_j.pitch	= turtle_dataset_pitch(time_in_id:mag_step:time_f_id);
-					dive_j.roll		= turtle_dataset_roll(time_in_id:mag_step:time_f_id);
+					dive_j_din.yaw		= turtle_dataset_yaw(time_in_id:mag_step:time_f_id);
+					dive_j_din.pitch	= turtle_dataset_pitch(time_in_id:mag_step:time_f_id);
+					dive_j_din.roll		= turtle_dataset_roll(time_in_id:mag_step:time_f_id);
 	
 					% plt version
 					if plt_version == 1
@@ -289,6 +298,9 @@ for i = 1: size(datetime_acc, 1)-2
 						dive_j_plt.accx		= acc_reor(time_in_id_plt:time_f_id_plt, 1);
 						dive_j_plt.accy		= acc_reor(time_in_id_plt:time_f_id_plt, 2);
 						dive_j_plt.accz		= acc_reor(time_in_id_plt:time_f_id_plt, 3);
+						dive_j_plt.yaw		= turtle_dataset_yaw(time_in_id_plt:mag_step:time_f_id_plt);
+						dive_j_plt.pitch	= turtle_dataset_pitch(time_in_id_plt:mag_step:time_f_id_plt);
+						dive_j_plt.roll		= turtle_dataset_roll(time_in_id_plt:mag_step:time_f_id_plt);
 
 						dive_j_din_plt.datatime = dive_j_plt.datatime;
 						dive_j_din_plt.datatime_depth = dive_j_plt.datatime_depth;
@@ -296,9 +308,9 @@ for i = 1: size(datetime_acc, 1)-2
 						dive_j_din_plt.time_f	= dive_j_plt.time_f;
 						dive_j_din_plt.depth	= dive_j_plt.depth;
 
-						dive_j_plt.yaw		= turtle_dataset_yaw(time_in_id_plt:mag_step:time_f_id_plt);
-						dive_j_plt.pitch	= turtle_dataset_pitch(time_in_id_plt:mag_step:time_f_id_plt);
-						dive_j_plt.roll		= turtle_dataset_roll(time_in_id_plt:mag_step:time_f_id_plt);
+						dive_j_din_plt.yaw		= turtle_dataset_yaw(time_in_id_plt:mag_step:time_f_id_plt);
+						dive_j_din_plt.pitch	= turtle_dataset_pitch(time_in_id_plt:mag_step:time_f_id_plt);
+						dive_j_din_plt.roll		= turtle_dataset_roll(time_in_id_plt:mag_step:time_f_id_plt);
 					end
 					
 					dive_j.type = dive_type;
@@ -339,6 +351,9 @@ for i = 1: size(datetime_acc, 1)-2
 				sup_j.accx		= acc_reor(time_f_id_old:time_in_id-1, 1);
 				sup_j.accy		= acc_reor(time_f_id_old:time_in_id-1, 2);
 				sup_j.accz		= acc_reor(time_f_id_old:time_in_id-1, 3);
+				sup_j.yaw	= turtle_dataset_yaw(time_f_id_old:mag_step:time_in_id-1);
+				sup_j.pitch = turtle_dataset_pitch(time_f_id_old:mag_step:time_in_id-1);
+				sup_j.roll	= turtle_dataset_roll(time_f_id_old:mag_step:time_in_id-1);
 	
 				% din version
 				sup_j_din.datatime	= sup_j.datatime;
@@ -347,9 +362,9 @@ for i = 1: size(datetime_acc, 1)-2
 				sup_j_din.time_f	= sup_j.time_f;
 				sup_j_din.depth		= sup_j.depth;
 
-				sup_j.yaw	= turtle_dataset_yaw(time_f_id_old:mag_step:time_in_id-1);
-				sup_j.pitch = turtle_dataset_pitch(time_f_id_old:mag_step:time_in_id-1);
-				sup_j.roll	= turtle_dataset_roll(time_f_id_old:mag_step:time_in_id-1);
+				sup_j_din.yaw	= turtle_dataset_yaw(time_f_id_old:mag_step:time_in_id-1);
+				sup_j_din.pitch = turtle_dataset_pitch(time_f_id_old:mag_step:time_in_id-1);
+				sup_j_din.roll	= turtle_dataset_roll(time_f_id_old:mag_step:time_in_id-1);
 
 				% plot version
 				if plt_version == 1
@@ -362,6 +377,9 @@ for i = 1: size(datetime_acc, 1)-2
 					sup_j_plt.accx		= acc_reor(time_f_id_old_plt:time_in_id_plt-1, 1);
 					sup_j_plt.accy		= acc_reor(time_f_id_old_plt:time_in_id_plt-1, 2);
 					sup_j_plt.accz		= acc_reor(time_f_id_old_plt:time_in_id_plt-1, 3);
+					sup_j_plt.yaw	= turtle_dataset_yaw(time_f_id_old_plt:mag_step:time_in_id_plt-1);
+					sup_j_plt.pitch = turtle_dataset_pitch(time_f_id_old_plt:mag_step:time_in_id_plt-1);
+					sup_j_plt.roll	= turtle_dataset_roll(time_f_id_old_plt:mag_step:time_in_id_plt-1);
 
 					sup_j_din_plt.datatime	= sup_j_plt.datatime;
 					sup_j_din_plt.datatime_depth	= sup_j_plt.datatime_depth;
@@ -369,9 +387,9 @@ for i = 1: size(datetime_acc, 1)-2
 					sup_j_din_plt.time_f	= sup_j_plt.time_f;
 					sup_j_din_plt.depth		= sup_j_plt.depth;
 
-					sup_j_plt.yaw	= turtle_dataset_yaw(time_f_id_old_plt:mag_step:time_in_id_plt-1);
-					sup_j_plt.pitch = turtle_dataset_pitch(time_f_id_old_plt:mag_step:time_in_id_plt-1);
-					sup_j_plt.roll	= turtle_dataset_roll(time_f_id_old_plt:mag_step:time_in_id_plt-1);
+					sup_j_din_plt.yaw	= turtle_dataset_yaw(time_f_id_old_plt:mag_step:time_in_id_plt-1);
+					sup_j_din_plt.pitch = turtle_dataset_pitch(time_f_id_old_plt:mag_step:time_in_id_plt-1);
+					sup_j_din_plt.roll	= turtle_dataset_roll(time_f_id_old_plt:mag_step:time_in_id_plt-1);
 
 				end
 				
