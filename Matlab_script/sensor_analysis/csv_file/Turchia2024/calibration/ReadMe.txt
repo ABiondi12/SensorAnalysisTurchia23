@@ -1,0 +1,1 @@
+chiamare il file da testare come "Calib_test.csV" e selezionare la tartaruga "0. General" durante l'esecuzione del test per la calibrazione. Il test di calibrazione viene fatto eseguendo lo script "calibration_procedure_real_time.m" contenuto in "SensorAnalysisTurchia23\Matlab_script\sensor_analysis".

@@ -80,6 +80,8 @@ addpath("csv_file\Turchia2023\Sevval-A");
 addpath("csv_file\Turchia2023\Deniz");
 addpath("csv_file\Turchia2023\Elif");
 addpath("csv_file\Turchia2023\Funda");
+addpath("csv_file\Turchia2024");
+addpath("csv_file\Turchia2024\calibration\");
 
 %% correct dataset
 

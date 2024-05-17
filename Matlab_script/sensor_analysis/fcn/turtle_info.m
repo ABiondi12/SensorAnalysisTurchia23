@@ -19,6 +19,7 @@ if turtle_nm == 0
 	fprintf('7. Deniz \n')
 	fprintf('8. Elif \n')
 	fprintf('9. Funda \n')
+    fprintf('0. General \n')
 
 	while turtle_nm <= 0 || turtle_nm > turtle_max
 		turtle_nm = input('');
@@ -203,4 +204,24 @@ elseif turtle_nm == 9
 	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Funda.mat';
 	
 	turtle_freq_name		= 'turtle_freq_Funda.mat';
+
+   elseif turtle_nm == 0
+	turtle_name		= 'Calib_test';
+	name_table_agm	= 'Calib_test.csv'; 
+	name_table_axy	= 'Calib_test.csv'; 
+	name_table_calib = 'Calib_test.csv';
+	turtle_raw_name			= 'Calib_test.mat';
+	turtle_ypr_name			= 'Calib_test_ypr.mat';
+	turtle_dive_name		= 'Calib_test_dive.mat';
+	turtle_dive_plt_name	= 'Calib_test_dive_plt.mat';
+	turtle_dive_fft_name	= 'Calib_test_dive_fft.mat';
+	turtle_DBA_name			= 'Calib_test_DBA.mat';
+	turtle_DBA_name_paper	= 'Calib_test_DBA_paper.mat';
+	
+	turtle_dive_name_din		= 'Calib_test_dive_din.mat';
+	turtle_dive_plt_name_din	= 'Calib_test_dive_din_plt.mat';
+	turtle_dive_fft_name_din	= 'Calib_test_dive_fft_din.mat';
+	turtle_DBA_name_paper_din	= 'Calib_test_DBA_paper_din.mat';
+	
+	turtle_freq_name		= 'Calib_test_freq.mat';
 end
