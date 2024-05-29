@@ -184,7 +184,7 @@ if (sensor_type == 1 && (new_raw_dataset == 1 || ov_to_do == 1)) || sensor_type 
 	end
 end
 
-if exist('all_together', 'var') == 0
+if exist('all_together', 'var') == 0 && calib_proc_real_time ~= 1
     % se non si esegue tutto insieme, allora facciamo main_1 e main_2
     % insieme, ma lasciamo comunque la possibilità di fare solo main 2
     % salvando qua i dati di acc, mag, mag calib e gyro che poi verranno
