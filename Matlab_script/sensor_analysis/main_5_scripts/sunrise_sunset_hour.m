@@ -43,32 +43,70 @@ while sun_kind <=0 || sun_kind > 3
 	sun_kind = input('');
 end
 
-if sun_kind == 1
-	if turtle_nm >= 1 && turtle_nm < 7
-		sunrise_hour	= (datetime(2023, 05, 30, 05, 16, 00, 000));
-		sunset_hour		= (datetime(2023, 05, 30, 20, 46, 00, 000));
-	elseif turtle_nm >= 7 && turtle_nm < 10
-		sunrise_hour	= (datetime(2023, 06, 26, 04, 59, 00, 000));
-		sunset_hour		= (datetime(2023, 06, 26, 21, 13, 00, 000));
-	end
-	
-elseif sun_kind == 2
-	if turtle_nm >= 1 && turtle_nm < 7
-		sunrise_hour	= (datetime(2023, 05, 30, 04, 39, 00, 000));
-		sunset_hour		= (datetime(2023, 05, 30, 21, 23, 00, 000));
-	elseif turtle_nm >= 7 && turtle_nm < 10
-		sunrise_hour	= (datetime(2023, 06, 26, 04, 16, 00, 000));
-		sunset_hour		= (datetime(2023, 06, 26, 21, 56, 00, 000));
-	end
-elseif sun_kind == 3
-	if turtle_nm >= 1 && turtle_nm < 7
-		sunrise_hour	= (datetime(2023, 05, 30, 03, 58, 00, 000));
-		sunset_hour		= (datetime(2023, 05, 30, 22, 04, 00, 000));
-	elseif turtle_nm >= 7 && turtle_nm < 10
-		sunrise_hour	= (datetime(2023, 06, 26, 03, 25, 00, 000));
-		sunset_hour		= (datetime(2023, 06, 26, 22, 47, 00, 000));
-	end
-end
+if release == 1
 
+    if sun_kind == 1 % civil
+
+	    if turtle_nm >= 1 && turtle_nm < 7
+		    sunrise_hour	= (datetime(2023, 05, 30, 05, 16, 00, 000));
+		    sunset_hour		= (datetime(2023, 05, 30, 20, 46, 00, 000));
+	    elseif turtle_nm >= 7 && turtle_nm < 10
+		    sunrise_hour	= (datetime(2023, 06, 26, 04, 59, 00, 000));
+		    sunset_hour		= (datetime(2023, 06, 26, 21, 13, 00, 000));
+	    end
+	    
+    elseif sun_kind == 2 % nautical
+    
+	    if turtle_nm >= 1 && turtle_nm < 7
+		    sunrise_hour	= (datetime(2023, 05, 30, 04, 39, 00, 000));
+		    sunset_hour		= (datetime(2023, 05, 30, 21, 23, 00, 000));
+	    elseif turtle_nm >= 7 && turtle_nm < 10
+		    sunrise_hour	= (datetime(2023, 06, 26, 04, 16, 00, 000));
+		    sunset_hour		= (datetime(2023, 06, 26, 21, 56, 00, 000));
+	    end
+    elseif sun_kind == 3 % astronomical
+    
+	    if turtle_nm >= 1 && turtle_nm < 7
+		    sunrise_hour	= (datetime(2023, 05, 30, 03, 58, 00, 000));
+		    sunset_hour		= (datetime(2023, 05, 30, 22, 04, 00, 000));
+	    elseif turtle_nm >= 7 && turtle_nm < 10
+		    sunrise_hour	= (datetime(2023, 06, 26, 03, 25, 00, 000));
+		    sunset_hour		= (datetime(2023, 06, 26, 22, 47, 00, 000));
+	    end
+    end
+
+elseif release == 2
+
+    if sun_kind == 1 % civil
+
+	    if turtle_nm >= 1 && turtle_nm < 6
+		    sunrise_hour	= (datetime(2024, 05, 20, 05, 24, 00, 000));
+		    sunset_hour		= (datetime(2024, 05, 20, 20, 39, 00, 000));
+	    elseif turtle_nm >= 6 && turtle_nm < 11
+		    sunrise_hour	= (datetime(2024, 06, 10, 05, 15, 00, 000));
+		    sunset_hour		= (datetime(2024, 06, 10, 20, 54, 00, 000));
+	    end
+	    
+    elseif sun_kind == 2 % nautical
+
+	    if turtle_nm >= 1 && turtle_nm < 6
+		    sunrise_hour	= (datetime(2024, 05, 20, 04, 48, 00, 000));
+		    sunset_hour		= (datetime(2024, 05, 20, 21, 16, 00, 000));
+	    elseif turtle_nm >= 6 && turtle_nm < 11
+		    sunrise_hour	= (datetime(2024, 06, 10, 04, 37, 00, 000));
+		    sunset_hour		= (datetime(2024, 06, 10, 21, 33, 00, 000));
+        end
+
+    elseif sun_kind == 3 % astronomical
+    
+	    if turtle_nm >= 1 && turtle_nm < 6
+		    sunrise_hour	= (datetime(2024, 05, 20, 04, 09, 00, 000));
+		    sunset_hour		= (datetime(2024, 05, 20, 21, 55, 00, 000));
+	    elseif turtle_nm >= 6 && turtle_nm < 11
+		    sunrise_hour	= (datetime(2024, 06, 10, 03, 54, 00, 000));
+		    sunset_hour		= (datetime(2024, 06, 10, 22, 15, 00, 000));
+	    end
+    end
+end
 save('sunrise_hour', 'sunrise_hour')
 save('sunset_hour', 'sunset_hour')

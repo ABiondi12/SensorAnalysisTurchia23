@@ -24,7 +24,11 @@ acc_normz = zeros(len_acc, 3);
 
 for i=1:len_acc
 	norma_acc(i)= norm(acc(i, :));
-	acc_normz(i, :) = acc(i, :)./norma_acc(i);
+    if norma_acc(i) == 0 % vuol dire che c'è un errore di misura perché almeno la g la deve sentire
+        acc_normz(i, :) = acc(i, :).*0;
+    else
+	    acc_normz(i, :) = acc(i, :)./norma_acc(i);
+    end
 end
 
 %% magnetic field
@@ -35,7 +39,11 @@ mag_normz =  zeros(len_mag, 3);
 
 for i=1:len_mag
 	norma_mag(i) = norm(mag(i, :));
-	mag_normz(i, :) = mag(i, :)./norma_mag(i);
+    if norma_acc(i) == 0 % vuol dire che c'è un errore di misura perché almeno la g la deve sentire
+        norma_mag(i, :) = mag(i, :).*0;
+    else
+	    mag_normz(i, :) = mag(i, :)./norma_mag(i);
+    end
 end
 
 %% gyroscope

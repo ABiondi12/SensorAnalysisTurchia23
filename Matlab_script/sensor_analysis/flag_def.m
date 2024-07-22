@@ -12,7 +12,7 @@ auto_calib = 1;				% if 0, choose if to perform calibration on mf data
 auto_calib_use = 1;			% if 0, choose if to use calibrated mf data
 							% if 1, automatically use calibrated mf data (suggested)
 							
-auto_calib_datetime	 = 0;	% if 1, automatic datetime insertion (suggested)
+auto_calib_datetime	 = 1;	% if 1, automatic datetime insertion (suggested)
 							% if 0, manual datetime insertion
 							
 auto_column_together = 1;	% if 1, date and time information are taken 
@@ -93,6 +93,16 @@ addpath("csv_file\Turchia2024\Ilkim");
 addpath("csv_file\Turchia2024\Ilkim\axy");
 addpath("csv_file\Turchia2024\Nurdan");
 addpath("csv_file\Turchia2024\Nurdan\axy");
+addpath("csv_file\Turchia2024\Paula");
+addpath("csv_file\Turchia2024\Paula\axy");
+addpath("csv_file\Turchia2024\Arya");
+addpath("csv_file\Turchia2024\Arya\axy");
+addpath("csv_file\Turchia2024\Bihter");
+addpath("csv_file\Turchia2024\Bihter\axy");
+addpath("csv_file\Turchia2024\Erica");
+addpath("csv_file\Turchia2024\Erica\axy");
+addpath("csv_file\Turchia2024\Benedetta");
+addpath("csv_file\Turchia2024\Benedetta\axy");
 
 %% correct dataset
 

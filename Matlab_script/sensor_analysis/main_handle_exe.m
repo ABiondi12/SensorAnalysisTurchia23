@@ -38,7 +38,7 @@ close all
 % missing one.
 name_table_modify	= 'Didar_agm.csv';	% not to be changed
 
-all_together = 1;           % if exists, the code is executed all together, otherwise you have to call each main_i separately and in order
+all_together = 0;           % if exists, the code is executed all together, otherwise you have to call each main_i separately and in order
 
 release = 0;
 
@@ -70,8 +70,8 @@ flag_def
 fprintf('1. Start raw data elaboration \n')
 main_1_raw_data
 
-% fprintf('2. Start ypr computation \n')
-% main_2_ypr
+fprintf('2. Start ypr computation \n')
+main_2_ypr
 
 % fprintf('3. Start dives analysis and ODBA \n')
 % main_3_dive_analysis

@@ -24,11 +24,20 @@ acc_NED = [0 0 1];
 
 %% Norm computation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-fprintf('norm_acc_mg using rotated sensor measures \n')
-[norm_acc_reor, acc_norm_reor, norm_mag_reor, mag_norm_reor, norm_gyro_reor, gyro_norm_reor] = norm_acc_mg(acc_reor, mag_reor, gyro_reor);
+if release == 2 && (turtle_nm == 4 || turtle_nm == 5)
+    fprintf('norm_acc_mg using rotated sensor measures \n')
+[norm_acc_reor, acc_norm_reor, norm_mag_reor, mag_norm_reor,  ~, ~] = norm_acc_mg(acc_reor, mag_reor);
 
 fprintf('norm_acc_mg using rotated sensor measures and calibrated magnetic field \n')
-[~, ~, norm_mag_reor_calib, mag_norm_reor_calib, ~, ~] = norm_acc_mg(acc_reor, mag_postcalib, gyro_reor);
+[~, ~, norm_mag_reor_calib, mag_norm_reor_calib, ~, ~] = norm_acc_mg(acc_reor, mag_postcalib);
+
+else    
+    fprintf('norm_acc_mg using rotated sensor measures \n')
+    [norm_acc_reor, acc_norm_reor, norm_mag_reor, mag_norm_reor, norm_gyro_reor, gyro_norm_reor] = norm_acc_mg(acc_reor, mag_reor, gyro_reor);
+    
+    fprintf('norm_acc_mg using rotated sensor measures and calibrated magnetic field \n')
+    [~, ~, norm_mag_reor_calib, mag_norm_reor_calib, ~, ~] = norm_acc_mg(acc_reor, mag_postcalib, gyro_reor);
+end
 
 if isnan(acc_norm_reor(end, 1))
 	acc_norm_reor(end, 1) = 0;

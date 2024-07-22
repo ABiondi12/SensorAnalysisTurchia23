@@ -40,6 +40,7 @@
 %	gyro x -- seems -x
 %	gyro y -- seems -y
 %	gyro z -- seems -z (in agm_z seems z)
+
 %% flag definition
 sensor_type		= 0;
 datetime_column = 0;
@@ -135,6 +136,17 @@ if (sensor_type == 1 && (new_raw_dataset == 1 || ov_to_do == 1)) || sensor_type 
 		data_accx		= table2array(data(1:end, 3));
 		data_accy		= table2array(data(1:end, 4));
 		data_accz		= table2array(data(1:end, 5));
+        
+        if iscell(data_accx)
+            data_accx = -str2double(data_accx);
+        end
+        if iscell(data_accy)
+            data_accy = -str2double(data_accy);
+        end
+        if iscell(data_accz)
+            data_accz = -str2double(data_accz);
+        end
+
 		acc_sens		= [data_accx, data_accy, data_accz];
 
 		[nan_find_x, nan_find_y] = find(isnan(acc_sens));
@@ -157,39 +169,88 @@ if (sensor_type == 1 && (new_raw_dataset == 1 || ov_to_do == 1)) || sensor_type 
 			data_magx		= table2array(data(1:mag_step:end, 6));
 			data_magy		= table2array(data(1:mag_step:end, 7));
 			data_magz		= table2array(data(1:mag_step:end, 8));
+
 		elseif sensor_type == 1	% AGM
-			datetime_mag	= table2array(data(1:mag_step:end, 2));
-			data_magx		= table2array(data(1:mag_step:end, 9));   
-			data_magy		= table2array(data(1:mag_step:end, 10));
-			data_magz		= table2array(data(1:mag_step:end, 11));
+            if release == 2 && (turtle_nm == 4 || turtle_nm == 5)
+                datetime_mag	= table2array(data(1:mag_step:end, 2));
+			    data_magx		= table2array(data(1:mag_step:end, 8));   
+			    data_magy		= table2array(data(1:mag_step:end, 9));
+			    data_magz		= table2array(data(1:mag_step:end, 10));
+    
+			    datetime_depth	= table2array(data(1:depth_step:end, 2));
+			    depth			= table2array(data(1:depth_step:end, 7));
 
-			datetime_gyro	= table2array(data(1:gyro_step:end, 2));
-			data_gyrox		= table2array(data(1:gyro_step:end, 6));
-			data_gyroy		= table2array(data(1:gyro_step:end, 7));
-			data_gyroz		= table2array(data(1:gyro_step:end, 8));
+                if iscell(depth)
+                    depth = -str2double(depth);
+                else
+			        depth			= - depth;
+                end
 
-			datetime_depth	= table2array(data(1:depth_step:end, 2));
-			depth			= table2array(data(1:depth_step:end, 13));
-			depth			= - depth;
-			gyro_sens		= [data_gyrox, data_gyroy, data_gyroz];
+            else
+			    datetime_mag	= table2array(data(1:mag_step:end, 2));
+			    data_magx		= table2array(data(1:mag_step:end, 9));   
+			    data_magy		= table2array(data(1:mag_step:end, 10));
+			    data_magz		= table2array(data(1:mag_step:end, 11));
+    
+			    datetime_gyro	= table2array(data(1:gyro_step:end, 2));
+			    data_gyrox		= table2array(data(1:gyro_step:end, 6));
+			    data_gyroy		= table2array(data(1:gyro_step:end, 7));
+			    data_gyroz		= table2array(data(1:gyro_step:end, 8));
+    
+                if iscell(data_gyrox)
+                    data_gyrox = -str2double(data_gyrox);
+                end
+                if iscell(data_gyroy)
+                    data_gyroy = -str2double(data_gyroy);
+                end
+                if iscell(data_gyroz)
+                    data_gyroz = -str2double(data_gyroz);
+                end
 
-			[nan_find_x, nan_find_y] = find(isnan(gyro_sens));
-			if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
-				count = 0;
-				while isempty(nan_find_x) == 0 && isempty(nan_find_y) == 0 && count < 10 
-					count = count +1;
-					fprintf('Nan number found, correct...\n');
-					gyro_sens(nan_find_x, nan_find_y) = gyro_sens(nan_find_x-1, nan_find_y);
-					[nan_find_x, nan_find_y] = find(isnan(gyro_sens));
-				end
-			end
+			    datetime_depth	= table2array(data(1:depth_step:end, 2));
+			    depth			= table2array(data(1:depth_step:end, 13));
 
-			if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
-				fprintf('too many NaN in the gyroscope dataset, get a look to your data before proceeding \n');
-			end
+	            if iscell(depth)
+                    depth = -str2double(depth);
+                else
+			        depth			= - depth;
+                end
 
-		end
+			    gyro_sens		= [data_gyrox, data_gyroy, data_gyroz];
+			    [nan_find_x, nan_find_y] = find(isnan(gyro_sens));
 
+			    if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
+				    count = 0;
+				    while isempty(nan_find_x) == 0 && isempty(nan_find_y) == 0 && count < 10 
+					    count = count +1;
+					    fprintf('Nan number found, correct...\n');
+					    gyro_sens(nan_find_x, nan_find_y) = gyro_sens(nan_find_x-1, nan_find_y);
+					    [nan_find_x, nan_find_y] = find(isnan(gyro_sens));
+				    end
+			    end
+    
+			    if isempty(nan_find_x) == 0 || isempty(nan_find_y) == 0
+				    fprintf('too many NaN in the gyroscope dataset, get a look to your data before proceeding \n');
+			    end
+            end
+        end
+
+        if iscell(data_magx)
+            data_magx = -str2double(data_magx);
+        end
+        if iscell(data_magy)
+            data_magy = -str2double(data_magy);
+        end
+        if iscell(data_magz)
+            data_magz = -str2double(data_magz);
+        end
+        
+        mag_sens		= [data_magx, data_magy, data_magz];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	elseif datetime_column == 2 % date and time together - not working for now
 		date_acc	= table2array(data(:, 2));
 		time_acc	= table2array(data(:, 3));
@@ -219,7 +280,8 @@ if (sensor_type == 1 && (new_raw_dataset == 1 || ov_to_do == 1)) || sensor_type 
 			depth		= - depth;
 			gyro_sens	= [data_gyrox, data_gyroy, data_gyroz];
 		end
-	end
+    end
+
 	mag_sens = [data_magx, data_magy, data_magz];
 
 	[nan_find_x, nan_find_y] = find(isnan(mag_sens));

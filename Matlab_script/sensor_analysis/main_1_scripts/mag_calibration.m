@@ -67,6 +67,7 @@
 
 %% select calibration section
 same_dataset = 0;
+
 day_max = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 31, 31];
 
 while same_dataset ~= 1 && same_dataset ~= 2
@@ -158,6 +159,7 @@ if auto_calib_datetime == 0
 elseif auto_calib_datetime == 1
 	auto_calib_session
 end
+
 %% Calibration perform
 if same_dataset == 1	% Yes
 	[start_id_calib, stop_id_calib] = time_id(datetime_mag, Yi, Mi, Di, Hi, MIi, Si, MSi, Yf, Mf, Df, Hf, MIf, Sf, MSf);
@@ -169,31 +171,42 @@ else					% no
 	data_accz_calib		= table2array(data_calib(:, 5));
 	acc_sens_calib		= [data_accx_calib, data_accy_calib, data_accz_calib];
 	
-	if sensor == 2		% axy
+	if sensor_type == 2		% axy
 		datetime_mag_calib	= table2array(data_calib(1:mag_step:end, 2));
 		data_magx_calib		= table2array(data_calib(1:mag_step:end, 6));
 		data_magy_calib		= table2array(data_calib(1:mag_step:end, 7));
 		data_magz_calib		= table2array(data_calib(1:mag_step:end, 8));
-	elseif sensor == 1	% AGM
-		datetime_mag_calib	= table2array(data_calib(1:mag_step:end, 2));
-		data_magx_calib		= table2array(data_calib(1:mag_step:end, 9));        
-		data_magy_calib		= table2array(data_calib(1:mag_step:end, 10));
-		data_magz_calib		= table2array(data_calib(1:mag_step:end, 11));
-		datetime_gyro		= table2array(data_calib(1:gyro_step:end, 2));
-		data_gyrox_calib	= table2array(data_calib(1:gyro_step:end, 6));
-		data_gyroy_calib	= table2array(data_calib(1:gyro_step:end, 7));
-		data_gyroz_calib	= table2array(data_calib(1:gyro_step:end, 8));
-		gyro_sens_calib		= [data_gyrox_calib, data_gyroy_calib, data_gyroz_calib];
+        
+	elseif sensor_type == 1	% AGM
+
+        if release == 2 && (turtle_nm == 4 || turtle_nm == 5)
+            datetime_mag_calib	= table2array(data_calib(1:mag_step:end, 2));
+		    data_magx_calib		= table2array(data_calib(1:mag_step:end, 8));   
+		    data_magy_calib		= table2array(data_calib(1:mag_step:end, 9));
+		    data_magz_calib		= table2array(data_calib(1:mag_step:end, 10));    
+        else
+		    datetime_mag_calib	= table2array(data_calib(1:mag_step:end, 2));
+		    data_magx_calib		= table2array(data_calib(1:mag_step:end, 9));        
+		    data_magy_calib		= table2array(data_calib(1:mag_step:end, 10));
+		    data_magz_calib		= table2array(data_calib(1:mag_step:end, 11));
+		    datetime_gyro		= table2array(data_calib(1:gyro_step:end, 2));
+		    data_gyrox_calib	= table2array(data_calib(1:gyro_step:end, 6));
+		    data_gyroy_calib	= table2array(data_calib(1:gyro_step:end, 7));
+		    data_gyroz_calib	= table2array(data_calib(1:gyro_step:end, 8));
+		    gyro_sens_calib		= [data_gyrox_calib, data_gyroy_calib, data_gyroz_calib];
+        end
 	end
-	mag_calib = [data_magx_calib, data_magy_calib, data_magz_calib];
+	mag_sens_calib = [data_magx_calib, data_magy_calib, data_magz_calib];
 	
 	% reorient data
-	if sensor == 1			% AGM
-		[acc_reor_calib, mag_reor_calib, gyro_reor_calib]	= file_data_reor(acc_sens_calib, mag_sens_calib, gyro_sens_calib, sensor);
-	elseif sensor == 2		% axy
-		[acc_reor_calib, mag_reor_calib, unused_calib]		= file_data_reor(acc_sens_calib, mag_sens_calib, acc_sens_calib, sensor);
+    if sensor_type == 2 || (sensor_type == 1 && release == 2 && (turtle_nm == 4 || turtle_nm == 5)) % axy or AGMD with no gyro
+        [acc_reor_calib_tot, mag_reor_calib_tot, unused_calib]		= file_data_reor(acc_sens_calib, mag_sens_calib, acc_sens_calib, sensor_type, auto_freq_selection);
+    elseif sensor_type == 1			% AGM
+		[acc_reor_calib_tot, mag_reor_calib_tot, gyro_reor_calib_tot]	= file_data_reor(acc_sens_calib, mag_sens_calib, gyro_sens_calib, sensor_type, auto_freq_selection);
 	end
 	
+    [start_id_calib, stop_id_calib] = time_id(datetime_mag_calib, Yi, Mi, Di, Hi, MIi, Si, MSi, Yf, Mf, Df, Hf, MIf, Sf, MSf);
+	mag_reor_calib = mag_reor_calib_tot(start_id_calib:stop_id_calib, :);
 end
 
 % function that execute the calibration:

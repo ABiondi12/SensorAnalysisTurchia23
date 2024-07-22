@@ -9,12 +9,16 @@ if ~exist('raw_data_struct', 'var')
 	raw_data_struct = struct('ID', [], 'name', [], 'datetime_acc', [], 'datetime_mag', [], 'datetime_gyro', [], 'datetime_depth', [], 'depth', [], 'accx_reor', [], 'accy_reor', [], 'accz_reor', [], 'magx_reor', [], 'magy_reor', [], 'magz_reor', [], 'magx_calib', [], 'magy_calib', [], 'magz_calib', [], 'gyrox_reor', [], 'gyroy_reor', [], 'gyroz_reor', []);
 end
 
+if sensor_type == 1	&& release == 2 && (turtle_nm == 4 || turtle_nm == 5)
+    no_gyro = 1;
+else
+    no_gyro = 0;
+end
 %% allocate data into the struct
 raw_data_struct.ID			= turtle_nm;
 raw_data_struct.name		= turtle_name;
 raw_data_struct.datetime_acc	= datetime_acc;
 raw_data_struct.datetime_mag	= datetime_mag;
-raw_data_struct.datetime_gyro	= datetime_gyro;
 raw_data_struct.datetime_depth = datetime_depth;
 raw_data_struct.depth		= depth;
 raw_data_struct.accx_reor	= acc_reor(:, 1);
@@ -26,10 +30,13 @@ raw_data_struct.magz_reor	= mag_reor(:, 3);
 raw_data_struct.magx_calib	= mag_postcalib(:, 1);
 raw_data_struct.magy_calib	= mag_postcalib(:, 2);
 raw_data_struct.magz_calib	= mag_postcalib(:, 3);
-raw_data_struct.gyrox_reor	= gyro_reor(:, 1);
-raw_data_struct.gyroy_reor	= gyro_reor(:, 2);
-raw_data_struct.gyroz_reor	= gyro_reor(:, 3);
 
+if no_gyro == 0
+    raw_data_struct.datetime_gyro	= datetime_gyro;
+    raw_data_struct.gyrox_reor	= gyro_reor(:, 1);
+    raw_data_struct.gyroy_reor	= gyro_reor(:, 2);
+    raw_data_struct.gyroz_reor	= gyro_reor(:, 3);
+end
 %% save the struct as a .mat file
 
 new_raw_dataset = 0;

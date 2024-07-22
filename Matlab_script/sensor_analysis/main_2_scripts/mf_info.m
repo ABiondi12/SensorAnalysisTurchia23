@@ -11,23 +11,46 @@
 % the correct space coordinates of the release.
 
 % Turchia coordinates
+if release == 1
 
-if turtle_nm >= 1 && turtle_nm < 7	% first release
-	height		= 0;
-	lat			= 36.6060000; % from satellite info about turtles patterns
-	long		= 28.8150000; % from satellite info about turtles patterns
-	year_calib	= 2023;
-	month_calib	= 5;
-	day_calib	= 30;
-	model		= '2020';
-elseif turtle_nm >= 7 && turtle_nm < 10	% second release
-	height		= 0;
-	lat			= 36.6060000; % from satellite info about turtles patterns
-	long		= 28.8150000; % from satellite info about turtles patterns
-	year_calib	= 2023;
-	month_calib	= 06;
-	day_calib	= 26;
-	model		= '2020';
+    if turtle_nm >= 1 && turtle_nm < 7	% first release
+	    height		= 0;
+	    lat			= 36.6060000; % from satellite info about turtles patterns
+	    long		= 28.8150000; % from satellite info about turtles patterns
+	    year_calib	= 2023;
+	    month_calib	= 5;
+	    day_calib	= 30;
+	    model		= '2020';
+    elseif turtle_nm >= 7 && turtle_nm < 10	% second release
+	    height		= 0;
+	    lat			= 36.6060000; % from satellite info about turtles patterns
+	    long		= 28.8150000; % from satellite info about turtles patterns
+	    year_calib	= 2023;
+	    month_calib	= 06;
+	    day_calib	= 26;
+	    model		= '2020';
+    end
+   
+elseif release == 2
+
+    if turtle_nm >= 1 && turtle_nm < 6	% first release
+	    height		= 0;
+	    lat			= 36.6060000; % from satellite info about turtles patterns
+	    long		= 28.8150000; % from satellite info about turtles patterns
+	    year_calib	= 2024;
+	    month_calib	= 5;
+	    day_calib	= 19;
+	    model		= '2020';
+    elseif turtle_nm >= 6 && turtle_nm < 11	% second release
+	    height		= 0;
+	    lat			= 36.6060000; % from satellite info about turtles patterns
+	    long		= 28.8150000; % from satellite info about turtles patterns
+	    year_calib	= 2024;
+	    month_calib	= 06;
+	    day_calib	= 10;
+	    model		= '2020';
+    end
+
 end
 % local magnetic field from online dataset (NED frame)
 % Results have nanoTesla magnitude

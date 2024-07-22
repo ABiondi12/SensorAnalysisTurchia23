@@ -14,6 +14,7 @@
 %	frequency components, corresponding to static acceleration (gravity)
 
 %% init
+new_ypr_dataset = 1; % forse da eliminare
 
 main_num = 2;
 
