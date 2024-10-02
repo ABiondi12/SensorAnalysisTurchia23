@@ -10,6 +10,6 @@ end
 
 if clear_workspace == 1
 	% clear
-	clearvars -except main_num
+    clearvars -except main_num clear_workspace
 	close all
 end

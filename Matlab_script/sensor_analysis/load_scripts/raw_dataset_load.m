@@ -14,7 +14,8 @@ else
 		fprintf('2. Last selected \n')
 		while turtle_switch < 1 || turtle_switch > 2
 			turtle_switch = input('');
-		end
+        end
+        
 		if turtle_switch == 1
             %% release
             release = 0;

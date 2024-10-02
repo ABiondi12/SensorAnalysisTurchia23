@@ -103,6 +103,7 @@ end
 counter			= 0;
 sh_counter		= 0;
 surf_counter	= 0;
+first_surf_delete = 1;
 
 % Depth is used as parameters with which evaluate if turtle is performing a
 % dive or a surface swim phase
@@ -403,13 +404,21 @@ for i = 1: size(datetime_acc, 1)-2
 					end
 					
 				elseif surf_counter == 0
-					surfs_h = sup_j;
-					surfs_h_din = sup_j_din;
+                    if first_surf_delete == 0
+					    surfs_h = sup_j;
+					    surfs_h_din = sup_j_din;
+    
+					    if plt_version == 1
+						    surfs_h_plt = sup_j_plt;
+						    surfs_h_din_plt = sup_j_din_plt;
+                        end
 
-					if plt_version == 1
-						surfs_h_plt = sup_j_plt;
-						surfs_h_din_plt = sup_j_din_plt;
-					end
+                    elseif first_surf_delete == 1
+                        first_surf_delete = 0;
+                        surf_counter = surf_counter - 1;
+                        % do not save the first sub-surface (previous to
+                        % the release
+                    end
 				end
 
 				% save last dive instant of time to be used as the first

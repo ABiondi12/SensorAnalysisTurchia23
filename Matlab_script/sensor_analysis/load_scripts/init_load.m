@@ -2,7 +2,7 @@
 
 clear_all_variables
 
-if clear_workspace == 1 && turtle_nm == 0
+if clear_workspace == 1
     calib_proc_real_time = 1;
     fprintf('calib_proc_real_time created');
 end
@@ -10,7 +10,7 @@ end
 flag_def
 
 %% release selection
-
+release = 0;
 if release == 0
 
     fprintf("Which releases: \n")

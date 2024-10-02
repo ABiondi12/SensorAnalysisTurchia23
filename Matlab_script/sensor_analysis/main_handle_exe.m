@@ -28,32 +28,10 @@
 % that summarize the results is created and saved.
 
 %% start
-clear
 clc
 close all
-
-%% dataset correction - DO NOT change this section
-% There is an error in Didar dataset (missing one second), thus the code
-% automatically adjust the dataset by cloning the previous second in the
-% missing one.
-name_table_modify	= 'Didar_agm.csv';	% not to be changed
-
-all_together = 0;           % if exists, the code is executed all together, otherwise you have to call each main_i separately and in order
-
-release = 0;
-
-%% release
-if release == 0
-
-    fprintf("Which releases: \n")
-    fprintf("1. 2023 \n")
-    fprintf("2. 2024 \n")
-
-    while release <= 0 || release > 2
-        release = input('');
-    end
-end
-
+clear
+clearvars
 
 %% flag definition
 % These variables are used as shortcut for obtaining an higher level of
@@ -62,29 +40,31 @@ end
 
 flag_def
 
-%% Turle name selection
-% Selection of the turtle and variables name definition
-[turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_plt_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_dive_name_din, turtle_dive_plt_name_din, turtle_dive_fft_name_din, turtle_DBA_name_paper_din, turtle_freq_name] = turtle_info(0, release);
+% all_together = 0;           % if exists, the code is executed all together, otherwise you have to call each main_i separately and in order
 
 %% main_launch
 fprintf('1. Start raw data elaboration \n')
 main_1_raw_data
+from_main_1 = 1;
 
 fprintf('2. Start ypr computation \n')
 main_2_ypr
+from_main_2 = 1;
 
-% fprintf('3. Start dives analysis and ODBA \n')
-% main_3_dive_analysis
+fprintf('3. Start dives analysis and ODBA \n')
+main_3_dive_analysis
+from_main_3 = 1;
 
-% fprintf('4. Start stft computation \n')
-% main_4_stft
+fprintf('4. Start stft computation \n')
+main_4_stft
+from_main_4 = 1;
 
 % fprintf('5. Start ODBA evaluation \n')
-% main_5_ODBA_statistics_paper
+main_5_ODBA_statistics_paper
 
 %% table creation
 % fprintf('6. Start table creation \n')
-% tab_dives_entire
+tab_dives_entire
 % fprintf('Table correctly created and saved \n')
 
 clear all_together

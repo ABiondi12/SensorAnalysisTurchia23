@@ -37,7 +37,7 @@ step_saving = 1;			% if 1, the code saves partial results
 							
 plt_version = 0;			% if 1, create another dataset having wider dive margins
 	
-raw_plt_show = 0;
+raw_plt_show = 1;
 calib_plt_show = 1;
 ypr_plt_show = 0;
 
@@ -104,8 +104,10 @@ addpath("csv_file\Turchia2024\Erica\axy");
 addpath("csv_file\Turchia2024\Benedetta");
 addpath("csv_file\Turchia2024\Benedetta\axy");
 
-%% correct dataset
-
+%% correct dataset - DO NOT change this section
+% There is an error in Didar dataset (missing one second), thus the code
+% automatically adjust the dataset by cloning the previous second in the
+% missing one.
 if exist('name_table_modify', 'var') == 0
 	name_table_modify	= 'Didar_agm.csv';
 end
