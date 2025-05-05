@@ -12,9 +12,9 @@ auto_calib = 1;				% if 0, choose if to perform calibration on mf data
 auto_calib_use = 1;			% if 0, choose if to use calibrated mf data
 							% if 1, automatically use calibrated mf data (suggested)
 							
-auto_calib_datetime	 = 1;	% if 1, automatic datetime insertion (suggested)
-							% if 0, manual datetime insertion
-							
+auto_calib_datetime	 = 1;	% if 0, manual datetime insertion
+                            % if 1, automatic datetime insertion (suggested)
+														
 auto_column_together = 1;	% if 1, date and time information are taken 
 							% as in the same column (suggested)	
 
@@ -26,9 +26,13 @@ auto_norm_g_mf_angle = 0;	% if 0, not show these values (suggested)
 							% the angle between g and mf is computed only
 							% if requested from the user (with this flag
 							% equal to 1)
+
 auto_freq_selection = 1;    % if 0, choose the data acquisition frequencies
 							% if 1, default values based on collected data
 							% in 2023 dataset.
+
+auto_logger_orientation = 1;
+
 %% new flags
 
 step_saving = 1;			% if 1, the code saves partial results
@@ -53,56 +57,6 @@ end
 if exist('dim_fontb', 'var') == 0
 	dim_fontb = 15;
 end
-
-%% add path
-addpath("fcn");
-addpath("general_scripts");
-addpath("main");
-addpath("main_1_scripts");
-addpath("main_2_scripts");
-addpath("main_3_scripts");
-addpath("main_4_scripts");
-addpath("main_5_scripts");
-addpath("save_scripts");
-addpath("load_scripts");
-addpath("csv_file");
-addpath("csv_file\Turchia2023");
-addpath("csv_file\Turchia2023\Banu-C");
-addpath("csv_file\Turchia2023\Banu-C\axy");
-addpath("csv_file\Turchia2023\Didar-F");
-addpath("csv_file\Turchia2023\Emine-D");
-addpath("csv_file\Turchia2023\Emine-D\axy");
-addpath("csv_file\Turchia2023\Fati-E");
-addpath("csv_file\Turchia2023\Fati-E\axy");
-addpath("csv_file\Turchia2023\Melis-B");
-addpath("csv_file\Turchia2023\Melis-B\axy");
-addpath("csv_file\Turchia2023\Sevval-A");
-addpath("csv_file\Turchia2023\Deniz");
-addpath("csv_file\Turchia2023\Elif");
-addpath("csv_file\Turchia2023\Funda");
-addpath("csv_file\Turchia2024");
-addpath("csv_file\Turchia2024\calibration\");
-
-addpath("csv_file\Turchia2024\Enes");
-addpath("csv_file\Turchia2024\Enes\axy");
-addpath("csv_file\Turchia2024\Atakan");
-addpath("csv_file\Turchia2024\Atakan\axy");
-addpath("csv_file\Turchia2024\Fatma");
-addpath("csv_file\Turchia2024\Fatma\axy");
-addpath("csv_file\Turchia2024\Ilkim");
-addpath("csv_file\Turchia2024\Ilkim\axy");
-addpath("csv_file\Turchia2024\Nurdan");
-addpath("csv_file\Turchia2024\Nurdan\axy");
-addpath("csv_file\Turchia2024\Paula");
-addpath("csv_file\Turchia2024\Paula\axy");
-addpath("csv_file\Turchia2024\Arya");
-addpath("csv_file\Turchia2024\Arya\axy");
-addpath("csv_file\Turchia2024\Bihter");
-addpath("csv_file\Turchia2024\Bihter\axy");
-addpath("csv_file\Turchia2024\Erica");
-addpath("csv_file\Turchia2024\Erica\axy");
-addpath("csv_file\Turchia2024\Benedetta");
-addpath("csv_file\Turchia2024\Benedetta\axy");
 
 %% correct dataset - DO NOT change this section
 % There is an error in Didar dataset (missing one second), thus the code

@@ -120,10 +120,11 @@ if (sensor_type == 1 && (new_raw_dataset == 1 || ov_to_do == 1)) || sensor_type 
 	%					z down directed
 	%					y in order to obtain a right frame
 
-    if sensor_type == 2 || (sensor_type == 1 && release == 2 && (turtle_nm == 4 || turtle_nm == 5)) % axy or AGMD with no gyro
-	        [acc_reor, mag_reor, unused]	= file_data_reor(acc_sens, mag_sens, acc_sens, sensor_type, auto_freq_selection);
-    elseif sensor_type == 1		% agm
-	        [acc_reor, mag_reor, gyro_reor]	= file_data_reor(acc_sens, mag_sens, gyro_sens, sensor_type, auto_freq_selection);
+    % if sensor_type == 2 || (sensor_type == 1 && release == 2 && (turtle_nm == 4 || turtle_nm == 5)) % axy or AGMD with no gyro
+    if sensor_type == 2 || (sensor_type == 1 && carapace_model == "axy") % axy or AGMD with no gyro
+	        [acc_reor, mag_reor, unused]	= file_data_reor(acc_sens, mag_sens, acc_sens, sensor_type, auto_logger_orientation, carapace_model);
+    elseif sensor_type == 1	&& carapace_model == "agm"	% agm
+	        [acc_reor, mag_reor, gyro_reor]	= file_data_reor(acc_sens, mag_sens, gyro_sens, sensor_type, auto_logger_orientation, carapace_model);
     end
 
 	%% magnetic field

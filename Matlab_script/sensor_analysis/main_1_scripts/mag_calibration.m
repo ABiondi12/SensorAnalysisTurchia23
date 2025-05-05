@@ -71,11 +71,15 @@ same_dataset = 0;
 day_max = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 31, 31];
 
 while same_dataset ~= 1 && same_dataset ~= 2
-	fprintf('Calibration section is in the same dataset?\n')
+	fprintf('Calibration section is in the same dataset? (NO for Enes, Nurdan, Ilkim) \n')
 	fprintf('1 = yes \n')
 	fprintf('2 = no \n')
 	
 	same_dataset = input('');
+end
+
+if release == 3
+    auto_calib_datetime = 0;
 end
 
 if auto_calib_datetime == 0
@@ -164,6 +168,9 @@ end
 if same_dataset == 1	% Yes
 	[start_id_calib, stop_id_calib] = time_id(datetime_mag, Yi, Mi, Di, Hi, MIi, Si, MSi, Yf, Mf, Df, Hf, MIf, Sf, MSf);
 	mag_reor_calib = mag_reor(start_id_calib:stop_id_calib, :);
+    datetime_mag_calib = datetime_mag(start_id_calib:stop_id_calib);
+    datetime_mag_calib_plot = datetime_mag_calib;
+
 else					% no
 	datetime_acc_calib	= table2array(data_calib(:, 2));
 	data_accx_calib		= table2array(data_calib(:, 3));
@@ -186,10 +193,10 @@ else					% no
 		    data_magz_calib		= table2array(data_calib(1:mag_step:end, 10));    
         else
 		    datetime_mag_calib	= table2array(data_calib(1:mag_step:end, 2));
-		    data_magx_calib		= table2array(data_calib(1:mag_step:end, 9));        
+            data_magx_calib		= table2array(data_calib(1:mag_step:end, 9));        
 		    data_magy_calib		= table2array(data_calib(1:mag_step:end, 10));
 		    data_magz_calib		= table2array(data_calib(1:mag_step:end, 11));
-		    datetime_gyro		= table2array(data_calib(1:gyro_step:end, 2));
+		    datetime_gyro_calib	= table2array(data_calib(1:gyro_step:end, 2));
 		    data_gyrox_calib	= table2array(data_calib(1:gyro_step:end, 6));
 		    data_gyroy_calib	= table2array(data_calib(1:gyro_step:end, 7));
 		    data_gyroz_calib	= table2array(data_calib(1:gyro_step:end, 8));
@@ -200,13 +207,15 @@ else					% no
 	
 	% reorient data
     if sensor_type == 2 || (sensor_type == 1 && release == 2 && (turtle_nm == 4 || turtle_nm == 5)) % axy or AGMD with no gyro
-        [acc_reor_calib_tot, mag_reor_calib_tot, unused_calib]		= file_data_reor(acc_sens_calib, mag_sens_calib, acc_sens_calib, sensor_type, auto_freq_selection);
+        [acc_reor_calib_tot, mag_reor_calib_tot, unused_calib]		= file_data_reor(acc_sens_calib, mag_sens_calib, acc_sens_calib, sensor_type, auto_logger_orientation, carapace_model);
     elseif sensor_type == 1			% AGM
-		[acc_reor_calib_tot, mag_reor_calib_tot, gyro_reor_calib_tot]	= file_data_reor(acc_sens_calib, mag_sens_calib, gyro_sens_calib, sensor_type, auto_freq_selection);
+		[acc_reor_calib_tot, mag_reor_calib_tot, gyro_reor_calib_tot]	= file_data_reor(acc_sens_calib, mag_sens_calib, gyro_sens_calib, sensor_type, auto_logger_orientation, carapace_model);
 	end
 	
     [start_id_calib, stop_id_calib] = time_id(datetime_mag_calib, Yi, Mi, Di, Hi, MIi, Si, MSi, Yf, Mf, Df, Hf, MIf, Sf, MSf);
 	mag_reor_calib = mag_reor_calib_tot(start_id_calib:stop_id_calib, :);
+    datetime_mag_calib_plot = datetime_mag_calib(start_id_calib:stop_id_calib);
+
 end
 
 % function that execute the calibration:
@@ -218,6 +227,9 @@ end
 norma_mag_postcalib = norm(mag_postcalib);
 norma_mag_calib_postcalib = norm(mag_calib_postcalib);
 
+if same_dataset == 2
+    [mag_calib_postcalib_clbsess, mag_postcalib_clbsess, soft_iron_clbsess, hard_iron_clbsess, exp_mag_strength_clbsess, sphere_fit_clbsess, ellips_fit_clbsess] = mag_calib_main(mag_reor_calib_tot, mag_reor_calib);
+end
 %% plot
 if calib_plt_show == 1
 	mag_calibration_plot

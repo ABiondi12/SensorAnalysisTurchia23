@@ -9,7 +9,7 @@
 %			work yet)
 %
 %	b. Sensor model
-%			1. AGMD
+%			1. AGMD 
 %			2. Axy-5
 %
 % Moreover, it is assumed that acceleration data has been taken with 10Hz
@@ -69,9 +69,9 @@ elseif auto_column_together == 1
 end
 
 % Choice of the sensor model.
-fprintf("Choose the logger model: \n")
-fprintf("1. AGM \n")
-fprintf("2. Axy-5 \n")
+fprintf("Choose the logger location: \n")
+fprintf("1. CARAPACE (recommended) \n")
+fprintf("2. head \n")
 
 while sensor_type <= 0 || sensor_type > 2
 	sensor_type = input('');
@@ -79,7 +79,7 @@ end
 
 %% read table
 
-if sensor_type == 1
+if sensor_type == 1     
 	name_table = name_table_agm;
 elseif sensor_type == 2
 	name_table = name_table_axy;
@@ -89,23 +89,32 @@ end
 %% check for already present raw .mat file
 new_raw_dataset = 0;
 if exist(turtle_raw_name, 'file') == 2
-	fprintf([turtle_raw_name,': dataset already exists!!! \n'])
+    formatSpec = "%s : dataset exists!!! \n";
+    print_msg = compose(formatSpec, turtle_raw_name);
+	fprintf(print_msg)
 	ov_to_do = 0;
 	
 	yn_ans = 0;
 	while yn_ans < 1 || yn_ans > 2
-		fprintf([turtle_raw_name, ': do you want to load the dataset again? \n'])
-		fprintf('1_ yes \n')
+        formatSpec = "%s : do you want to load again the dataset (yes) or to use the existing one (no)? \n";
+        print_msg = compose(formatSpec, turtle_raw_name);
+	    fprintf(print_msg)
+        fprintf('1_ yes \n')
 		fprintf('2_ no \n')
 		yn_ans = input('');
 	end
 	
 	if yn_ans == 1
 		ov_to_do = 1;
-		fprintf([turtle_raw_name, ': start loading... \n'])
+        formatSpec = "%s : start loading... \n";
+        print_msg = compose(formatSpec, turtle_raw_name);
+	    fprintf(print_msg)
+		
 	elseif yn_ans == 2
 		ov_to_do = 0;
-		fprintf([turtle_raw_name, ': load operation aborted! \n'])
+        formatSpec = "%s : load operation aborted! \n";
+        print_msg = compose(formatSpec, turtle_raw_name);
+	    fprintf(print_msg)
 	end
 else
 	new_raw_dataset = 1;

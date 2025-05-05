@@ -42,12 +42,16 @@ end
 new_raw_dataset = 0;
 
 if exist(turtle_raw_name, 'file') == 2
-	fprintf([turtle_raw_name,': dataset exists!!! \n'])
+    formatSpec = "%s : dataset exists!!! \n";
+    print_msg = compose(formatSpec, turtle_raw_name);
+	fprintf(print_msg)
 	ov_to_do = 0;
 	
 	yn_ans = 0;
 	while yn_ans < 1 || yn_ans > 2
-		fprintf([turtle_raw_name, ': do you want to overwrite it? \n'])
+        formatSpec = "%s : do you want to overwrite it? \n";
+        print_msg = compose(formatSpec, turtle_raw_name);
+	    fprintf(print_msg)
 		fprintf('1_ yes \n')
 		fprintf('2_ no \n')
 		yn_ans = input('');
@@ -55,20 +59,32 @@ if exist(turtle_raw_name, 'file') == 2
 	
 	if yn_ans == 1
 		ov_to_do = 1;
-		fprintf([turtle_raw_name, ': start overwrite... \n'])
+        formatSpec = "%s : start overwrite... \n";
+        print_msg = compose(formatSpec, turtle_raw_name);
+	    fprintf(print_msg)
 	elseif yn_ans == 2
 		ov_to_do = 0;
-		fprintf([turtle_raw_name, ': overwrite operation aborted! \n'])
+        formatSpec = "%s : overwrite operation aborted! \n";
+        print_msg = compose(formatSpec, turtle_raw_name);
+	    fprintf(print_msg)
 	end
 	
 else
-	fprintf([turtle_raw_name, ': dataset does not exist, start making it... \n'])
+    formatSpec = "%s : dataset does not exist, start making it... \n";
+    print_msg = compose(formatSpec, turtle_raw_name);
+	fprintf(print_msg)
 	new_raw_dataset = 1;
 end
 
 if new_raw_dataset == 1 || ov_to_do == 1
-	fprintf([turtle_raw_name, ': saving struct \n'])
+    formatSpec = "%s : saving struct \n";
+    print_msg = compose(formatSpec, turtle_raw_name);
+	fprintf(print_msg)
+
 	% save('turtle_dive', 'turtle_dive', '-v7.3');
 	save(turtle_raw_name, 'raw_data_struct', '-v7.3');
-	fprintf([turtle_raw_name,' saved! \n'])
+
+    formatSpec = "%s : saved! \n";
+    print_msg = compose(formatSpec, turtle_raw_name);
+	fprintf(print_msg)    
 end

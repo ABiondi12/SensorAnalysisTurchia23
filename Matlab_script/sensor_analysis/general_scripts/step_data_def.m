@@ -2,6 +2,10 @@ freq_mag		= 0;
 freq_gyro		= 0;
 freq_depth		= 0;
 
+if release == 3
+    auto_freq_selection = 0;
+end
+
 if auto_freq_selection == 0
 
 	fprintf("Choose the magnetometer frequency: \n")

@@ -146,3 +146,103 @@ smooth_yaw_m_norm_calib	= smoothdata(yaw_m_norm_calib, 'movmean', more*n_2s);
 smooth_yaw_g_norm_calib	= smoothdata(yaw_g_norm_calib, 'movmean', more*n_2s);
 smooth_pitch_norm_calib	= smoothdata(pitch_norm_calib, 'movmean', n_2s);
 smooth_roll_norm_calib	= smoothdata(roll_norm_calib, 'movmean', n_2s);
+
+
+
+%% calib session not in the same dataset
+if same_dataset == 2 % no same dataset
+    calib_session_ypr = 0;
+    while calib_session_ypr ~= 1 && calib_session_ypr ~= 2
+	    fprintf('Do you want to compute ypr for the calibration section? \n')
+	    fprintf('1 = yes \n')
+	    fprintf('2 = no \n')
+	
+	    calib_session_ypr = input('');
+    end
+    if calib_session_ypr == 1
+        
+        %	mag_calib_postcalib = post calibration of the calibration set
+        %	mag_postcalib		= post calibration of the entire dataset
+
+        fprintf('YPR using rotated sensor measures and calibrated magnetic field \n')
+        [yaw_m_calib_clbsess, yaw_g_calib_clbsess, pitch_calib_clbsess, roll_calib_clbsess, R_pose_m_calib_clbsess, R_pose_g_calib_clbsess]= YPR_comp(g_NED, D, acc_reor_calib_tot, mag_postcalib_clbsess, Fs, Fs_filter);
+        
+        %% smooth data
+        % Windows choice is related to AAV computation, during which, by following
+        % Gunner paper steps, angles are smoothed using a 2 second moving window.
+        % Since our sample rate is 10Hz, we need to use a 20 samples width window.
+        
+        % We so have to compute:
+        %		smooth_values = smoothdata(values, 'movmean', 20)
+        
+        if exist("n_2s", "var") == 0
+            n_2s = 2*Fs;	% 2s smooth
+        end
+        if exist("more", "var") == 0
+            more = 50;		% 100s smooth
+        end
+        
+        % with calibrated magnetic field
+        smooth_yaw_m_calib_clbsess	= smoothdata(yaw_m_calib_clbsess, 'movmean', more*n_2s);
+        smooth_yaw_g_calib_clbsess	= smoothdata(yaw_g_calib_clbsess, 'movmean', more*n_2s);
+        smooth_pitch_calib_clbsess	= smoothdata(pitch_calib_clbsess, 'movmean', n_2s);
+        smooth_roll_calib_clbsess	= smoothdata(roll_calib_clbsess, 'movmean', n_2s);
+        
+    end
+end
+
+if same_dataset == 1 || (same_dataset == 2 && calib_session_ypr == 1)
+    calib_session_ypr_show = 0;
+    while calib_session_ypr_show ~= 1 && calib_session_ypr_show ~= 2
+	    fprintf('Do you want to show ypr for the calibration section? \n')
+	    fprintf('1 = yes \n')
+	    fprintf('2 = no \n')
+	
+	    calib_session_ypr_show = input('');
+    end
+
+    if calib_session_ypr_show == 1
+        
+        if same_dataset == 2 % no same dataset
+        
+                %% YPR reoriented w.r.t. magnetic North after calibration
+            figure('Name', ['figure ', num2str(id_plot),', YPR reoriented w.r.t. magnetic North - calibration session'], 'NumberTitle','off'); id_plot = id_plot + 1;
+            clf
+            plot(datetime_mag_calib_plot, [roll_calib_clbsess(start_id_calib:stop_id_calib), pitch_calib_clbsess(start_id_calib:stop_id_calib), yaw_m_calib_clbsess(start_id_calib:stop_id_calib)], '*', 'MarkerSize', 2)
+	        grid on
+	        box on
+	        axis tight
+	        xlabel('time','FontSize', dim_font)
+	        ylabel('angle (deg)','FontSize', dim_font)
+	        legend('Roll', 'Pitch', 'Yaw','FontSize', dim_font, 'Location', 'best')
+	        set(gca,'FontSize', dim_font) 
+	        title('YPR reoriented w.r.t. magnetic North - calibration session')
+    
+            figure('Name', ['figure ', num2str(id_plot),', YPR reoriented w.r.t. magnetic North - calibration dataset'], 'NumberTitle','off'); id_plot = id_plot + 1;
+            clf
+            plot(datetime_mag_calib, [roll_calib_clbsess, pitch_calib_clbsess, yaw_m_calib_clbsess], '*', 'MarkerSize', 2)
+	        grid on
+	        box on
+	        axis tight
+	        xlabel('time','FontSize', dim_font)
+	        ylabel('angle (deg)','FontSize', dim_font)
+	        legend('Roll', 'Pitch', 'Yaw','FontSize', dim_font, 'Location', 'best')
+	        set(gca,'FontSize', dim_font) 
+	        title('YPR reoriented w.r.t. magnetic North - calibration dataset')
+        elseif same_dataset == 1 % yes same dataset
+
+            figure('Name', ['figure ', num2str(id_plot),', YPR reoriented w.r.t. magnetic North - calibration session'], 'NumberTitle','off'); id_plot = id_plot + 1;
+            clf
+            plot(datetime_mag_calib_plot, [roll_calib(start_id_calib:stop_id_calib), pitch_calib(start_id_calib:stop_id_calib), yaw_m_calib(start_id_calib:stop_id_calib)], '*', 'MarkerSize', 2)
+	        grid on
+	        box on
+	        axis tight
+	        xlabel('time','FontSize', dim_font)
+	        ylabel('angle (deg)','FontSize', dim_font)
+	        legend('Roll', 'Pitch', 'Yaw','FontSize', dim_font, 'Location', 'best')
+	        set(gca,'FontSize', dim_font) 
+	        title('YPR reoriented w.r.t. magnetic North - calibration session')
+        end
+    end
+
+end

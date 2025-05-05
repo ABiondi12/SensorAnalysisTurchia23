@@ -1,4 +1,4 @@
-function [turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_plt_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_dive_name_din, turtle_dive_plt_name_din, turtle_dive_fft_name_din, turtle_DBA_name_paper_din, turtle_freq_name] = turtle_info(turtle_nm, release)
+function [turtle_nm, turtle_name, name_table_agm, name_table_axy, name_table_calib, turtle_raw_name, turtle_ypr_name, turtle_dive_name, turtle_dive_plt_name, turtle_dive_fft_name, turtle_DBA_name, turtle_DBA_name_paper, turtle_dive_name_din, turtle_dive_plt_name_din, turtle_dive_fft_name_din, turtle_DBA_name_paper_din, turtle_freq_name, carapace_model] = turtle_info(turtle_nm, release)
 % turtle_info
 % Function that allows to select the turtle (from the Dalmag 2023 dataset) to
 % be analysed through a "command window" selection of the name. After that,
@@ -36,199 +36,71 @@ if release == 1
         name_table_agm	= 'Melis_agm.csv';
         name_table_axy	= 'Melis_axy.csv';
         name_table_calib = 'Melis_agm.csv';
-        turtle_raw_name			= 'turtle_raw_Melis.mat';
-        turtle_ypr_name			= 'turtle_ypr_Melis.mat';
-        turtle_dive_name		= 'turtle_dive_Melis.mat';
-        turtle_dive_plt_name	= 'turtle_dive_plt_Melis.mat';
-        turtle_dive_fft_name	= 'turtle_dive_fft_Melis.mat';
-        turtle_DBA_name			= 'turtle_DBA_Melis.mat';
-        turtle_DBA_name_paper	= 'turtle_DBA_paper_Melis.mat';
-
-        turtle_dive_name_din		= 'turtle_dive_din_Melis.mat';
-        turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Melis.mat';
-        turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Melis.mat';
-        turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Melis.mat';
-
-        turtle_freq_name		= 'turtle_freq_Melis.mat';
+        carapace_model = 'agm';
 
     elseif turtle_nm == 2
         turtle_name		= 'Banu';
         name_table_agm	= 'Banu_agm.csv';
         name_table_axy	= 'Banu_axy.csv';
         name_table_calib = 'Banu_agm.csv';
-        turtle_raw_name			= 'turtle_raw_Banu.mat';
-        turtle_ypr_name			= 'turtle_ypr_Banu.mat';
-        turtle_dive_name		= 'turtle_dive_Banu.mat';
-        turtle_dive_plt_name	= 'turtle_dive_plt_Banu.mat';
-        turtle_dive_fft_name	= 'turtle_dive_fft_Banu.mat';
-        turtle_DBA_name			= 'turtle_DBA_Banu.mat';
-        turtle_DBA_name_paper	= 'turtle_DBA_paper_Banu.mat';
-
-        turtle_dive_name_din		= 'turtle_dive_din_Banu.mat';
-        turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Banu.mat';
-        turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Banu.mat';
-        turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Banu.mat';
-
-        turtle_freq_name		= 'turtle_freq_Banu.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 3
         turtle_name		= 'Fati';
         name_table_agm	= 'Fati_agm.csv';
         name_table_axy	= 'Fati_axy.csv';
         name_table_calib = 'Fati_agm.csv';
-        turtle_raw_name			= 'turtle_raw_Fati.mat';
-        turtle_ypr_name			= 'turtle_ypr_Fati.mat';
-        turtle_dive_name		= 'turtle_dive_Fati.mat';
-        turtle_dive_plt_name	= 'turtle_dive_plt_Fati.mat';
-        turtle_dive_fft_name	= 'turtle_dive_fft_Fati.mat';
-        turtle_DBA_name			= 'turtle_DBA_Fati.mat';
-        turtle_DBA_name_paper	= 'turtle_DBA_paper_Fati.mat';
-
-        turtle_dive_name_din		= 'turtle_dive_din_Fati.mat';
-        turtle_dive_plt_name_din		= 'turtle_dive_din_plt_Fati.mat';
-        turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Fati.mat';
-        turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Fati.mat';
-
-        turtle_freq_name		= 'turtle_freq_Fati.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 4
         turtle_name		= 'Emine';
         name_table_agm	= 'Emine_agm.csv';
         name_table_axy	= 'Emine_axy.csv';
         name_table_calib = 'Emine_agm.csv';
-        turtle_raw_name			= 'turtle_raw_Emine.mat';
-        turtle_ypr_name			= 'turtle_ypr_Emine.mat';
-        turtle_dive_name		= 'turtle_dive_Emine.mat';
-        turtle_dive_plt_name	= 'turtle_dive_plt_Emine.mat';
-        turtle_dive_fft_name	= 'turtle_dive_fft_Emine.mat';
-        turtle_DBA_name			= 'turtle_DBA_Emine.mat';
-        turtle_DBA_name_paper	= 'turtle_DBA_paper_Emine.mat';
-
-        turtle_dive_name_din		= 'turtle_dive_din_Emine.mat';
-        turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Emine.mat';
-        turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Emine.mat';
-        turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Emine.mat';
-
-        turtle_freq_name		= 'turtle_freq_Emine.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 5
         turtle_name		= 'Sevval';
         name_table_agm	= 'Sevval_agm.csv';
         name_table_axy	= 'Sevval_axy.csv';
         name_table_calib = 'Sevval_agm.csv';
-        turtle_raw_name			= 'turtle_raw_Sevval.mat';
-        turtle_ypr_name			= 'turtle_ypr_Sevval.mat';
-        turtle_dive_name		= 'turtle_dive_Sevval.mat';
-        turtle_dive_plt_name	= 'turtle_dive_plt_Sevval.mat';
-        turtle_dive_fft_name	= 'turtle_dive_fft_Sevval.mat';
-        turtle_DBA_name			= 'turtle_DBA_Sevval.mat';
-        turtle_DBA_name_paper	= 'turtle_DBA_paper_Sevval.mat';
-
-        turtle_dive_name_din		= 'turtle_dive_din_Sevval.mat';
-        turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Sevval.mat';
-        turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Sevval.mat';
-        turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Sevval.mat';
-
-        turtle_freq_name		= 'turtle_freq_Sevval.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 6
         turtle_name		= 'Didar';
         name_table_agm	= 'Didar_agm.csv';
         name_table_axy	= 'Didar_axy.csv';
         name_table_calib = 'Didar_agm.csv';
-        turtle_raw_name			= 'turtle_raw_Didar.mat';
-        turtle_ypr_name			= 'turtle_ypr_Didar.mat';
-        turtle_dive_name		= 'turtle_dive_Didar.mat';
-        turtle_dive_plt_name	= 'turtle_dive_plt_Didar.mat';
-        turtle_DBA_name			= 'turtle_DBA_Didar.mat';
-        turtle_DBA_name_paper	= 'turtle_DBA_paper_Didar.mat';
-
-        turtle_dive_name_din		= 'turtle_dive_din_Didar.mat';
-        turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Didar.mat';
-        turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Didar.mat';
-        turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Didar.mat';
-
-        turtle_freq_name		= 'turtle_freq_Didar.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 7
         turtle_name		= 'Deniz';
         name_table_agm	= 'Deniz_agm.csv';
         name_table_axy	= 'Deniz_axy.csv';
         name_table_calib = 'Deniz_agm.csv';
-        turtle_raw_name			= 'turtle_raw_Deniz.mat';
-        turtle_ypr_name			= 'turtle_ypr_Deniz.mat';
-        turtle_dive_name		= 'turtle_dive_Deniz.mat';
-        turtle_dive_plt_name	= 'turtle_dive_plt_Deniz.mat';
-        turtle_dive_fft_name	= 'turtle_dive_fft_Deniz.mat';
-        turtle_DBA_name			= 'turtle_DBA_Deniz.mat';
-        turtle_DBA_name_paper	= 'turtle_DBA_paper_Deniz.mat';
-
-        turtle_dive_name_din		= 'turtle_dive_din_Didar.mat';
-        turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Didar.mat';
-        turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Didar.mat';
-        turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Didar.mat';
-
-        turtle_freq_name		= 'turtle_freq_Deniz.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 8
         turtle_name		= 'Elif';
         name_table_agm	= 'Elif_agm.csv';
         name_table_axy	= 'Elif_axy.csv';
         name_table_calib = 'Elif_agm.csv';
-        turtle_raw_name			= 'turtle_raw_Elif.mat';
-        turtle_ypr_name			= 'turtle_ypr_Elif.mat';
-        turtle_dive_name		= 'turtle_dive_Elif.mat';
-        turtle_dive_plt_name	= 'turtle_dive_plt_Elif.mat';
-        turtle_dive_fft_name	= 'turtle_dive_fft_Elif.mat';
-        turtle_DBA_name			= 'turtle_DBA_Elif.mat';
-        turtle_DBA_name_paper	= 'turtle_DBA_paper_Elif.mat';
-
-        turtle_dive_name_din		= 'turtle_dive_din_Elif.mat';
-        turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Elif.mat';
-        turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Elif.mat';
-        turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Elif.mat';
-
-        turtle_freq_name		= 'turtle_freq_Elif.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 9
         turtle_name		= 'Funda';
         name_table_agm	= 'Funda_agm.csv';
         name_table_axy	= 'Funda_axy.csv';
         name_table_calib = 'Funda_agm.csv';
-        turtle_raw_name			= 'turtle_raw_Funda.mat';
-        turtle_ypr_name			= 'turtle_ypr_Funda.mat';
-        turtle_dive_name		= 'turtle_dive_Funda.mat';
-        turtle_dive_plt_name	= 'turtle_dive_plt_Funda.mat';
-        turtle_dive_fft_name	= 'turtle_dive_fft_Funda.mat';
-        turtle_DBA_name			= 'turtle_DBA_Funda.mat';
-        turtle_DBA_name_paper	= 'turtle_DBA_paper_Funda.mat';
-
-        turtle_dive_name_din		= 'turtle_dive_din_Funda.mat';
-        turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Funda.mat';
-        turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Funda.mat';
-        turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Funda.mat';
-
-        turtle_freq_name		= 'turtle_freq_Funda.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 0
         turtle_name		= 'Calib_test';
         name_table_agm	= 'Calib_test.csv';
         name_table_axy	= 'Calib_test.csv';
         name_table_calib = 'Calib_test.csv';
-        turtle_raw_name			= 'Calib_test.mat';
-        turtle_ypr_name			= 'Calib_test_ypr.mat';
-        turtle_dive_name		= 'Calib_test_dive.mat';
-        turtle_dive_plt_name	= 'Calib_test_dive_plt.mat';
-        turtle_dive_fft_name	= 'Calib_test_dive_fft.mat';
-        turtle_DBA_name			= 'Calib_test_DBA.mat';
-        turtle_DBA_name_paper	= 'Calib_test_DBA_paper.mat';
-
-        turtle_dive_name_din		= 'Calib_test_dive_din.mat';
-        turtle_dive_plt_name_din	= 'Calib_test_dive_din_plt.mat';
-        turtle_dive_fft_name_din	= 'Calib_test_dive_fft_din.mat';
-        turtle_DBA_name_paper_din	= 'Calib_test_DBA_paper_din.mat';
-
-        turtle_freq_name		= 'Calib_test_freq.mat';
+        carapace_model = 'agm';
+        
         calib_proc_real_time = 1;
         fprintf('calib_proc_real_time created');
     end
@@ -245,11 +117,12 @@ elseif release == 2
     	fprintf('3. Fatma \n')
     	fprintf('4. Ilkim \n')
     	fprintf('5. Nurdan \n')
-    	fprintf('6. Paula (2nd release) \n')
-    	fprintf('7. Arya (2nd release) \n')
-    	fprintf('8. Bihter (2nd release) \n')
+    	fprintf('6. Paula (2nd release) - no AGM \n')
+    	fprintf('7. Arya (2nd release) - no AGM \n')
+    	fprintf('8. Bihter (2nd release)  - no AGM \n')
     	fprintf('9. Erica (2nd release) \n')
-    	fprintf('10. Benedetta (2nd release) \n')
+    	fprintf('10. Benedetta (2nd release)  - no AGM \n')
+        fprintf('0. General \n')
 
     	while turtle_nm < 0 || turtle_nm > turtle_max
     		turtle_nm = input('');
@@ -260,233 +133,126 @@ elseif release == 2
     	turtle_name		= 'Enes';
     	name_table_agm	= 'Enes_agm.csv';
     	name_table_axy	= 'Enes_axy.csv';
-    	% name_table_calib = 'Enes_agm.csv';
     	name_table_calib = 'Enes_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Enes.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Enes.mat';
-    	turtle_dive_name		= 'turtle_dive_Enes.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Enes.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Enes.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Enes.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Enes.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Enes.mat';
-    	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Enes.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Enes.mat';
-    	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Enes.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Enes.mat';
+        carapace_model = 'agm';
+        
 
     elseif turtle_nm == 2
     	turtle_name		= 'Atakan';
     	name_table_agm	= 'Atakan_agm.csv';
     	name_table_axy	= 'Atakan_axy.csv';
-    	% name_table_calib = 'Atakan_agm.csv';
-    	name_table_calib = 'Atakan_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Atakan.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Atakan.mat';
-    	turtle_dive_name		= 'turtle_dive_Atakan.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Atakan.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Atakan.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Atakan.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Atakan.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Atakan.mat';
-    	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Atakan.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Atakan.mat';
-    	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Atakan.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Atakan.mat';
-
+     	name_table_calib = 'Atakan_agm_calib.csv';
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 3
     	turtle_name		= 'Fatma';
     	name_table_agm	= 'Fatma_agm.csv';
     	name_table_axy	= 'Fatma_axy.csv';
     	name_table_calib = 'Fatma_agm.csv';
-    	% name_table_calib = 'Fatma_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Fatma.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Fatma.mat';
-    	turtle_dive_name		= 'turtle_dive_Fatma.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Fatma.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Fatma.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Fatma.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Fatma.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Fatma.mat';
-    	turtle_dive_plt_name_din		= 'turtle_dive_din_plt_Fatma.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Fatma.mat';
-    	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Fatma.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Fatma.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 4
     	turtle_name		= 'Ilkim';
     	name_table_agm	= 'Ilkim_agm.csv';
     	name_table_axy	= 'Ilkim_axy.csv';
-    	% name_table_calib = 'Ilkim_agm.csv';
     	name_table_calib = 'Ilkim_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Ilkim.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Ilkim.mat';
-    	turtle_dive_name		= 'turtle_dive_Ilkim.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Ilkim.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Ilkim.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Ilkim.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Ilkim.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Ilkim.mat';
-    	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Ilkim.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Ilkim.mat';
-    	turtle_DBA_name_paper_din		= 'turtle_DBA_paper_din_Ilkim.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Ilkim.mat';
-
+        carapace_model = 'axy';
+        
     elseif turtle_nm == 5
     	turtle_name		= 'Nurdan';
     	name_table_agm	= 'Nurdan_agm.csv';
     	name_table_axy	= 'Nurdan_axy.csv';
-    	% name_table_calib = 'Nurdan_agm.csv';
     	name_table_calib = 'Nurdan_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Nurdan.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Nurdan.mat';
-    	turtle_dive_name		= 'turtle_dive_Nurdan.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Nurdan.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Nurdan.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Nurdan.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Nurdan.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Nurdan.mat';
-    	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Nurdan.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Nurdan.mat';
-    	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Nurdan.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Nurdan.mat';
-
+        carapace_model = 'axy';
+        
     elseif turtle_nm == 6
     	turtle_name		= 'Paula';
     	name_table_agm	= 'Paula_agm.csv';
     	name_table_axy	= 'Paula_axy.csv';
     	name_table_calib = 'Paula_agm.csv';
-    	% name_table_calib = 'Paula_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Paula.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Paula.mat';
-    	turtle_dive_name		= 'turtle_dive_Paula.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Paula.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Paula.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Paula.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Paula.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Paula.mat';
-    	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Paula.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Paula.mat';
-    	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Paula.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Paula.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 7
     	turtle_name		= 'Arya';
     	name_table_agm	= 'Arya_agm.csv';
     	name_table_axy	= 'Arya_axy.csv';
     	name_table_calib = 'Arya_agm.csv';
-    	% name_table_calib = 'Arya_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Arya.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Arya.mat';
-    	turtle_dive_name		= 'turtle_dive_Arya.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Arya.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Arya.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Arya.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Arya.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Arya.mat';
-    	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Arya.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Arya.mat';
-    	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Arya.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Arya.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 8
     	turtle_name		= 'Bihter';
     	name_table_agm	= 'Bihter_agm.csv';
     	name_table_axy	= 'Bihter_axy.csv';
     	name_table_calib = 'Bihter_agm.csv';
-    	% name_table_calib = 'Bihter_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Bihter.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Bihter.mat';
-    	turtle_dive_name		= 'turtle_dive_Bihter.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Bihter.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Bihter.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Bihter.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Bihter.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Bihter.mat';
-    	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Bihter.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Bihter.mat';
-    	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Bihter.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Bihter.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 9
     	turtle_name		= 'Erica';
     	name_table_agm	= 'Erica_agm.csv';
     	name_table_axy	= 'Erica_axy.csv';
     	name_table_calib = 'Erica_agm.csv';
-        % name_table_calib = 'Erica_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Erica.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Erica.mat';
-    	turtle_dive_name		= 'turtle_dive_Erica.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Erica.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Erica.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Erica.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Erica.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Erica.mat';
-    	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Erica.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Erica.mat';
-    	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Erica.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Erica.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 10
     	turtle_name		= 'Benedetta';
     	name_table_agm	= 'Benedetta_agm.csv';
     	name_table_axy	= 'Benedetta_axy.csv';
     	name_table_calib = 'Benedetta_agm.csv';
-    	% name_table_calib = 'Benedetta_agm_calib.csv';
-    	turtle_raw_name			= 'turtle_raw_Benedetta.mat';
-    	turtle_ypr_name			= 'turtle_ypr_Benedetta.mat';
-    	turtle_dive_name		= 'turtle_dive_Benedetta.mat';
-    	turtle_dive_plt_name	= 'turtle_dive_plt_Benedetta.mat';
-    	turtle_dive_fft_name	= 'turtle_dive_fft_Benedetta.mat';
-    	turtle_DBA_name			= 'turtle_DBA_Benedetta.mat';
-    	turtle_DBA_name_paper	= 'turtle_DBA_paper_Benedetta.mat';
-
-    	turtle_dive_name_din		= 'turtle_dive_din_Benedetta.mat';
-    	turtle_dive_plt_name_din	= 'turtle_dive_din_plt_Benedetta.mat';
-    	turtle_dive_fft_name_din	= 'turtle_dive_fft_din_Benedetta.mat';
-    	turtle_DBA_name_paper_din	= 'turtle_DBA_paper_din_Benedetta.mat';
-
-    	turtle_freq_name		= 'turtle_freq_Benedetta.mat';
-
+        carapace_model = 'agm';
+        
     elseif turtle_nm == 0
-    	turtle_name		= 'Calib_test';
-    	name_table_agm	= 'Calib_test.csv';
-    	name_table_axy	= 'Calib_test.csv';
-    	name_table_calib = 'Calib_test.csv';
-    	turtle_raw_name			= 'Calib_test.mat';
-    	turtle_ypr_name			= 'Calib_test_ypr.mat';
-    	turtle_dive_name		= 'Calib_test_dive.mat';
-    	turtle_dive_plt_name	= 'Calib_test_dive_plt.mat';
-    	turtle_dive_fft_name	= 'Calib_test_dive_fft.mat';
-    	turtle_DBA_name			= 'Calib_test_DBA.mat';
-    	turtle_DBA_name_paper	= 'Calib_test_DBA_paper.mat';
-
-    	turtle_dive_name_din		= 'Calib_test_dive_din.mat';
-    	turtle_dive_plt_name_din	= 'Calib_test_dive_din_plt.mat';
-    	turtle_dive_fft_name_din	= 'Calib_test_dive_fft_din.mat';
-    	turtle_DBA_name_paper_din	= 'Calib_test_DBA_paper_din.mat';
-
-    	turtle_freq_name		= 'Calib_test_freq.mat';
+        turtle_name		= 'Calib_test';
+        name_table_agm	= 'Calib_test.csv';
+        name_table_axy	= 'Calib_test.csv';
+        name_table_calib = 'Calib_test.csv';
+        carapace_model = 'agm';
+        
         calib_proc_real_time = 1;
-
         fprintf('calib_proc_real_time created');
+
     end
+
+elseif release == 3
+    auto_calib_datetime	 = 0;
+    auto_freq_selection = 0;
+       
+    prompt= 'Turtle name ';
+    turtle_name = input(prompt, 's');
+    prompt= 'Carapace sensor (agm) file name (include .csv) ';
+    name_table_agm = input(prompt, 's');
+	prompt= 'Head sensor (axy) file name (include .csv) ';
+	name_table_axy	= input(prompt, 's');
+	prompt= 'Carapace sensor (agm) calibration file name (include .csv) ';
+	name_table_calib = input(prompt, 's');
+    prompt= 'Carapace sensor model (agm or axy) ';
+    carapace_model = input(prompt, 's');
+    
+end
+
+formatSpec = 'turtle_raw_%s.mat';
+turtle_raw_name = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_ypr_%s.mat';
+turtle_ypr_name = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_dive_%s.mat';
+turtle_dive_name = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_dive_plt_%s.mat';
+turtle_dive_plt_name = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_dive_fft_%s.mat';
+turtle_dive_fft_name = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_DBA_%s.mat';
+turtle_DBA_name = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_DBA_paper_%s.mat';
+turtle_DBA_name_paper = string(compose(formatSpec, turtle_name));
+
+formatSpec = 'turtle_dive_din_%s.mat';
+turtle_dive_name_din = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_dive_din_plt_%s.mat';
+turtle_dive_plt_name_din = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_dive_fft_din_%s.mat';
+turtle_dive_fft_name_din = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_DBA_paper_din_%s.mat';
+turtle_DBA_name_paper_din = string(compose(formatSpec, turtle_name));
+formatSpec = 'turtle_freq_%s.mat';
+turtle_freq_name = string(compose(formatSpec, turtle_name));
+
 end

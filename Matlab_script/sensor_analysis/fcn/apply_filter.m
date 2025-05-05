@@ -9,3 +9,7 @@ a_z_filt = LP_FIR(a_z);
 d_filt_x	= a_x - a_x_filt;
 d_filt_y	= a_y - a_y_filt;
 d_filt_z	= a_z - a_z_filt;
+
+d_filt_x	= d_filt_x - mean(d_filt_x);
+d_filt_y	= d_filt_y - mean(d_filt_y);
+d_filt_z	= d_filt_z - mean(d_filt_z);

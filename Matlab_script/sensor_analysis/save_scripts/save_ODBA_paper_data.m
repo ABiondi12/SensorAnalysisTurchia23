@@ -33,12 +33,18 @@ turtle_DBA			= struct('name', turtle_name, 'big_dive', turtle_dives_DBA, 'shallo
 new_DBA_dataset = 0;
 
 if exist (turtle_DBA_name_paper, 'file') == 2
-	fprintf([turtle_DBA_name_paper ': dive dataset exists!!! \n'])
+    formatSpec = "%s : dive dataset exists!!! \n";
+    print_msg = compose(formatSpec, turtle_DBA_name_paper);
+    fprintf(print_msg)
+
 	ov_to_do = 0;
 	
 	yn_ans = 0;
 	while yn_ans < 1 || yn_ans > 2
-		fprintf([turtle_DBA_name_paper ': do you want to overwrite it? \n'])
+		formatSpec = "%s : do you want to overwrite it? \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper);
+        fprintf(print_msg)
+    
 		fprintf('1_ yes \n')
 		fprintf('2_ no \n')
 		yn_ans = input('');
@@ -46,14 +52,23 @@ if exist (turtle_DBA_name_paper, 'file') == 2
 	
 	if yn_ans == 1
 		ov_to_do = 1;
-		fprintf([turtle_DBA_name_paper ': start overwrite \n'])
+        formatSpec = "%s : start overwrite \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper);
+        fprintf(print_msg)
+
 	elseif yn_ans == 2
 		ov_to_do = 0;
-		fprintf([turtle_DBA_name_paper ': overwrite operation aborted \n'])
-	end
+		formatSpec = "%s : overwrite operation aborted \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper);
+        fprintf(print_msg)
+    
+    end
 	
 else
-	fprintf([turtle_DBA_name_paper ': dataset not exists, start making it \n'])
+	formatSpec = "%s : dataset not exists, start making it \n";
+    print_msg = compose(formatSpec, turtle_DBA_name_paper);
+    fprintf(print_msg)
+    
 	new_DBA_dataset = 1;
 end
 
@@ -62,9 +77,14 @@ end
 
 if new_DBA_dataset == 1 || ov_to_do == 1
 		turtle_DBA_paper = turtle_DBA;
-		fprintf([turtle_DBA_name_paper ': saving struct \n'])
+		formatSpec = "%s : saving struct \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper);
+        fprintf(print_msg)
 		save(turtle_DBA_name_paper, 'turtle_DBA_paper', '-v7.3');
-		fprintf([turtle_DBA_name_paper, ' saved! \n'])
+
+		formatSpec = "%s : saved! \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper);
+        fprintf(print_msg)
 end
 
 %% din version
@@ -102,12 +122,17 @@ turtle_DBA_din			= struct('name', turtle_name, 'big_dive', turtle_dives_DBA_din,
 new_DBA_dataset_din = 0;
 
 if exist (turtle_DBA_name_paper_din, 'file') == 2
-	fprintf([turtle_DBA_name_paper_din ': dive dataset exists!!! \n'])
+	formatSpec = "%s : dive dataset exists!!! \n";
+    print_msg = compose(formatSpec, turtle_DBA_name_paper_din);
+    fprintf(print_msg)
+        
 	ov_to_do_din = 0;
 	
 	yn_ans_din = 0;
 	while yn_ans_din < 1 || yn_ans_din > 2
-		fprintf([turtle_DBA_name_paper_din ': do you want to overwrite it? \n'])
+	    formatSpec = "%s : do you want to overwrite it? \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper_din);
+        fprintf(print_msg)
 		fprintf('1_ yes \n')
 		fprintf('2_ no \n')
 		yn_ans_din = input('');
@@ -115,14 +140,23 @@ if exist (turtle_DBA_name_paper_din, 'file') == 2
 	
 	if yn_ans_din == 1
 		ov_to_do_din = 1;
-		fprintf([turtle_DBA_name_paper_din ': start overwrite \n'])
+	    formatSpec = "%s : start overwrite \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper_din);
+        fprintf(print_msg)
+		
 	elseif yn_ans_din == 2
 		ov_to_do_din = 0;
-		fprintf([turtle_DBA_name_paper_din ': overwrite operation aborted \n'])
+	    formatSpec = "%s : overwrite operation aborted \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper_din);
+        fprintf(print_msg)
+
 	end
 	
 else
-	fprintf([turtle_DBA_name_paper_din ': dataset not exists, start making it \n'])
+	formatSpec = "%s : dataset not exists, start making it \n";
+    print_msg = compose(formatSpec, turtle_DBA_name_paper_din);
+    fprintf(print_msg)
+
 	new_DBA_dataset_din = 1;
 end
 
@@ -131,7 +165,13 @@ end
 
 if new_DBA_dataset_din == 1 || ov_to_do_din == 1
 		turtle_DBA_paper_din = turtle_DBA_din;
-		fprintf([turtle_DBA_name_paper_din ': saving struct \n'])
+	    formatSpec = "%s : saving struct \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper_din);
+        fprintf(print_msg)
+        
 		save(turtle_DBA_name_paper_din, 'turtle_DBA_paper_din', '-v7.3');
-		fprintf([turtle_DBA_name_paper_din, ' saved! \n'])
+	    formatSpec = "%s : saved! \n";
+        print_msg = compose(formatSpec, turtle_DBA_name_paper_din);
+        fprintf(print_msg)
+        
 end

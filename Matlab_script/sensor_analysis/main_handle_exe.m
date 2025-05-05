@@ -32,6 +32,7 @@ clc
 close all
 clear
 clearvars
+addpath("C:\Users\UTENTE\Documents\GitHub\SensorAnalysisTurchia23\Matlab_script\sensor_analysis\general_scripts")
 
 %% flag definition
 % These variables are used as shortcut for obtaining an higher level of
@@ -40,6 +41,12 @@ clearvars
 
 flag_def
 
+if exist('added_once', 'var') == 0
+	add_path;
+end
+
+
+
 % all_together = 0;           % if exists, the code is executed all together, otherwise you have to call each main_i separately and in order
 
 %% main_launch
@@ -47,24 +54,28 @@ fprintf('1. Start raw data elaboration \n')
 main_1_raw_data
 from_main_1 = 1;
 
-fprintf('2. Start ypr computation \n')
-main_2_ypr
-from_main_2 = 1;
+if main_num == 1
+    fprintf('2. Start ypr computation \n')
+    main_2_ypr
+    from_main_2 = 1;
+end
 
-fprintf('3. Start dives analysis and ODBA \n')
-main_3_dive_analysis
-from_main_3 = 1;
+% yaw_circling_research
 
-fprintf('4. Start stft computation \n')
-main_4_stft
-from_main_4 = 1;
+% fprintf('3. Start dives analysis and ODBA \n')
+% main_3_dive_analysis
+% from_main_3 = 1;
+
+% fprintf('4. Start stft computation \n')
+% main_4_stft
+% from_main_4 = 1;
 
 % fprintf('5. Start ODBA evaluation \n')
-main_5_ODBA_statistics_paper
+% main_5_ODBA_statistics_paper
 
 %% table creation
 % fprintf('6. Start table creation \n')
-tab_dives_entire
+% tab_dives_entire
 % fprintf('Table correctly created and saved \n')
 
 clear all_together

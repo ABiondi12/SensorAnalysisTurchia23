@@ -81,6 +81,38 @@ if yn_calib_show == 1
 	set(gca,'FontSize', 20)
 	title("Calibrated magnetic field fitting - calibration session")
 	hold off
+
+    % magnetic field reoriented  - single axes
+    figure('Name', ['figure ', num2str(id_plot),', magnetic field reoriented and calibrated - calibration session'], 'NumberTitle','off'); id_plot = id_plot + 1;
+    clf
+	subplot(3,1,1)
+		plot(datetime_mag_calib_plot, mag_calib_postcalib(:, 1), 'DisplayName', 'mag_x');
+		grid on
+		axis tight
+		xlabel('time','FontSize', dim_fontb)
+		ylabel('mag (\mu T)','FontSize', dim_fontb)
+		legend('Location', 'best','FontSize', dim_fontb, 'Location', 'best')
+		set(gca,'FontSize', dim_fontb) 
+		title('Mag_x of magnetic field reoriented')
+	subplot(3,1,2)
+		plot(datetime_mag_calib_plot, mag_calib_postcalib(:, 2), 'DisplayName', 'mag_y');
+		grid on
+		axis tight
+		xlabel('time','FontSize', dim_fontb)
+		ylabel('mag','FontSize', dim_fontb)
+		legend('Location', 'best','FontSize', dim_fontb, 'Location', 'best')
+		set(gca,'FontSize', dim_fontb) 
+		title('Mag_y of magnetic field reoriented')
+	subplot(3,1,3)
+		plot(datetime_mag_calib_plot, mag_calib_postcalib(:, 3), 'DisplayName', 'mag_z');
+		grid on
+		axis tight
+		xlabel('time','FontSize', dim_fontb)
+		ylabel('mag','FontSize', dim_fontb)
+		legend('Location', 'best','FontSize', dim_fontb, 'Location', 'best')
+		set(gca,'FontSize', dim_fontb) 
+		title('Mag_z of magnetic field reoriented')	
+	sgtitle('Magnetic field reoriented and calibrated', 'FontSize', dim_font)
 end
 
 %% plot

@@ -27,7 +27,7 @@
 %% YPR reoriented w.r.t. magnetic North after calibration
 figure('Name', ['figure ', num2str(id_plot),', YPR reoriented w.r.t. magnetic North'], 'NumberTitle','off'); id_plot = id_plot + 1;
 clf
-plot(datetime_mag, [roll_plot, pitch_plot, yaw_m_plot])
+plot(datetime_mag, [roll_plot, pitch_plot, yaw_m_plot], '*', 'MarkerSize', 2)
 	grid on
 	box on
 	axis tight
@@ -40,7 +40,7 @@ plot(datetime_mag, [roll_plot, pitch_plot, yaw_m_plot])
 %% YPR norm reoriented w.r.t. magnetic North after calibration
 figure('Name', ['figure ', num2str(id_plot),', YPR norm reoriented w.r.t. magnetic North'], 'NumberTitle','off'); id_plot = id_plot + 1;
 clf
-plot(datetime_mag, [roll_norm_plot, pitch_norm_plot, yaw_m_norm_plot])
+plot(datetime_mag, [roll_norm_plot, pitch_norm_plot, yaw_m_norm_plot], '*', 'MarkerSize', 2)
 	grid on
 	box on
 	axis tight
@@ -53,7 +53,7 @@ plot(datetime_mag, [roll_norm_plot, pitch_norm_plot, yaw_m_norm_plot])
 %% YPR reoriented w.r.t. geographic	North after calibration
 figure('Name', ['figure ', num2str(id_plot),', YPR reoriented w.r.t. geographic North'], 'NumberTitle','off'); id_plot = id_plot + 1;
 clf
-plot(datetime_mag, [roll_plot, pitch_plot, yaw_g_plot])
+plot(datetime_mag, [roll_plot, pitch_plot, yaw_g_plot], '*', 'MarkerSize', 2)
 	grid on
 	box on
 	axis tight
@@ -66,7 +66,7 @@ plot(datetime_mag, [roll_plot, pitch_plot, yaw_g_plot])
 %% YPR norm reoriented w.r.t. geographic North after calibration
 figure('Name', ['figure ', num2str(id_plot),', YPR norm reoriented w.r.t. geographic North '], 'NumberTitle','off'); id_plot = id_plot + 1;
 	clf
-plot(datetime_mag, [roll_norm_plot, pitch_norm_plot, yaw_g_norm_plot])
+plot(datetime_mag, [roll_norm_plot, pitch_norm_plot, yaw_g_norm_plot], '*', 'MarkerSize', 2)
 	grid on
 	box on
 	axis tight
@@ -79,7 +79,7 @@ plot(datetime_mag, [roll_norm_plot, pitch_norm_plot, yaw_g_norm_plot])
 	%% Yaw reoriented w.r.t. geographic North
 figure('Name', ['figure ', num2str(id_plot),', Yaw angle w.r.t. geographic North'], 'NumberTitle','off'); id_plot = id_plot + 1;
 clf
-plot(datetime_mag, yaw_g_plot)
+plot(datetime_mag, yaw_g_plot, '*', 'MarkerSize', 2)
 	grid on
 	box on
 	axis tight
@@ -92,7 +92,7 @@ plot(datetime_mag, yaw_g_plot)
 	%% Yaw reoriented w.r.t. magnetic North
 figure('Name', ['figure ', num2str(id_plot),', Yaw angle w.r.t. magnetic North'], 'NumberTitle','off'); id_plot = id_plot + 1;
 clf
-plot(datetime_mag, yaw_m_plot)
+plot(datetime_mag, yaw_m_plot, '*', 'MarkerSize', 2)
 	grid on
 	box on
 	axis tight
@@ -102,3 +102,40 @@ plot(datetime_mag, yaw_m_plot)
 	set(gca,'FontSize', dim_font) 
 	title('Yaw angle w.r.t. magnetic North')
 
+	%% Yaw reoriented w.r.t. magnetic North
+
+yaw_m_plot_wrap = rad2deg(wrapTo2Pi(deg2rad(yaw_m_plot)));
+
+figure('Name', ['figure ', num2str(id_plot),', Yaw angle w.r.t. magnetic North'], 'NumberTitle','off'); id_plot = id_plot + 1;
+clf
+plot(datetime_mag, yaw_m_plot_wrap, '*', 'MarkerSize', 2)
+	grid on
+	box on
+	axis tight
+	xlabel('time','FontSize', dim_font)
+	ylabel('angle (deg)','FontSize', dim_font)
+	legend('Yaw','FontSize', dim_font, 'Location', 'best')
+	set(gca,'FontSize', dim_font) 
+	title('Yaw angle w.r.t. magnetic North')
+
+
+	%% Yaw reoriented w.r.t. geographic North
+
+yaw_g_plot_wrap = rad2deg(wrapTo2Pi(deg2rad(yaw_g_plot)));
+
+figure('Name', ['figure ', num2str(id_plot),', Yaw angle w.r.t. geographic North'], 'NumberTitle','off'); id_plot = id_plot + 1;
+clf
+plot(datetime_mag, yaw_g_plot_wrap, '*', 'MarkerSize', 2)
+	grid on
+	box on
+	axis tight
+	xlabel('time','FontSize', dim_font)
+	ylabel('angle (deg)','FontSize', dim_font)
+	legend('Yaw','FontSize', dim_font, 'Location', 'best')
+	set(gca,'FontSize', dim_font) 
+	title('Yaw angle w.r.t. geographic North')
+
+
+
+
+    

@@ -51,7 +51,30 @@ elseif release == 2
 	    model		= '2020';
     end
 
+elseif release == 3
+    prompt= 'release site height: ';
+    height = input(prompt);
+
+    prompt= 'release site latitude: ';
+    lat = input(prompt);
+
+    prompt= 'release site longitude: ';
+    long = input(prompt);
+
+    prompt= 'release year calibration: ';
+    year_calib = input(prompt);
+
+    prompt= 'release month calibration: ';
+    month_calib = input(prompt);
+
+    prompt= 'release day calibration: ';
+    day_calib = input(prompt);
+
+%    prompt= 'magnetic field model: ';
+%    model = input(prompt, 's');
+    model		= '2020';
 end
+
 % local magnetic field from online dataset (NED frame)
 % Results have nanoTesla magnitude
 %   Output calculated by wrldmagm are:
